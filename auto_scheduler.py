@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import io
 import datetime
 from operator import itemgetter
@@ -60,6 +61,26 @@ def date_string_to_datetime(input_date_string):
     return datetime.date(year, month, day)
 
 
+def decimal_to_timestring(value):
+    hours = round(value - value % 1)
+    minutes = round((value % 1) * 60)
+    if minutes >= 10:
+        return str(hours) + ":" + str(minutes)
+    else:
+        return str(hours) + ":0" + str(minutes)
+
+
+def timestring_to_decimal(timestring):
+    split_time = timestring.split(':')
+    hours = float(split_time[0])
+    if len(split_time) > 1:
+        minutes = float(split_time[1])
+    else:
+        minutes = 0
+    decimal_time = hours + minutes / 60
+    return decimal_time
+
+
 def get_work_on_day(requested_day):
     weekday = weekday_conversion[requested_day.weekday()]
     regular_work = regular_working[weekday]
@@ -76,7 +97,7 @@ for day_info in fixed_work_lines:
     if day_info != '\n':
         split_info = day_info.split(' ')
         day = split_info[0]
-        work_time = float(split_info[1].split('\n')[0])
+        work_time = timestring_to_decimal(split_info[1].split('\n')[0])
         if day in regular_working.keys():
             regular_working[day] += work_time
         elif day in one_off_working.keys():
@@ -90,13 +111,17 @@ tasks = []
 for task in one_off_tasks_lines:
     split_info = task.split(';')
     if split_info == '\n' or '\n' in split_info:
-        break
+        continue
     title = split_info[0]
     try:
-        required_hours = split_info[1].split(' ')[1]
+        required_hours = timestring_to_decimal(split_info[1].split(' ')[1])
     except IndexError:
         print(split_info)
     due_date = split_info[2].split(' ')[1].split('\n')[0]
+    if len(split_info) >= 4:
+        min_time = timestring_to_decimal(split_info[3].split(' ')[1])
+    else:
+        min_time = 1
     if len(due_date.split('-')) > 1:
         due_date = due_date.split('-')
         start_date = date_string_to_datetime(due_date[0])
@@ -104,7 +129,7 @@ for task in one_off_tasks_lines:
     else:
         start_date = datetime.datetime.now().date()
         due_date = date_string_to_datetime(due_date)
-    tasks.append([title, required_hours, start_date, due_date])
+    tasks.append([title, required_hours, start_date, due_date, min_time])
 # Sort tasks by due date
 tasks = sorted(tasks, key=itemgetter(3))
 
@@ -115,6 +140,7 @@ for task in tasks:
     title = task[0]
     required_hours = float(task[1])
     start_date = max(task[2], datetime.datetime.now().date())
+    min_time = float(task[4])
     if include_today:
         due_date = max(task[3], datetime.datetime.now().date() + datetime.timedelta(days=1))
     else:
@@ -137,10 +163,14 @@ for task in tasks:
         else:
             work_on_days_to_due[date] = get_work_on_day(date)
 
+    # Calculate time increment
+    num_days = len(available_days)
+    time_inc = max(min_time, required_hours / num_days)
+
     # Add hours to day with smallest amount of work so far
     while required_hours > 0 and len(work_on_days_to_due) > 0:
         min_work_day = min(work_on_days_to_due, key=lambda x: work_on_days_to_due[x])
-        auto_work_to_add = min([1, required_hours])
+        auto_work_to_add = min([1/60, required_hours])
         if min_work_day in auto_work_per_day:
             auto_work_per_day[min_work_day] += auto_work_to_add
             work_on_days_to_due[min_work_day] += auto_work_to_add
@@ -159,17 +189,31 @@ for task in tasks:
     title = task[0]
     required_hours = float(task[1])
     start_date = task[2]
+    min_time = float(task[4])
+
     if include_today:
         due_date = max(task[3], datetime.datetime.now().date() + datetime.timedelta(days=1))
     else:
         due_date = max(task[3], datetime.datetime.now().date() + datetime.timedelta(days=2))
     available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
+
+    # Calculate time increment
+    num_days = len(available_days)
+    time_inc = max(min_time, required_hours / num_days)
+
     while required_hours > 0 and len(available_days) > 0:
         previous_hours = required_hours
         for date in available_days:
             if date in auto_work_per_day:
                 if required_hours > 0 and auto_work_per_day[date] > 0:
-                    auto_work_to_add = min([1, required_hours, auto_work_per_day[date]])
+                    if not date in daily_tasks:
+                        auto_work_to_add = min_time
+                    elif not title in daily_tasks[date]:
+                        auto_work_to_add = min_time
+                    elif daily_tasks[date][title] < min_time:
+                        auto_work_to_add = min_time - daily_tasks[date][title]
+                    else:
+                        auto_work_to_add = min([1/60, required_hours, auto_work_per_day[date]])
                     if date in daily_tasks:
                         if title in daily_tasks[date]:
                             daily_tasks[date][title] += auto_work_to_add
@@ -180,12 +224,12 @@ for task in tasks:
                     else:
                         daily_tasks[date] = {title: auto_work_to_add}
                         auto_work_per_day[date] -= auto_work_to_add
-                    required_hours -= 1
+                    required_hours -= auto_work_to_add
         if previous_hours == required_hours:
             print("Not enough time for " + title + " with " + str(required_hours) + " hours extra.")
             break
     if len(available_days) <= 0:
-        if required_hours > 1:
+        if required_hours > 0:
             print('Do ' + str(required_hours) + ' hours of ' + title + ' now!')
         else:
             print('Do ' + str(required_hours) + ' hour of ' + title + ' now!')
@@ -197,7 +241,7 @@ for date in sorted(daily_tasks, reverse=reverse_output):
     for task in daily_tasks[date]:
         total_auto += daily_tasks[date][task]
     # Create correct number of title dashes
-    output = weekday_conversion[date.weekday()] + ' ' + str(date) + ' (' + str(total_auto) + ' auto/' + str(work_on_days_to_due[date]) + ' total hours)'
+    output = weekday_conversion[date.weekday()] + ' ' + str(date) + ' (' + decimal_to_timestring(total_auto) + ' auto/' + decimal_to_timestring(work_on_days_to_due[date]) + ' total)'
     cur_side_left = True
     while len(output) < screen_width:
         if cur_side_left:
@@ -207,4 +251,4 @@ for date in sorted(daily_tasks, reverse=reverse_output):
         cur_side_left = not cur_side_left
     print(output)
     for task in daily_tasks[date]:
-        print(task + ': ' + str(daily_tasks[date][task]))
+        print(task + ': ' + decimal_to_timestring(daily_tasks[date][task]))
