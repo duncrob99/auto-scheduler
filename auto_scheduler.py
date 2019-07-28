@@ -12,6 +12,8 @@ regular_working = {'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Fr
 weekday_conversion = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday', 4: 'Friday', 5: 'Saturday', 6: 'Sunday'}
 one_off_working = {}
 
+time_inc = 1/60
+
 valid_input = False
 while not valid_input:
     include_today = input("Include Today? (y/n): ")
@@ -63,7 +65,7 @@ def date_string_to_datetime(input_date_string):
 
 def decimal_to_timestring(value):
     hours = round(value - value % 1)
-    minutes = round((value % 1) * 60)
+    minutes = round((value - hours) * 60)
     if minutes >= 10:
         return str(hours) + ":" + str(minutes)
     else:
@@ -93,6 +95,7 @@ def get_work_on_day(requested_day):
 
 
 # Bring fixed work data into memory structures
+daily_tasks = {}
 for day_info in fixed_work_lines:
     if day_info != '\n':
         split_info = day_info.split(' ')
@@ -104,6 +107,22 @@ for day_info in fixed_work_lines:
             one_off_working[date_string_to_datetime(day)] += work_time
         else:
             one_off_working[date_string_to_datetime(day)] = work_time
+
+        if len(split_info) >= 3:
+            work_title = split_info[2].split('\n')[0]
+            if day in regular_working.keys():
+                #TODO: Deal with regulars
+                pass
+            else:
+                date = date_string_to_datetime(day)
+                if date in daily_tasks:
+                    if work_title in daily_tasks[date]:
+                        daily_tasks[date][work_title] += work_time
+                    else:
+                        daily_tasks[date][work_title] = work_time
+                else:
+                    daily_tasks[date] = {}
+                    daily_tasks[date][work_title] = work_time
 
 
 # Bring task list data into memory structures
@@ -163,14 +182,10 @@ for task in tasks:
         else:
             work_on_days_to_due[date] = get_work_on_day(date)
 
-    # Calculate time increment
-    num_days = len(available_days)
-    time_inc = max(min_time, required_hours / num_days)
-
     # Add hours to day with smallest amount of work so far
     while required_hours > 0 and len(work_on_days_to_due) > 0:
         min_work_day = min(work_on_days_to_due, key=lambda x: work_on_days_to_due[x])
-        auto_work_to_add = min([1/60, required_hours])
+        auto_work_to_add = min([time_inc, required_hours])
         if min_work_day in auto_work_per_day:
             auto_work_per_day[min_work_day] += auto_work_to_add
             work_on_days_to_due[min_work_day] += auto_work_to_add
@@ -184,7 +199,6 @@ for task in tasks:
 
 
 # Assign specific tasks to each day
-daily_tasks = {}
 for task in tasks:
     title = task[0]
     required_hours = float(task[1])
@@ -196,10 +210,6 @@ for task in tasks:
     else:
         due_date = max(task[3], datetime.datetime.now().date() + datetime.timedelta(days=2))
     available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
-
-    # Calculate time increment
-    num_days = len(available_days)
-    time_inc = max(min_time, required_hours / num_days)
 
     while required_hours > 0 and len(available_days) > 0:
         previous_hours = required_hours
@@ -213,7 +223,7 @@ for task in tasks:
                     elif daily_tasks[date][title] < min_time:
                         auto_work_to_add = min_time - daily_tasks[date][title]
                     else:
-                        auto_work_to_add = min([1/60, required_hours, auto_work_per_day[date]])
+                        auto_work_to_add = min([time_inc, required_hours, auto_work_per_day[date]])
                     if date in daily_tasks:
                         if title in daily_tasks[date]:
                             daily_tasks[date][title] += auto_work_to_add
