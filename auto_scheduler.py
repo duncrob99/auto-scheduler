@@ -98,7 +98,7 @@ def get_work_on_day(requested_day):
 daily_tasks = {}
 for day_info in fixed_work_lines:
 	if day_info != '\n':
-		split_info = day_info.split(' ')
+		split_info = day_info.split(';')
 		day = split_info[0]
 		work_time = timestring_to_decimal(split_info[1].split('\n')[0])
 		if day in regular_working.keys():
@@ -108,6 +108,7 @@ for day_info in fixed_work_lines:
 		else:
 			one_off_working[date_string_to_datetime(day)] = work_time
 
+		# Deal with titled work data
 		if len(split_info) >= 3:
 			work_title = split_info[2].split('\n')[0]
 			if day in regular_working.keys():
@@ -153,6 +154,14 @@ for index, task in enumerate(one_off_tasks_lines):
 		start_date = datetime.datetime.now().date()
 		due_date = date_string_to_datetime(due_date)
 	tasks.append([title, required_hours, start_date, due_date, min_time])
+
+# Remove set work from task requirements
+for date in daily_tasks:
+	for title in daily_tasks[date]:
+		for task in tasks:
+			if title == task[0]:
+				task[1] -= daily_tasks[date][title]
+print(tasks)
 
 # Set due date for any tasks without due date to maximum due date
 max_due_date = sorted(tasks, key=itemgetter(3))[-1][3]

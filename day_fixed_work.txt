@@ -1,9 +1,9 @@
-Monday 5.5
-Tuesday 10
-Wednesday 3.5
-Thursday 8
-Friday 4
-Saturday 1
-Sunday 3
+Monday;6.5
+Tuesday;10
+Wednesday;3.5
+Thursday;7
+Friday;4
+Saturday;1
+Sunday;3
 
-29/7/19 1 HelloWorld
+29/7/19;-1.5
