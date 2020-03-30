@@ -56,11 +56,14 @@ def datetime_to_date_string(input_date):
 
 
 def date_string_to_datetime(input_date_string):
-	split_string = input_date_string.split('/')
-	day = int(split_string[0])
-	month = int(split_string[1])
-	year = int('20' + split_string[2])
-	return datetime.date(year, month, day)
+    split_string = input_date_string.split('/')
+    day = int(split_string[0])
+    month = int(split_string[1])
+    year = int('20' + split_string[2])
+    try:
+        return datetime.date(year, month, day)
+    except ValueError:
+        print("Invalid date:",year, month, day)
 
 
 def decimal_to_timestring(value):
@@ -161,7 +164,6 @@ for date in daily_tasks:
 		for task in tasks:
 			if title == task[0]:
 				task[1] -= daily_tasks[date][title]
-print(tasks)
 
 # Set due date for any tasks without due date to maximum due date
 max_due_date = sorted(tasks, key=itemgetter(3))[-1][3]
@@ -266,6 +268,7 @@ for task in tasks:
 
 
 # Display results
+german_sum = 0
 for date in sorted(daily_tasks, reverse=reverse_output):
 	total_auto = 0
 	for task in daily_tasks[date]:
@@ -281,4 +284,9 @@ for date in sorted(daily_tasks, reverse=reverse_output):
 		cur_side_left = not cur_side_left
 	print(output)
 	for task in daily_tasks[date]:
-		print(task + ': ' + decimal_to_timestring(daily_tasks[date][task]))
+            print(task + ': ' + decimal_to_timestring(daily_tasks[date][task]))
+            if task == 'UAS work':
+                german_sum += 1
+
+print(german_sum)
+
