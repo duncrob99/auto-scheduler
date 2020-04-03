@@ -101,7 +101,8 @@ def get_work_on_day(requested_day):
         total_work = regular_work + one_off_work
     else:
         total_work = regular_work
-        return total_work
+
+    return total_work
 
 
 # Bring fixed work data into memory structures
@@ -134,7 +135,6 @@ for day_info in fixed_work_lines:
                 else:
                     daily_tasks[date] = {}
                     daily_tasks[date][work_title] = work_time
-
 
 # Bring task list data into memory structures
 tasks = []
@@ -196,7 +196,6 @@ for index in due_dateless_task_indices:
 # Sort tasks by due date
 tasks = sorted(tasks, key=itemgetter(3))
 
-
 # Work out how many hours to work a day
 auto_work_per_day = {}
 work_on_days_to_due = {}
@@ -205,6 +204,7 @@ for task in tasks:
     required_hours = float(task[1])
     start_date = max(task[2], datetime.datetime.now().date())
     min_time = float(task[4])
+    subtitle = task[5]
     if include_today:
         due_date = max(task[3], datetime.datetime.now().date() + datetime.timedelta(days=1))
     else:
@@ -216,19 +216,24 @@ for task in tasks:
     else:
         available_days = [start_date + datetime.timedelta(days=x) for x in range(1, (due_date - start_date).days)]
 
-    # Get total work on each day and remove weekends
+    # Get total work on each day and slate weekends for removal if necessary
+    indices_to_delete = []
     for index, date in enumerate(available_days):
         if date.weekday() in [6, 5] and not include_weekends:
-            del available_days[index] 
+            indices_to_delete.append(index)
             continue
         if date in auto_work_per_day:
             work_on_days_to_due[date] = get_work_on_day(date) + auto_work_per_day[date]
         else:
             work_on_days_to_due[date] = get_work_on_day(date)
 
+    # Can't delete while iterating over list, so actually remove weekends now
+    for index in reversed(indices_to_delete):
+        del available_days[index]
+
     # Add hours to day with smallest amount of work so far
     while required_hours > 0 and len(work_on_days_to_due) > 0:
-        min_work_day = min(work_on_days_to_due, key=lambda x: work_on_days_to_due[x])
+        min_work_day = min(available_days, key=lambda x: work_on_days_to_due[x])
         auto_work_to_add = min([min_time, required_hours])
         if min_work_day in auto_work_per_day:
             auto_work_per_day[min_work_day] += auto_work_to_add
@@ -241,8 +246,7 @@ for task in tasks:
             work_on_days_to_due[min_work_day] += auto_work_to_add
 
         required_hours -= auto_work_to_add
-
-
+        
 # Assign specific tasks to each day
 daily_subtitles = {}
 for task in tasks:
@@ -264,6 +268,8 @@ for task in tasks:
         for date in available_days:
             if date in auto_work_per_day:
                 if required_hours > 0 and auto_work_per_day[date] > 0:
+                    if auto_work_per_day[date] < min_time:
+                        continue
                     if not date in daily_tasks or not title in daily_tasks[date]:
                         auto_work_to_add = min_time
                     elif daily_tasks[date][title] < min_time:
@@ -296,13 +302,13 @@ for task in tasks:
                     required_hours -= auto_work_to_add
 
         if previous_hours == required_hours:
-            print("Not enough time for " + title + " with " + str(required_hours) + " hours extra.")
+            print("Not enough time for " + subtitle + " with " + str(required_hours) + " hours extra.")
             break
     if len(available_days) <= 0:
         if required_hours > 1:
-            print('Do ' + str(required_hours) + ' hours of ' + title + ' now!')
+            print('Do ' + str(required_hours) + ' hours of ' + subtitle + ' now!')
         else:
-            print('Do ' + str(required_hours) + ' hour of ' + title + ' now!')
+            print('Do ' + str(required_hours) + ' hour of ' + subtitle + ' now!')
 
 # Display results
 for date in sorted(daily_subtitles, reverse=reverse_output):
