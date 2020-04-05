@@ -9,29 +9,29 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-Translation; 1; 8/4/20; 0.25; Weekly Translation (Wk 4)
-Translation; 1; 22/4/20; 0.25; Weekly Translation (Wk 5)
-Translation; 1; 29/4/20; 0.25; Weekly Translation (Wk 6)
-Translation; 1; 6/5/20; 0.25; Weekly Translation (Wk 7)
-Translation; 1; 13/5/20; 0.25; Weekly Translation (Wk 8)
-Translation; 1; 20/5/20; 0.25; Weekly Translation (Wk 9)
-Translation; 1; 27/5/20; 0.25; Weekly Translation (Wk 10)
-Translation; 1; 3/6/20; 0.25; Weekly Translation (Wk 11)
-Translation; 1; 10/6/20; 0.25; Weekly Translation (Wk 12)
+Translation; 0.5; 8/4/20; 0.5; Translation Lecture & Readings (Wk 4)
+Translation; 1; 22/4/20; 0.5; Translation Lecture & Readings (Wk 5)
+Translation; 1; 29/4/20; 0.5; Translation Lecture & Readings (Wk 6)
+Translation; 1; 6/5/20; 0.5; Translation Lecture & Readings (Wk 7)
+Translation; 1; 13/5/20; 0.5; Translation Lecture & Readings (Wk 8)
+Translation; 1; 20/5/20; 0.5; Translation Lecture & Readings (Wk 9)
+Translation; 1; 27/5/20; 0.5; Translation Lecture & Readings (Wk 10)
+Translation; 1; 3/6/20; 0.5; Translation Lecture & Readings (Wk 11)
+Translation; 1; 10/6/20; 0.5; Translation Lecture & Readings (Wk 12)
 
-Translation; 3; 1/5/20; 0.25; Short Translation Task
-Translation; 3; 12/6/20; 0.25; Translation Comparative Analysis
-Translation; 5; 26/6/20; 0.25; Long Translation Task
+Translation; 1; 8/4/20; 0.5; Weekly Translation (Wk 4)
+Translation; 1; 22/4/20; 0.5; Weekly Translation (Wk 5)
+Translation; 1; 29/4/20; 0.5; Weekly Translation (Wk 6)
+Translation; 1; 6/5/20; 0.5; Weekly Translation (Wk 7)
+Translation; 1; 13/5/20; 0.5; Weekly Translation (Wk 8)
+Translation; 1; 20/5/20; 0.5; Weekly Translation (Wk 9)
+Translation; 1; 27/5/20; 0.5; Weekly Translation (Wk 10)
+Translation; 1; 3/6/20; 0.5; Weekly Translation (Wk 11)
+Translation; 1; 10/6/20; 0.5; Weekly Translation (Wk 12)
 
-Translation; 1; 8/4/20; 0.25; Translation Lecture & Readings (Wk 4)
-Translation; 1; 22/4/20; 0.25; Translation Lecture & Readings (Wk 5)
-Translation; 1; 29/4/20; 0.25; Translation Lecture & Readings (Wk 6)
-Translation; 1; 6/5/20; 0.25; Translation Lecture & Readings (Wk 7)
-Translation; 1; 13/5/20; 0.25; Translation Lecture & Readings (Wk 8)
-Translation; 1; 20/5/20; 0.25; Translation Lecture & Readings (Wk 9)
-Translation; 1; 27/5/20; 0.25; Translation Lecture & Readings (Wk 10)
-Translation; 1; 3/6/20; 0.25; Translation Lecture & Readings (Wk 11)
-Translation; 1; 10/6/20; 0.25; Translation Lecture & Readings (Wk 12)
+Translation; 3; 1/5/20; 0.5; Short Translation Task
+Translation; 3; 12/6/20; 0.5; Translation Comparative Analysis
+Translation; 5; 26/6/20; 0.5; Long Translation Task
 
 Translation; 0.25; 3/4/20-8/4/20; 0.25; Translation Quiz 4
 Translation; 0.25; 10/4/20-22/4/20; 0.25; Translation Quiz 5
@@ -43,15 +43,15 @@ Translation; 0.25; 22/5/20-27/5/20; 0.25; Translation Quiz 10
 Translation; 0.25; 29/5/20-3/6/20; 0.25; Translation Quiz 11
 Translation; 0.25; 5/6/20-10/6/20; 0.25; Translation Quiz 12
 
-Aero; 2; 6/4/20; 0.25; Aero Worksheet 3
-Aero; 2; 20/4/20; 0.25; Aero Worksheet 4
-Aero; 2; 27/4/20; 0.25; Aero Worksheet 5
-Aero; 2; 4/5/20; 0.25; Aero Worksheet 6
-Aero; 2; 11/5/20; 0.25; Aero Worksheet 7
-Aero; 2; 18/5/20; 0.25; Aero Worksheet 8
-Aero; 2; 25/5/20; 0.25; Aero Worksheet 9
-Aero; 2; 1/6/20; 0.25; Aero Worksheet 10
-Aero; 2; 8/6/20; 0.25; Aero Worksheet 11
+Aero; 1.25; 6/4/20; 0.5; Aero Worksheet 3
+Aero; 2; 20/4/20; 0.5; Aero Worksheet 4
+Aero; 2; 27/4/20; 0.5; Aero Worksheet 5
+Aero; 2; 4/5/20; 0.5; Aero Worksheet 6
+Aero; 2; 11/5/20; 0.5; Aero Worksheet 7
+Aero; 2; 18/5/20; 0.5; Aero Worksheet 8
+Aero; 2; 25/5/20; 0.5; Aero Worksheet 9
+Aero; 2; 1/6/20; 0.5; Aero Worksheet 10
+Aero; 2; 8/6/20; 0.5; Aero Worksheet 11
 
 Aero; 1.0; 6/4/20-9/4/20; 0.5; Aero Lecture 1 Wk 4
 Aero; 0.5; 7/4/20-9/4/20; 0.5; Aero Lecture 2 Wk 4
@@ -72,6 +72,27 @@ Aero; 0.5; 2/6/20-4/6/20; 0.5; Aero Lecture 2 Wk 11
 Aero; 1.0; 8/6/20-11/6/20; 0.5; Aero Lecture 1 Wk 12
 Aero; 0.5; 9/6/20-11/6/20; 0.5; Aero Lecture 2 Wk 12
 
+Structures; 1; 6/4/20-13/4/20; 1; Structures Lecture 1 Wk 4
+Structures; 1; 20/4/20-27/4/20; 1; Structures Lecture 1 Wk 5
+Structures; 1; 27/4/20-4/5/20; 1; Structures Lecture 1 Wk 6
+Structures; 1; 4/5/20-11/5/20; 1; Structures Lecture 1 Wk 7
+Structures; 1; 11/5/20-18/5/20; 1; Structures Lecture 1 Wk 8
+Structures; 1; 18/5/20-25/5/20; 1; Structures Lecture 1 Wk 9
+Structures; 1; 25/5/20-1/6/20; 1; Structures Lecture 1 Wk 10
+Structures; 1; 1/6/20-8/6/20; 1; Structures Lecture 1 Wk 11
+Structures; 1; 8/6/20-15/6/20; 1; Structures Lecture 1 Wk 12
+
+Structures; 0.5; 2/4/20-6/4/20; 0.5; Structures Lecture 2 Wk 3
+Structures; 0.5; 9/4/20-13/4/20; 0.5; Structures Lecture 2 Wk 4
+Structures; 0.5; 23/4/20-27/4/20; 0.5; Structures Lecture 2 Wk 5
+Structures; 0.5; 30/4/20-4/5/20; 0.5; Structures Lecture 2 Wk 6
+Structures; 0.5; 7/5/20-11/5/20; 0.5; Structures Lecture 2 Wk 7
+Structures; 0.5; 14/5/20-18/5/20; 0.5; Structures Lecture 2 Wk 8
+Structures; 0.5; 21/5/20-25/5/20; 0.5; Structures Lecture 2 Wk 9
+Structures; 0.5; 28/5/20-1/6/20; 0.5; Structures Lecture 2 Wk 10
+Structures; 0.5; 4/6/20-8/6/20; 0.5; Structures Lecture 2 Wk 11
+Structures; 0.5; 11/6/20-15/6/20; 0.5; Structures Lecture 2 Wk 12
+
 Structures; 1; 3/4/20-6/4/20; 1; Structures Quiz 2
 Structures; 1; 10/4/20-13/4/20; 1; Structures Quiz 3
 Structures; 1; 24/4/20-27/4/20; 1; Structures Quiz 4
@@ -83,12 +104,26 @@ Structures; 1; 29/5/20-1/6/20; 1; Structures Quiz 9
 Structures; 1; 5/6/20-8/6/20; 1; Structures Quiz 10
 Structures; 1; 12/6/20-15/6/20; 1; Structures Quiz 11
 
-Ukrainian; 1; 3/4/20-9/4/20; 0.25; Ukrainian Language Wk 4
-Ukrainian; 1; 10/4/20-16/4/20; 0.25; Ukrainian Language Wk 5
-Ukrainian; 1; 17/4/20-23/4/20; 0.25; Ukrainian Language Wk 6
-Ukrainian; 1; 24/4/20-30/4/20; 0.25; Ukrainian Language Wk 7
-Ukrainian; 1; 1/5/20-7/5/20; 0.25; Ukrainian Language Wk 8
-Ukrainian; 1; 8/5/20-14/5/20; 0.25; Ukrainian Language Wk 9
-Ukrainian; 1; 15/5/20-21/5/20; 0.25; Ukrainian Language Wk 10
-Ukrainian; 1; 22/5/20-28/5/20; 0.25; Ukrainian Language Wk 11
-Ukrainian; 1; 29/5/20-4/6/20; 0.25; Ukrainian Language Wk 12
+Ukrainian; 1; 3/4/20-9/4/20; 0.5; Ukrainian Language Wk 4
+Ukrainian; 1; 10/4/20-16/4/20; 0.5; Ukrainian Language Wk 5
+Ukrainian; 1; 17/4/20-23/4/20; 0.5; Ukrainian Language Wk 6
+Ukrainian; 1; 24/4/20-30/4/20; 0.5; Ukrainian Language Wk 7
+Ukrainian; 1; 1/5/20-7/5/20; 0.5; Ukrainian Language Wk 8
+Ukrainian; 1; 8/5/20-14/5/20; 0.5; Ukrainian Language Wk 9
+Ukrainian; 1; 15/5/20-21/5/20; 0.5; Ukrainian Language Wk 10
+Ukrainian; 1; 22/5/20-28/5/20; 0.5; Ukrainian Language Wk 11
+Ukrainian; 1; 29/5/20-4/6/20; 0.5; Ukrainian Language Wk 12
+
+Ukrainian; 0.5; 3/4/20; 0.5; Ukrainian Literature Wk 4
+Ukrainian; 1; 10/4/20; 0.5; Ukrainian Literature Wk 5
+Ukrainian; 1; 24/4/20; 0.5; Ukrainian Literature Wk 6
+Ukrainian; 1; 1/5/20; 0.5; Ukrainian Literature Wk 7
+Ukrainian; 1; 8/5/20; 0.5; Ukrainian Literature Wk 8
+Ukrainian; 1; 15/5/20; 0.5; Ukrainian Literature Wk 9
+Ukrainian; 1; 22/5/20; 0.5; Ukrainian Literature Wk 10
+Ukrainian; 1; 29/5/20; 0.5; Ukrainian Literature Wk 11
+Ukrainian; 1; 5/6/20; 0.5; Ukrainian Literature Wk 12
+Ukrainian; 1; 12/6/20; 0.5; Ukrainian Literature Wk 13
+
+Structures; 36; 15/6/20; 0.5; Creating Structures Anki Cards
+Aero; 36; 15/6/20; 0.5; Creating Aero Anki Cards
