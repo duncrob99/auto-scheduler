@@ -16,7 +16,7 @@ time_inc = 1/60
 
 valid_input = False
 while not valid_input:
-    include_today = input("Include Today? (y/n): ")
+    include_today = input("Include Today? [Y/n]: ")
     if include_today == "y" or include_today == "":
         include_today = True
         valid_input = True
@@ -26,7 +26,7 @@ while not valid_input:
 
 valid_input = False
 while not valid_input:
-    include_weekends = input("Include weekends? (y/n): ") 
+    include_weekends = input("Include weekends? [Y/n]: ") 
     if include_weekends == 'y' or include_weekends == "":
         include_weekends = True
         valid_input = True
@@ -36,7 +36,7 @@ while not valid_input:
 
 valid_input = False
 while not valid_input:
-    reverse_output = input("Reverse output? (y/n): ")
+    reverse_output = input("Reverse output? [Y/n]: ")
     if reverse_output == "y" or reverse_output == "":
         reverse_output = True
         valid_input = True
@@ -44,7 +44,7 @@ while not valid_input:
         reverse_output = False
         valid_input = True
 
-if input("Separate output? (y/n): ") in ['y', '']:
+if input("Separate output? [y/n]: ") in ['y', '']:
     for i in range(0, 5):
         print(' ')
 
@@ -162,11 +162,13 @@ for index, task in enumerate(one_off_tasks_lines):
         due_date = date_string_to_datetime('1/1/01')
     elif len(due_date.split('-')) > 1:
         due_date = due_date.split('-')
-        start_date = date_string_to_datetime(due_date[0])
+        start_date = max(date_string_to_datetime(due_date[0]), datetime.datetime.now().date())
         due_date = date_string_to_datetime(due_date[1])
     else:
         start_date = datetime.datetime.now().date()
         due_date = date_string_to_datetime(due_date)
+
+    due_date = max(due_date, datetime.datetime.now().date() + datetime.timedelta(days=1 if include_today else 2))
 
     if len(split_info) >= 5:
         subtitle = split_info[4]
@@ -197,18 +199,11 @@ for index in due_dateless_task_indices:
 tasks = sorted(tasks, key=itemgetter(3))
 
 # Work out how many hours to work a day
+required_hour_sum = 0
 auto_work_per_day = {}
 work_on_days_to_due = {}
 for task in tasks:
-    title = task[0]
-    required_hours = float(task[1])
-    start_date = max(task[2], datetime.datetime.now().date())
-    min_time = float(task[4])
-    subtitle = task[5]
-    if include_today:
-        due_date = max(task[3], datetime.datetime.now().date() + datetime.timedelta(days=1))
-    else:
-        due_date = max(task[3], datetime.datetime.now().date() + datetime.timedelta(days=2))
+    title, required_hours, start_date, due_date, min_time, subtitle = task
 
     # Get list of days which could possibly be used
     if include_today or start_date != datetime.datetime.now().date():
@@ -246,20 +241,11 @@ for task in tasks:
             work_on_days_to_due[min_work_day] += auto_work_to_add
 
         required_hours -= auto_work_to_add
-        
-# Assign specific tasks to each day
-daily_subtitles = {}
-for task in tasks:
-    title = task[0]
-    required_hours = float(task[1])
-    start_date = task[2]
-    min_time = float(task[4])
-    subtitle = task[5]
 
-    if include_today:
-        due_date = max(task[3], datetime.datetime.now().date() + datetime.timedelta(days=1))
-    else:
-        due_date = max(task[3], datetime.datetime.now().date() + datetime.timedelta(days=2))
+# Assign subjects to each day
+daily_titles = {}
+for task in tasks:
+    title, required_hours, start_date, due_date, min_time, subtitle = task
 
     available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
 
@@ -290,19 +276,19 @@ for task in tasks:
                     # Update total amount of auto-work
                     auto_work_per_day[date] -= auto_work_to_add
 
-                    # Safely add work to daily subtitles
-                    if date in daily_subtitles:
-                        if subtitle in daily_subtitles[date]:
-                            daily_subtitles[date][subtitle] += auto_work_to_add
+                    # Safely add work to daily titles
+                    if date in daily_titles:
+                        if title in daily_titles[date]:
+                            daily_titles[date][title] += auto_work_to_add
                         else:
-                            daily_subtitles[date][subtitle] = auto_work_to_add
+                            daily_titles[date][title] = auto_work_to_add
                     else:
-                        daily_subtitles[date] = {subtitle: auto_work_to_add}
+                        daily_titles[date] = {title: auto_work_to_add}
 
                     required_hours -= auto_work_to_add
 
         if previous_hours == required_hours:
-            print("Not enough time for " + subtitle + " with " + str(required_hours) + " hours extra.")
+            print("Not enough time for " + title + " (" + subtitle + ") with " + str(required_hours) + " hours extra.")
             break
     if len(available_days) <= 0:
         if required_hours > 1:
@@ -310,11 +296,37 @@ for task in tasks:
         else:
             print('Do ' + str(required_hours) + ' hour of ' + subtitle + ' now!')
 
+# Assign specific tasks to dates
+daily_subtitles = {}
+for task in tasks:
+    title, required_hours, start_date, due_date, min_time, subtitle = task
+    if due_date == datetime.datetime.now().date():
+        subtitle = "(DUE) " + subtitle
+
+    #for date in daily_titles:
+    for date in filter(lambda x: x >= start_date, daily_titles):
+        if title in daily_titles[date] and required_hours > 0 and daily_titles[date][title] > 0:
+            auto_work_to_add = min(required_hours, daily_titles[date][title])
+            required_hours -= auto_work_to_add
+            daily_titles[date][title] -= auto_work_to_add
+            if required_hours <= 0:
+                subtitle = "(Complete) " + subtitle
+            if date in daily_subtitles:
+                if subtitle in daily_subtitles[date]:
+                    daily_subtitles[date][subtitle] += auto_work_to_add
+                else:
+                    daily_subtitles[date][subtitle] = auto_work_to_add
+            else:
+                daily_subtitles[date] = {subtitle: auto_work_to_add}
+    if required_hours > 0:
+        print('%s: %s' % (subtitle, required_hours))
+
 # Display results
+actual_hours_sum = 0
 for date in sorted(daily_subtitles, reverse=reverse_output):
     total_auto = 0
-    for task in daily_tasks[date]:
-        total_auto += daily_tasks[date][task]
+    for task in daily_subtitles[date]:
+        total_auto += daily_subtitles[date][task]
 
     # Create correct number of title dashes
     output = weekday_conversion[date.weekday()] + ' ' + str(date) + ' (' + decimal_to_timestring(total_auto) + ' auto/' + decimal_to_timestring(work_on_days_to_due[date]) + ' total)'
@@ -328,5 +340,7 @@ for date in sorted(daily_subtitles, reverse=reverse_output):
         cur_side_left = not cur_side_left
 
     print(output)
+
     for task in daily_subtitles[date]:
         print(task + ': ' + decimal_to_timestring(daily_subtitles[date][task]))
+        actual_hours_sum += daily_subtitles[date][task]
