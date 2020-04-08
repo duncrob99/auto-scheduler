@@ -108,43 +108,43 @@ def get_work_on_day(requested_day):
 # Bring fixed work data into memory structures
 daily_tasks = {}
 for day_info in fixed_work_lines:
-    if day_info != '\n':
-        split_info = day_info.split(';')
-        day = split_info[0]
-        work_time = timestring_to_decimal(split_info[1].split('\n')[0])
-        if day in regular_working.keys():
-            regular_working[day] += work_time
-        elif day in one_off_working.keys():
-            one_off_working[date_string_to_datetime(day)] += work_time
-        else:
-            one_off_working[date_string_to_datetime(day)] = work_time
+    if day_info == '\n' or day_info[0] == '#': continue
 
-        # Deal with titled work data
-        if len(split_info) >= 3:
-            work_title = split_info[2].split('\n')[0]
-            if day in regular_working.keys():
-                #TODO: Deal with regulars
-                pass
-            else:
-                date = date_string_to_datetime(day)
-                if date in daily_tasks:
-                    if work_title in daily_tasks[date]:
-                        daily_tasks[date][work_title] += work_time
-                    else:
-                        daily_tasks[date][work_title] = work_time
+    split_info = day_info.split(';')
+    day = split_info[0]
+    work_time = timestring_to_decimal(split_info[1].split('\n')[0])
+    if day in regular_working.keys():
+        regular_working[day] += work_time
+    elif day in one_off_working.keys():
+        one_off_working[date_string_to_datetime(day)] += work_time
+    else:
+        one_off_working[date_string_to_datetime(day)] = work_time
+
+    # Deal with titled work data
+    if len(split_info) >= 3:
+        work_title = split_info[2].split('\n')[0]
+        if day in regular_working.keys():
+            #TODO: Deal with regulars
+            pass
+        else:
+            date = date_string_to_datetime(day)
+            if date in daily_tasks:
+                if work_title in daily_tasks[date]:
+                    daily_tasks[date][work_title] += work_time
                 else:
-                    daily_tasks[date] = {}
                     daily_tasks[date][work_title] = work_time
+            else:
+                daily_tasks[date] = {}
+                daily_tasks[date][work_title] = work_time
 
 # Bring task list data into memory structures
 tasks = []
 due_dateless_task_indices = []
 for index, task in enumerate(one_off_tasks_lines):
-    if task[0] == '#':
-        continue
     split_info = task.split(';')
-    if split_info == '\n' or '\n' in split_info:
-        continue
+    
+    if task[0] == '#' or split_info == '\n' or '\n' in split_info: continue
+
     title = split_info[0]
     try:
         required_hours = timestring_to_decimal(split_info[1].split(' ')[1])
@@ -303,8 +303,7 @@ for task in tasks:
     if due_date == datetime.datetime.now().date():
         subtitle = "(DUE) " + subtitle
 
-    #for date in daily_titles:
-    for date in filter(lambda x: x >= start_date, daily_titles):
+    for date in sorted(filter(lambda x: x >= start_date, daily_titles)):
         if title in daily_titles[date] and required_hours > 0 and daily_titles[date][title] > 0:
             auto_work_to_add = min(required_hours, daily_titles[date][title])
             required_hours -= auto_work_to_add
