@@ -1,6 +1,6 @@
 Tuesday; 2
 Wednesday; 2
-Thursday; 3.5
+Thursday; 2
 
 Monday; 7.5
 Tuesday; 7.5
@@ -11,6 +11,13 @@ Friday; 7.5
 14/4/20; -2
 15/4/20; -3
 16/4/20; -3.5
+
+# Aero Take-Home Tests
+23/4/20; 1.5
+30/4/20; 1.5
+14/5/20; 1.5
+28/5/20; 1.5
+11/6/20; 1.5
 
 # Justing tutoring
 18/4/20; 1
