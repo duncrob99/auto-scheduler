@@ -19,14 +19,15 @@ Structures; 1; 29/5/20-1/6/20; 1; Structures Quiz 9
 Structures; 1; 5/6/20-8/6/20; 1; Structures Quiz 10
 Structures; 1; 12/6/20-15/6/20; 1; Structures Quiz 11
 
-Aero; 3; 20/4/20; 0.5; Aero Worksheet 4
-Aero; 4; 27/4/20; 0.5; Aero Worksheet 5
-Aero; 4; 4/5/20; 0.5; Aero Worksheet 6
-Aero; 4; 11/5/20; 0.5; Aero Worksheet 7
-Aero; 4; 18/5/20; 0.5; Aero Worksheet 8
-Aero; 4; 25/5/20; 0.5; Aero Worksheet 9
-Aero; 4; 1/6/20; 0.5; Aero Worksheet 10
-Aero; 4; 8/6/20; 0.5; Aero Worksheet 11
+Aero; 2; 20/4/20; 0.5; Aero Worksheet 4
+Aero; 0.25; 17/4/20-20/4/20; 0.25; Hand in Aero Worksheet 4
+Aero; 3; 27/4/20; 0.5; Aero Worksheet 5
+Aero; 3; 4/5/20; 0.5; Aero Worksheet 6
+Aero; 3; 11/5/20; 0.5; Aero Worksheet 7
+Aero; 3; 18/5/20; 0.5; Aero Worksheet 8
+Aero; 3; 25/5/20; 0.5; Aero Worksheet 9
+Aero; 3; 1/6/20; 0.5; Aero Worksheet 10
+Aero; 3; 8/6/20; 0.5; Aero Worksheet 11
 
 Aero; 1.5; 20/4/20-23/4/20; 0.5; Aero Lecture Wk 5
 Aero; 1.5; 27/4/20-30/4/20; 0.5; Aero Lecture Wk 6
@@ -65,26 +66,35 @@ Ukrainian; 0.5; 22/5/20-28/5/20; 0.5; Ukrainian Language Wk 10
 Ukrainian; 0.5; 29/5/20-4/6/20; 0.5; Ukrainian Language Wk 11
 Ukrainian; 0.5; 5/6/20-11/6/20; 0.5; Ukrainian Language Wk 12
 
-Ukrainian; 2; 24/4/20; 0.5; Ukrainian Literature Wk 6
-Ukrainian; 2; 1/5/20; 0.5; Ukrainian Literature Wk 7
-Ukrainian; 2; 8/5/20; 0.5; Ukrainian Literature Wk 8
-Ukrainian; 2; 15/5/20; 0.5; Ukrainian Literature Wk 9
-Ukrainian; 2; 22/5/20; 0.5; Ukrainian Literature Wk 10
-Ukrainian; 2; 29/5/20; 0.5; Ukrainian Literature Wk 11
-Ukrainian; 2; 5/6/20; 0.5; Ukrainian Literature Wk 12
-Ukrainian; 2; 12/6/20; 0.5; Ukrainian Literature Wk 13
+Ukrainian; 0.25; 24/4/20; 0.5; Ukrainian Literature Wk 6
+Ukrainian; 1; 1/5/20; 0.5; Ukrainian Literature Wk 7
+Ukrainian; 1; 8/5/20; 0.5; Ukrainian Literature Wk 8
+Ukrainian; 1; 15/5/20; 0.5; Ukrainian Literature Wk 9
+Ukrainian; 1; 22/5/20; 0.5; Ukrainian Literature Wk 10
+Ukrainian; 1; 29/5/20; 0.5; Ukrainian Literature Wk 11
+Ukrainian; 1; 5/6/20; 0.5; Ukrainian Literature Wk 12
+Ukrainian; 1; 12/6/20; 0.5; Ukrainian Literature Wk 13
 
-Translation; 1; 10/4/20-22/4/20; 0.5; Translation Lecture & Readings (Wk 5)
-Translation; 1; 24/4/20-29/4/20; 0.5; Translation Lecture & Readings (Wk 6)
-Translation; 1; 1/5/20-6/5/20; 0.5; Translation Lecture & Readings (Wk 7)
-Translation; 1; 8/5/20-13/5/20; 0.5; Translation Lecture & Readings (Wk 8)
-Translation; 1; 15/5/20-20/5/20; 0.5; Translation Lecture & Readings (Wk 9)
-Translation; 1; 22/5/20-27/5/20; 0.5; Translation Lecture & Readings (Wk 10)
-Translation; 1; 29/5/20-3/6/20; 0.5; Translation Lecture & Readings (Wk 11)
-Translation; 1; 5/6/20-10/6/20; 0.5; Translation Lecture & Readings (Wk 12)
+Translation; 0.5; 10/4/20-22/4/20; 0.5; Translation Lecture (Wk 5)
+Translation; 0.5; 24/4/20-29/4/20; 0.5; Translation Lecture (Wk 6)
+Translation; 0.5; 1/5/20-6/5/20; 0.5; Translation Lecture (Wk 7)
+Translation; 0.5; 8/5/20-13/5/20; 0.5; Translation Lecture (Wk 8)
+Translation; 0.5; 15/5/20-20/5/20; 0.5; Translation Lecture (Wk 9)
+Translation; 0.5; 22/5/20-27/5/20; 0.5; Translation Lecture (Wk 10)
+Translation; 0.5; 29/5/20-3/6/20; 0.5; Translation Lecture (Wk 11)
+Translation; 0.5; 5/6/20-10/6/20; 0.5; Translation Lecture (Wk 12)
 
-Translation; 1; 22/4/20; 0.5; Weekly Translation (Wk 5)
-Translation; 2; 29/4/20; 0.5; Weekly Translation (Wk 6)
+Translation; 0.5; 22/4/20; 0.25; Translation Readings (Wk 5)
+Translation; 0.5; 29/4/20; 0.25; Translation Readings (Wk 6)
+Translation; 0.5; 6/5/20; 0.25; Translation Readings (Wk 7)
+Translation; 0.5; 13/5/20; 0.25; Translation Readings (Wk 8)
+Translation; 0.5; 20/5/20; 0.25; Translation Readings (Wk 9)
+Translation; 0.5; 27/5/20; 0.25; Translation Readings (Wk 10)
+Translation; 0.5; 29/5/20-3/6/20; 0.25; Translation Readings (Wk 11)
+Translation; 0.5; 5/6/20-10/6/20; 0.25; Translation Readings (Wk 12)
+
+Translation; 1; 15/4/20; 0.5; Weekly Translation (Wk 5)
+Translation; 2; 22/4/20; 0.5; Weekly Translation (Wk 6)
 Translation; 2; 6/5/20; 0.5; Weekly Translation (Wk 7)
 Translation; 2; 13/5/20; 0.5; Weekly Translation (Wk 8)
 Translation; 2; 20/5/20; 0.5; Weekly Translation (Wk 9)
