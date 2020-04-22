@@ -50,6 +50,12 @@ screen_width = int(os.popen('stty size', 'r').read().split()[1])
 
 if input("Clear terminal history? [Y/n]: ") in ['y', '']:
     subprocess.call('reset')
+elif input("Separate output? [Y/n]: ") in ['y', '']:
+    output = ''
+    for j in range(screen_width):
+        output += ':'
+    for i in range(20):
+        print(output)
 
 def datetime_to_date_string(input_date):
     return str(input_date.day) + '/' + str(input_date.month) + '/' + str(input_date.year)[2:]
