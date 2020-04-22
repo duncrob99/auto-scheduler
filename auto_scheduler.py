@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import io
+import subprocess
 import os
 import datetime
 from operator import itemgetter
@@ -47,13 +48,8 @@ while not valid_input:
 
 screen_width = int(os.popen('stty size', 'r').read().split()[1])
 
-if input("Separate output? [y/n]: ") in ['y', '']:
-    for i in range(0, 5):
-        print(' ')
-        output = ''
-        for i in range(0, int(screen_width/2)):
-            output += '/\\'
-        print(output)
+if input("Clear terminal history? [Y/n]: ") in ['y', '']:
+    subprocess.call('reset')
 
 def datetime_to_date_string(input_date):
     return str(input_date.day) + '/' + str(input_date.month) + '/' + str(input_date.year)[2:]
