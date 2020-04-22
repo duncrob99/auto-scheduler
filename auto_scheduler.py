@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import io
+import os
 import datetime
 from operator import itemgetter
 
@@ -44,12 +45,15 @@ while not valid_input:
         reverse_output = False
         valid_input = True
 
+screen_width = int(os.popen('stty size', 'r').read().split()[1])
+
 if input("Separate output? [y/n]: ") in ['y', '']:
     for i in range(0, 5):
         print(' ')
-
-screen_width = 64
-
+        output = ''
+        for i in range(0, int(screen_width/2)):
+            output += '/\\'
+        print(output)
 
 def datetime_to_date_string(input_date):
     return str(input_date.day) + '/' + str(input_date.month) + '/' + str(input_date.year)[2:]
