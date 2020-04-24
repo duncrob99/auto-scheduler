@@ -306,7 +306,7 @@ for task in tasks:
 daily_subtitles = {}
 for task in tasks:
     title, required_hours, start_date, due_date, min_time, subtitle = task
-    if due_date == datetime.datetime.now().date():
+    if due_date == datetime.datetime.now().date() + datetime.timedelta(days=1):
         subtitle = "(DUE) " + subtitle
 
     for date in sorted(filter(lambda x: x >= start_date, daily_titles)):
