@@ -306,23 +306,24 @@ for task in tasks:
 daily_subtitles = {}
 for task in tasks:
     title, required_hours, start_date, due_date, min_time, subtitle = task
-    if due_date == datetime.datetime.now().date() + datetime.timedelta(days=1):
-        subtitle = "(DUE) " + subtitle
 
     for date in sorted(filter(lambda x: x >= start_date, daily_titles)):
         if title in daily_titles[date] and required_hours > 0 and daily_titles[date][title] > 0:
             auto_work_to_add = min(required_hours, daily_titles[date][title])
             required_hours -= auto_work_to_add
             daily_titles[date][title] -= auto_work_to_add
+            output_subtitle = subtitle
             if required_hours <= 0:
-                subtitle = "(Complete) " + subtitle
+                output_subtitle = "(Complete) " + output_subtitle
+            if due_date == date + datetime.timedelta(days=1):
+                output_subtitle = "(DUE) " + output_subtitle
             if date in daily_subtitles:
-                if subtitle in daily_subtitles[date]:
-                    daily_subtitles[date][subtitle] += auto_work_to_add
+                if output_subtitle in daily_subtitles[date]:
+                    daily_subtitles[date][output_subtitle] += auto_work_to_add
                 else:
-                    daily_subtitles[date][subtitle] = auto_work_to_add
+                    daily_subtitles[date][output_subtitle] = auto_work_to_add
             else:
-                daily_subtitles[date] = {subtitle: auto_work_to_add}
+                daily_subtitles[date] = {output_subtitle: auto_work_to_add}
     if required_hours > 0:
         print('%s: %s' % (subtitle, required_hours))
 
