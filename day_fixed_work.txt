@@ -1,3 +1,4 @@
+Monday; 1
 Tuesday; 1
 Wednesday; 2
 Thursday; 2
@@ -13,8 +14,7 @@ Friday; 8
 16/4/20; -2
 
 # Extra/Less Work
-24/4/20; 1
-1/5/20;1
+4/5/20; 2
 
 # Aero Take-Home Tests
 30/4/20; 1.5
