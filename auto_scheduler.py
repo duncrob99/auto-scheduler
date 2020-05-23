@@ -95,8 +95,9 @@ def timestring_to_decimal(timestring):
         minutes = float(split_time[1])
     else:
         minutes = 0
-        decimal_time = hours + minutes / 60
-        return decimal_time
+
+    decimal_time = hours + minutes / 60
+    return decimal_time
 
 
 def get_work_on_day(requested_day):
