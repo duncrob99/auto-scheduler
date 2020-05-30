@@ -9,8 +9,8 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-Aero; 2:45; 21/5/20-1/6/20; 0.5; Aero Lecture Wk 11
-Aero; 2:45; 24/5/20-8/6/20; 0.5; Aero Lecture Wk 12
+Aero; 1.5; 21/5/20-1/6/20; 0.5; Aero Lecture Wk 11
+Aero; 1.75; 24/5/20-8/6/20; 0.5; Aero Lecture Wk 12
 
 Aero; 5; 25/5/20-3/6/20; 0.5; Aero Worksheet 10
 Aero; 5; 1/6/20-10/6/20; 0.5; Aero Worksheet 11
@@ -26,7 +26,6 @@ Structures; 1; 29/5/20-1/6/20; 1; Structures Quiz 8
 Structures; 1; 5/6/20-8/6/20; 1; Structures Quiz 9
 Structures; 1; 12/6/20-15/6/20; 1; Structures Quiz 10
 
-Ukrainian; 1; 28/5/20; 0.5; Ukrainian Language Presentation
 Ukrainian; 0.5; 21/5/20-4/6/20; 0.5; Ukrainian Language Wk 10 (Food vocab, Colloquial UKR ch.6, read aloud Topic 10 text)
 Ukrainian; 1; 28/5/20-4/6/20; 0.5; Ukrainian Language Wk 12
 
@@ -37,6 +36,9 @@ Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 10
 Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 11
 Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 12
 Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 13
+
+Ukrainian; 10; 9/7/20; 0.5; Ukrainian Literature Readings
+Ukrainian; 10; 11/7/20; 0.5; Ukrainian Language Exam Study
 
 Translation; 0.5; 29/5/20-3/6/20; 0.5; Translation Lecture (Wk 11)
 Translation; 0.5; 5/6/20-10/6/20; 0.5; Translation Lecture (Wk 12)
@@ -57,6 +59,4 @@ Aero; 36; 15/6/20; 0.25; Creating Aero Anki Cards
 Structures; 36; 15/6/20; 0.25; Creating Structures Anki Cards
 
 UAS; 2:30; 1/6/20; 1; Rover - Create Heading Loop
-UAS; 90; 21/6/20; 0.25
-
-German Study Plan; 3; 29/5/20; 1
+UAS; 134; 11/7/20; 0.25
