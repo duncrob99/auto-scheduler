@@ -9,20 +9,17 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-Aero; 1.5; 21/5/20-1/6/20; 0.5; Aero Lecture Wk 11
 Aero; 1.75; 24/5/20-8/6/20; 0.5; Aero Lecture Wk 12
 
-Aero; 5; 25/5/20-3/6/20; 0.5; Aero Worksheet 10
+Aero; 3; 25/5/20-3/6/20; 0.5; Aero Worksheet 10
 Aero; 5; 1/6/20-10/6/20; 0.5; Aero Worksheet 11
 
 Structures; 1; 1/6/20-8/6/20; 1; Structures Lecture 1 Wk 11
 Structures; 1; 8/6/20-15/6/20; 1; Structures Lecture 1 Wk 12
 
-Structures; 0.5; 28/5/20-1/6/20; 0.5; Structures Lecture 2 Wk 10
 Structures; 0.5; 4/6/20-8/6/20; 0.5; Structures Lecture 2 Wk 11
 Structures; 0.5; 11/6/20-15/6/20; 0.5; Structures Lecture 2 Wk 12
 
-Structures; 1; 29/5/20-1/6/20; 1; Structures Quiz 8
 Structures; 1; 5/6/20-8/6/20; 1; Structures Quiz 9
 Structures; 1; 12/6/20-15/6/20; 1; Structures Quiz 10
 
@@ -40,11 +37,7 @@ Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 13
 Ukrainian; 10; 9/7/20; 0.5; Ukrainian Literature Readings
 Ukrainian; 10; 11/7/20; 0.5; Ukrainian Language Exam Study
 
-Translation; 0.5; 29/5/20-3/6/20; 0.5; Translation Lecture (Wk 11)
 Translation; 0.5; 5/6/20-10/6/20; 0.5; Translation Lecture (Wk 12)
-
-Translation; 1; 29/5/20-3/6/20; 0.25; Translation Readings (Wk 11)
-Translation; 1; 5/6/20-10/6/20; 0.25; Translation Readings (Wk 12)
 
 Translation; 1; 3/6/20; 0.5; Weekly Translation (Wk 11)
 Translation; 1; 10/6/20; 0.5; Weekly Translation (Wk 12)
@@ -52,11 +45,11 @@ Translation; 1; 10/6/20; 0.5; Weekly Translation (Wk 12)
 Translation; 3; 12/6/20; 0.5; Translation Comparative Analysis
 Translation; 5; 26/6/20; 0.5; Long Translation Task
 
-Translation; 0.25; 29/5/20-3/6/20; 0.25; Translation Quiz 11
-Translation; 0.25; 5/6/20-10/6/20; 0.25; Translation Quiz 12
+Translation; 0:15; 29/5/20-3/6/20; 0.25; Translation Quiz 11
+Translation; 0:15; 5/6/20-10/6/20; 0.25; Translation Quiz 12
 
 Aero; 36; 15/6/20; 0.25; Creating Aero Anki Cards
 Structures; 36; 15/6/20; 0.25; Creating Structures Anki Cards
 
-UAS; 2:30; 1/6/20; 1; Rover - Create Heading Loop
+UAS; 2:30; 2/6/20; 1; Rover - Create Heading Loop
 UAS; 134; 11/7/20; 0.25
