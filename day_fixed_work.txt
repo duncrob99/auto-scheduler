@@ -14,7 +14,7 @@ Thursday; 8
 Friday; 8
 
 # Extra/Less Work
-5/6/20; 1.5
+5/6/20; 1:15
 8/6/20; -8
 
 # Aero Take-Home Tests

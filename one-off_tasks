@@ -9,7 +9,7 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-Aero; 1.75; 24/5/20-8/6/20; 0.5; Aero Lecture Wk 12
+Aero; 1.75; 6/6/20-8/6/20; 0.5; Aero Lecture Wk 12
 
 Aero; 5; 1/6/20-11/6/20; 0.5; Aero Worksheet 11
 
