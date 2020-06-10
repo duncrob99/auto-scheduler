@@ -9,42 +9,28 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-Aero; 1.75; 6/6/20-8/6/20; 0.5; Aero Lecture Wk 12
-
-Aero; 5; 1/6/20-11/6/20; 0.5; Aero Worksheet 11
+Aero; 5; 1/6/20-13/6/20; 0.5; Aero Worksheet 11
 
 Structures; 1; 8/6/20-15/6/20; 1; Structures Lecture 1 Wk 12
 
 Structures; 0.5; 11/6/20-15/6/20; 0.5; Structures Lecture 2 Wk 12
 
-Structures; 1; 5/6/20-8/6/20; 1; Structures Quiz 9
 Structures; 1; 12/6/20-15/6/20; 1; Structures Quiz 10
 
-Ukrainian; 0.5; 21/5/20-4/6/20; 0.5; Ukrainian Language Wk 10 (Food vocab, Colloquial UKR ch.6, read aloud Topic 10 text)
-Ukrainian; 1; 28/5/20-4/6/20; 0.5; Ukrainian Language Wk 12
+#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 8
+#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 9
+#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 10
+#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 11
+#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 12
+#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 13
 
-Ukrainian; 2; 28/4/20-12/6/20; 0.5; Ukrainian Literature Wk 7
-Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 8
-Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 9
-Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 10
-Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 11
-Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 12
-Ukrainian; 2; 30/4/20-12/6/20; 0.5; Ukrainian Literature Wk 13
-
-Ukrainian; 10; 9/7/20; 0.5; Ukrainian Literature Readings
-Ukrainian; 10; 11/7/20; 0.5; Ukrainian Language Exam Study
-
-Translation; 0.5; 5/6/20-10/6/20; 0.5; Translation Lecture (Wk 12)
-
-Translation; 1; 10/6/20; 0.5; Weekly Translation (Wk 12)
+Ukrainian; 8; 11/6/20; 0.5; Ukrainian Language Exam Study
 
 Translation; 3; 12/6/20; 0.5; Translation Comparative Analysis
 Translation; 5; 26/6/20; 0.5; Long Translation Task
 
-Translation; 0:15; 5/6/20-10/6/20; 0.25; Translation Quiz 12
-
 Aero; 36; 15/6/20; 0.25; Creating Aero Anki Cards
 Structures; 36; 15/6/20; 0.25; Creating Structures Anki Cards
 
-UAS; 2:30; 9/6/20; 1; Rover - Create Heading Loop
+UAS; 2:30; 16/6/20; 1; Rover - Create Heading Loop
 UAS; 134; 11/7/20; 0.25
