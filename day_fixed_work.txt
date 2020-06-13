@@ -7,6 +7,12 @@
 # Uni
 10/6/20; 2
 
+# Structures Exam
+30/6/20; 24
+
+# Aero Exam
+3/7/20; 2.5
+
 Monday; 8
 Tuesday; 8
 Wednesday; 8
@@ -19,6 +25,9 @@ Friday; 8
 
 # Aero Take-Home Tests
 11/6/20; 1.5
+
+# Gemma tutoring
+13/6/20; 1
 
 # Justing tutoring
 6/6/20; 1
