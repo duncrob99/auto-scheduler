@@ -8,7 +8,7 @@
 10/6/20; 2
 
 # Structures Exam
-30/6/20; 24
+30/6/20; 0
 
 # Aero Exam
 3/7/20; 2.5
@@ -20,11 +20,15 @@ Thursday; 8
 Friday; 8
 
 # Extra/Less Work
-5/6/20; 1:15
-#8/6/20; -8
+17/6/20; -0.25
+18/6/20; 1:50
+19/6/20; 1
 
 # Aero Take-Home Tests
 11/6/20; 1.5
+
+# Kip McGrath Tutoring
+Wednesday; 3.5
 
 # Gemma tutoring
 13/6/20; 1

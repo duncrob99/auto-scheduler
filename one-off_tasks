@@ -9,25 +9,10 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-Structures; 1; 8/6/20-15/6/20; 1; Structures Lecture 1 Wk 12
-
-Structures; 0.5; 11/6/20-15/6/20; 0.5; Structures Lecture 2 Wk 12
-
-Structures; 1; 12/6/20-15/6/20; 1; Structures Quiz 10
-
-#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 8
-#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 9
-#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 10
-#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 11
-#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 12
-#Ukrainian; 1; 30/4/20-9/6/20; 0.5; Ukrainian Literature Wk 13
-
 Translation; 5; 27/6/20; 0.5; Long Translation Task
 
-Aero; 36; 22/6/20; 0.25; Creating Aero Anki Cards
-Structures; 36; 22/6/20; 0.25; Creating Structures Anki Cards
+Aero; 7.5; 22/6/20; 0.25; Creating Aero Anki Cards
+Structures; 11.25; 22/6/20; 0.25; Creating Structures Anki Cards
 
-UAS; 2:30; 16/6/20; 1; Rover - Create Heading Loop
+UAS; 2:30; 7/7/20; 1; Rover - Create Heading Loop
 UAS; 134; 11/7/20; 0.25
-
-Do tutoring paperwork; 0.25; 14/6/20; 0.25
