@@ -162,7 +162,7 @@ for index, task in enumerate(one_off_tasks_lines):
     if len(split_info) >= 4:
         min_time = timestring_to_decimal(split_info[3].split(' ')[1])
     else:
-        min_time = 1
+        min_time = 1/60
 
     if due_date == 'none':
         due_dateless_task_indices.append(index)
