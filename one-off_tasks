@@ -9,11 +9,61 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-
 Ukrainian; 72; 3/8/20-6/11/20
 German; 72; 3/8/20-6/11/20
 FVP; 100; 3/8/20-6/11/20
 CAD; 100; 3/8/20-6/11/20
 
+Housework; 2; 12/7/20
+Housework; 3.5; 19/7/20
+Housework; 3.5; 26/7/20
+Housework; 3.5; 2/8/20
+Housework; 3.5; 9/8/20
+Housework; 3.5; 16/8/20
+Housework; 3.5; 23/8/20
+Housework; 3.5; 30/8/20
+Housework; 3.5; 6/9/20
+Housework; 3.5; 13/9/20
+Housework; 3.5; 20/9/20
+Housework; 3.5; 27/9/20
+Housework; 3.5; 4/10/20
+Housework; 3.5; 11/10/20
+Housework; 3.5; 18/10/20
+Housework; 3.5; 25/10/20
+Housework; 3.5; 1/11/20
+Housework; 3.5; 8/11/20
+Housework; 3.5; 15/11/20
+Housework; 3.5; 22/11/20
+Housework; 3.5; 29/11/20
+Housework; 3.5; 6/12/20
+Housework; 3.5; 13/12/20
+Housework; 3.5; 20/12/20
+Housework; 3.5; 27/12/20
+
 UAS; 2:30; 14/7/20; 1; Rover - Create Heading Loop
-UAS; 354:32; 31/12/20; 0:01
+UAS; 354:32; 31/12/20
+
+Car maintenance; 1; 19/7/20; 1
+Car maintenance; 1; 26/7/20; 1
+Car maintenance; 1; 2/8/20; 1
+Car maintenance; 1; 9/8/20; 1
+Car maintenance; 1; 16/8/20; 1
+Car maintenance; 1; 23/8/20; 1
+Car maintenance; 1; 30/8/20; 1
+Car maintenance; 1; 6/9/20; 1
+Car maintenance; 1; 13/9/20; 1
+Car maintenance; 1; 20/9/20; 1
+Car maintenance; 1; 27/9/20; 1
+Car maintenance; 1; 4/10/20; 1
+Car maintenance; 1; 11/10/20; 1
+Car maintenance; 1; 18/10/20; 1
+Car maintenance; 1; 25/10/20; 1
+Car maintenance; 1; 1/11/20; 1
+Car maintenance; 1; 8/11/20; 1
+Car maintenance; 1; 15/11/20; 1
+Car maintenance; 1; 22/11/20; 1
+Car maintenance; 1; 29/11/20; 1
+Car maintenance; 1; 6/12/20; 1
+Car maintenance; 1; 13/12/20; 1
+Car maintenance; 1; 20/12/20; 1
+Car maintenance; 1; 27/12/20; 1
