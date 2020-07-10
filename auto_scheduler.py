@@ -47,6 +47,7 @@ while not valid_input:
         valid_input = True
 
 screen_width = int(os.popen('stty size', 'r').read().split()[1])
+clearer_text = ''.join([' ' for x in range(screen_width)]) + '\r'
 
 if input("Clear terminal history? [Y/n]: ") in ['y', '']:
     subprocess.call('reset')
@@ -129,7 +130,7 @@ for day_info in fixed_work_lines:
 
     # Deal with titled work data
     if len(split_info) >= 3:
-        work_title = split_info[2].split('\n')[0]
+        work_title = split_info[2].strip()
         if day in regular_working.keys():
             #TODO: Deal with regulars
             pass
@@ -205,11 +206,15 @@ for index in due_dateless_task_indices:
 # Sort tasks by due date
 tasks = sorted(tasks, key=itemgetter(3))
 
+print("All input data imported")
+
 # Work out how many hours to work a day
 required_hour_sum = 0
 auto_work_per_day = {}
 work_on_days_to_due = {}
-for task in tasks:
+for index, task in enumerate(tasks):
+    print(clearer_text, end='')
+    print("(" + str(index + 1) + "/" + str(2*len(tasks)) + ") - Accounting hours for " + task[0] + '\r', end='')
     title, required_hours, start_date, due_date, min_time, subtitle = task
 
     # Get list of days which could possibly be used
@@ -251,7 +256,9 @@ for task in tasks:
 
 # Assign subjects to each day
 daily_titles = {}
-for task in tasks:
+for index, task in enumerate(tasks):
+    print(clearer_text, end='')
+    print("(" + str(index + 1 + len(tasks)) + "/" + str(2*len(tasks)) + ") - Alotting hours for " + task[0] + '\r', end='')
     title, required_hours, start_date, due_date, min_time, subtitle = task
 
     available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
