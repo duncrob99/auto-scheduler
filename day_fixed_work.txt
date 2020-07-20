@@ -1,8 +1,6 @@
-10/7/20; 2; Tester
 # UAS
-21/7/20; 1
-28/7/20; 1
-11/8/20; 1
+Monday; 1; UAS
+Tuesday; 1; UAS
 
 # PI
 Monday; 8
@@ -10,6 +8,7 @@ Tuesday; 8
 Wednesday; 8
 Thursday; 8
 Friday; 8
+20/7/20; 0.75
 
 # Topscore Tutoring
 Wednesday; 3.5
@@ -17,6 +16,7 @@ Thursday; 1
 Friday; 3.5
 8/7/20; -3.5
 10/7/20; -3.5
+17/7/20; -3.5
 
 # Justing tutoring
 18/7/20; 1
