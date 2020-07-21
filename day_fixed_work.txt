@@ -8,18 +8,14 @@ Tuesday; 8
 Wednesday; 8
 Thursday; 8
 Friday; 8
-20/7/20; 0.75
+21/7/20; 0.75
 
 # Topscore Tutoring
-Wednesday; 3.5
+Wednesday; 2
 Thursday; 1
-Friday; 3.5
-8/7/20; -3.5
-10/7/20; -3.5
-17/7/20; -3.5
+Friday; 2
 
-# Justing tutoring
-18/7/20; 1
+# Justin tutoring
 1/8/20; 1
 15/8/20; 1
 29/8/20; 1
