@@ -8,7 +8,6 @@ Tuesday; 8
 Wednesday; 8
 Thursday; 8
 Friday; 8
-21/7/20; 0.75
 
 # Topscore Tutoring
 Wednesday; 2
