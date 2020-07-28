@@ -9,6 +9,8 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
+DIIP application; 2; 31/7/20
+Topscore paymemt hours; 0.5; 29/7/20
 Ukrainian; 72; 3/8/20-6/11/20
 German; 72; 3/8/20-6/11/20
 FVP; 100; 3/8/20-6/11/20
