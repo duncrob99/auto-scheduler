@@ -14,7 +14,7 @@ Wednesday; 8
 
 # Topscore Tutoring
 Wednesday; 2
-Thursday; 1
+Thursday; 3
 Friday; 2
 
 # Justin tutoring
