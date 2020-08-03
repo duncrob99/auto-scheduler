@@ -9,13 +9,12 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-FVP; 95; 6/11/20
+FVP; 94:30; 6/11/20
 FVP; 5; 10/8/20-28/9/20; 0:15; Lab Report
 CAD; 100; 6/11/20
-Ukrainian; 72; 6/11/20
+Ukrainian; 72; 3/8/20-6/11/20
 German; 72; 6/11/20
 
-Housework; 2.5; 27/7/20-3/8/20; 0.25
 Housework; 3.5; 3/8/20-10/8/20; 0.25
 Housework; 3.5; 10/8/20-17/8/20; 0.25
 Housework; 3.5; 17/8/20-24/8/20; 0.25
