@@ -1,19 +1,15 @@
 # UAS
 Monday; 1; UAS
-Tuesday; 1; UAS
+Tuesday; 2; UAS
 
 # PI
 Monday; 8
 Tuesday; 8
 Wednesday; 8
-#Thursday; 8
-#Friday; 8
-31/7/20; 9.5
-6/8/20; 8
-7/8/20; 8
+6/8/20; 8; PI
+7/8/20; 8; PI
 
 # Ukrainian
-3/8/20; 2; Ukrainian
 5/8/20; 2; Ukrainian
 10/8/20; 2; Ukrainian
 12/8/20; 2; Ukrainian
@@ -39,7 +35,6 @@ Wednesday; 8
 4/11/20; 2; Ukrainian
 
 # FVP Pracs
-4/8/20; 2; FVP Pracs
 18/8/20; 2; FVP Pracs
 1/9/20; 2; FVP Pracs
 15/9/20; 2; FVP Pracs
@@ -71,6 +66,9 @@ Wednesday; 8
 # Topscore Tutoring
 Wednesday; 2
 Thursday; 3
+
+# LearnMate Tutoring
+Friday; 1
 
 # Justin tutoring
 1/8/20; 8
