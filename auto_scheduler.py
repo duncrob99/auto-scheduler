@@ -17,6 +17,7 @@ one_off_working = {}
 time_inc = 1/60
 
 valid_input = False
+include_today = True
 while not valid_input:
     include_today = input("Include Today? [Y/n]: ")
     if include_today == "y" or include_today == "":
@@ -27,6 +28,7 @@ while not valid_input:
         valid_input = True
 
 valid_input = False
+include_weekends = True
 while not valid_input:
     include_weekends = input("Include weekends? [Y/n]: ") 
     if include_weekends == 'y' or include_weekends == "":
@@ -37,6 +39,7 @@ while not valid_input:
         valid_input = True
 
 valid_input = False
+reverse_output = True
 while not valid_input:
     reverse_output = input("Reverse output? [Y/n]: ")
     if reverse_output == "y" or reverse_output == "":
@@ -46,7 +49,10 @@ while not valid_input:
         reverse_output = False
         valid_input = True
 
-screen_width = int(os.popen('stty size', 'r').read().split()[1])
+try:
+    screen_width = int(os.popen('stty size', 'r').read().split()[1])
+except IndexError:
+    screen_width = 30
 clearer_text = ''.join([' ' for x in range(screen_width)]) + '\r'
 
 if input("Clear terminal history? [Y/n]: ") in ['y', '']:
@@ -58,6 +64,7 @@ elif input("Separate output? [Y/n]: ") in ['y', '']:
     for i in range(20):
         print(output)
 
+
 def datetime_to_date_string(input_date):
     return str(input_date.day) + '/' + str(input_date.month) + '/' + str(input_date.year)[2:]
 
@@ -65,15 +72,15 @@ def datetime_to_date_string(input_date):
 def date_string_to_datetime(input_date_string):
     split_string = input_date_string.split('/')
     try:
-        day = int(split_string[0])
+        local_day = int(split_string[0])
         month = int(split_string[1])
         year = int('20' + split_string[2])
+        try:
+            return datetime.date(year, month, local_day)
+        except ValueError:
+            print("Invalid date:", year, month, local_day)
     except IndexError:
-        print("Invalid datestring:", input_date_string)
-    try:
-        return datetime.date(year, month, day)
-    except ValueError:
-        print("Invalid date:",year, month, day)
+        print("Invalid date-string:", input_date_string)
 
 
 def decimal_to_timestring(value):
@@ -116,14 +123,15 @@ def get_work_on_day(requested_day):
 # Bring fixed work data into memory structures
 daily_tasks = {}
 for day_info in fixed_work_lines:
-    if day_info == '\n' or day_info[0] == '#': continue
+    if day_info == '\n' or day_info[0] == '#':
+        continue
 
     split_info = day_info.split(';')
     day = split_info[0]
     work_time = timestring_to_decimal(split_info[1].split('\n')[0])
     if day in regular_working.keys():
         regular_working[day] += work_time
-    elif day in one_off_working.keys():
+    elif date_string_to_datetime(day) in one_off_working.keys():
         one_off_working[date_string_to_datetime(day)] += work_time
     else:
         one_off_working[date_string_to_datetime(day)] = work_time
@@ -132,7 +140,7 @@ for day_info in fixed_work_lines:
     if len(split_info) >= 3:
         work_title = split_info[2].strip()
         if day in regular_working.keys():
-            #TODO: Deal with regulars
+            # TODO: Deal with regulars
             pass
         else:
             date = date_string_to_datetime(day)
@@ -151,13 +159,15 @@ due_dateless_task_indices = []
 for index, task in enumerate(one_off_tasks_lines):
     split_info = task.split(';')
     
-    if task[0] == '#' or split_info == '\n' or '\n' in split_info: continue
+    if task[0] == '#' or split_info == '\n' or '\n' in split_info:
+        continue
 
     title = split_info[0]
     try:
         required_hours = timestring_to_decimal(split_info[1].split(' ')[1])
     except IndexError:
         print(split_info)
+        continue
 
     due_date = split_info[2].split(' ')[1].split('\n')[0]
     if len(split_info) >= 4:
@@ -167,6 +177,7 @@ for index, task in enumerate(one_off_tasks_lines):
 
     if due_date == 'none':
         due_dateless_task_indices.append(index)
+        start_date = max(date_string_to_datetime(due_date[0]), datetime.datetime.now().date())
         due_date = date_string_to_datetime('1/1/01')
     elif len(due_date.split('-')) > 1:
         due_date = due_date.split('-')
@@ -225,9 +236,9 @@ for index, task in enumerate(tasks):
 
     # Get total work on each day and slate weekends for removal if necessary
     indices_to_delete = []
-    for index, date in enumerate(available_days):
+    for day_index, date in enumerate(available_days):
         if date.weekday() in [6, 5] and not include_weekends:
-            indices_to_delete.append(index)
+            indices_to_delete.append(day_index)
             continue
         if date in auto_work_per_day:
             work_on_days_to_due[date] = get_work_on_day(date) + auto_work_per_day[date]
@@ -235,8 +246,8 @@ for index, task in enumerate(tasks):
             work_on_days_to_due[date] = get_work_on_day(date)
 
     # Can't delete while iterating over list, so actually remove weekends now
-    for index in reversed(indices_to_delete):
-        del available_days[index]
+    for deletable_index in reversed(indices_to_delete):
+        del available_days[deletable_index]
 
     # Add hours to day with smallest amount of work so far
     while required_hours > 0 and len(work_on_days_to_due) > 0:
@@ -258,24 +269,25 @@ for index, task in enumerate(tasks):
 daily_titles = {}
 for index, task in enumerate(tasks):
     print(clearer_text, end='')
-    print("(" + str(index + 1 + len(tasks)) + "/" + str(2*len(tasks)) + ") - Alotting hours for " + task[0] + '\r', end='')
+    print("(" + str(index + 1 + len(tasks)) + "/" + str(2*len(tasks)) + ") - Allotting hours for " + task[0] + '\r',
+          end='')
     title, required_hours, start_date, due_date, min_time, subtitle = task
 
     available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
 
-    while required_hours > 0 and len(available_days) > 0:
+    while required_hours >= time_inc and len(available_days) > 0:
         previous_hours = required_hours
         for date in available_days:
             if date in auto_work_per_day:
                 if required_hours > 0 and auto_work_per_day[date] > 0:
                     if auto_work_per_day[date] < min_time:
                         continue
-                    if not date in daily_tasks or not title in daily_tasks[date]:
+                    if date not in daily_tasks or title not in daily_tasks[date]:
                         auto_work_to_add = min_time
                     elif daily_tasks[date][title] < min_time:
                         auto_work_to_add = min_time - daily_tasks[date][title]
                     else:
-                        auto_work_to_add = min([min_time, required_hours, auto_work_per_day[date]])
+                        auto_work_to_add = max(min_time, min([required_hours, auto_work_per_day[date]]))
 
                     # Safely add work to daily tasks
                     if date in daily_tasks:
@@ -302,8 +314,11 @@ for index, task in enumerate(tasks):
                     required_hours -= auto_work_to_add
 
         if previous_hours == required_hours:
-            print("Not enough time for " + title + " (" + subtitle + ") with " + str(required_hours) + " hours extra.")
-            break
+            if failed_min_time:
+                print("Not enough time for " + title + " (" + subtitle + ") with " + str(required_hours) + " hours extra.")
+                break
+            min_time = 0
+            failed_min_time = True
     if len(available_days) <= 0:
         if required_hours > 1:
             print('Do ' + str(required_hours) + ' hours of ' + subtitle + ' now!')
@@ -332,7 +347,7 @@ for task in tasks:
                     daily_subtitles[date][output_subtitle] = auto_work_to_add
             else:
                 daily_subtitles[date] = {output_subtitle: auto_work_to_add}
-    if required_hours > 0:
+    if required_hours >= time_inc:
         print('%s: %s' % (subtitle, required_hours))
 
 # Display results
@@ -343,7 +358,8 @@ for date in sorted(daily_subtitles, reverse=reverse_output):
         total_auto += daily_subtitles[date][task]
 
     # Create correct number of title dashes
-    output = weekday_conversion[date.weekday()] + ' ' + str(date) + ' (' + decimal_to_timestring(total_auto) + ' auto/' + decimal_to_timestring(work_on_days_to_due[date]) + ' total)'
+    output = weekday_conversion[date.weekday()] + ' ' + str(date) + ' (' + decimal_to_timestring(total_auto) + ' auto/'\
+        + decimal_to_timestring(work_on_days_to_due[date]) + ' total)'
     cur_side_left = True
     while len(output) < screen_width:
         if cur_side_left:
