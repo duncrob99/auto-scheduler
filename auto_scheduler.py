@@ -205,9 +205,13 @@ for index, task in enumerate(one_off_tasks_lines):
 # Remove set work from task requirements
 for date in daily_tasks:
     for title in daily_tasks[date]:
+        time_to_remove = daily_tasks[date][title]
         for task in tasks:
-            if title == task[0]:
-                task[1] -= daily_tasks[date][title]
+            if time_to_remove <= time_inc:
+                break
+            elif title == task[5]:
+                task[1] -= min(time_to_remove, task[1])
+                time_to_remove -= min(time_to_remove, task[1])
 
 # Set due date for any tasks without due date to maximum due date
 max_due_date = sorted(tasks, key=itemgetter(3))[-1][3]
@@ -275,6 +279,7 @@ for index, task in enumerate(tasks):
 
     available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
 
+    failed_min_time = False
     while required_hours >= time_inc and len(available_days) > 0:
         previous_hours = required_hours
         for date in available_days:
@@ -287,7 +292,7 @@ for index, task in enumerate(tasks):
                     elif daily_tasks[date][title] < min_time:
                         auto_work_to_add = min_time - daily_tasks[date][title]
                     else:
-                        auto_work_to_add = max(min_time, min([required_hours, auto_work_per_day[date]]))
+                        auto_work_to_add = min(required_hours, auto_work_per_day[date], min_time)
 
                     # Safely add work to daily tasks
                     if date in daily_tasks:
