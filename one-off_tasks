@@ -9,11 +9,50 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-FVP; 94:30; 6/11/20
-FVP; 5; 10/8/20-28/9/20; 0:15; Lab Report
-CAD; 100; 6/11/20
+FVP; 27; 6/11/20
+
+# FVP Lectures
+FVP; 4; 11/8/20; 0:15; FVP Lecture Wk 1
+FVP; 2.5; 11/8/20; 0:15; FVP Lecture Wk 2
+FVP; 3.175; 19/8/20; 0:15; FVP Lecture Wk 3
+FVP; 3.5; 10/8/20-25/8/20; 0:15; FVP Lecture Wk 4
+FVP; 3.5; 10/8/20-2/9/20; 0:15; FVP Lecture Wk 5
+FVP; 3.5; 10/8/20-8/9/20; 0:15; FVP Lecture Wk 6
+FVP; 3.5; 10/8/20-16/9/20; 0:15; FVP Lecture Wk 7
+FVP; 3.5; 10/8/20-7/10/20; 0:15; FVP Lecture Wk 8
+FVP; 3.5; 10/8/20-13/10/20; 0:15; FVP Lecture Wk 9
+FVP; 3.5; 10/8/20-21/10/20; 0:15; FVP Lecture Wk 10
+FVP; 3.5; 10/8/20-21/10/20; 0:15; FVP Lecture Wk 11
+FVP; 3.5; 10/8/20-21/10/20; 0:15; FVP Lecture Wk 11
+
+# FVP Assignments
+FVP; 5; 19/8/20; 0:15; Assignment 1
+FVP; 5; 2/9/20; 0:15; Assignment 2
+FVP; 5; 16/9/20; 0:15; Assignment 3
+FVP; 5; 7/10/20; 0:15; Assignment 4
+FVP; 5; 21/10/20; 0:15; Assignment 5
+
+FVP; 5; 17/8/20-5/10/20; 0:15; Lab Report
+
+CAD; 64; 6/11/20
+CAD; 3; 7/8/20; 0.15; CAD Lectures Wk 1
+CAD; 1.5; 14/8/20; 0.15; CAD Lectures Wk 2
+CAD; 3; 17/8/20-21/8/20; 0.15; CAD Lectures Wk 3
+CAD; 3; 24/8/20-28/8/20; 0.15; CAD Lectures Wk 4
+CAD; 3; 31/8/20-4/9/20; 0.15; CAD Lectures Wk 5
+CAD; 3; 7/9/20-11/9/20; 0.15; CAD Lectures Wk 6
+CAD; 3; 14/9/20-18/9/20; 0.15; CAD Lectures Wk 7
+CAD; 3; 5/10/20-9/10/20; 0.15; CAD Lectures Wk 8
+CAD; 3; 12/10/20-16/10/20; 0.15; CAD Lectures Wk 9
+CAD; 3; 19/10/20-23/10/20; 0.15; CAD Lectures Wk 10
+CAD; 3; 26/10/20-30/10/20; 0.15; CAD Lectures Wk 11
+CAD; 3; 2/11/20-6/11/20; 0.15; CAD Lectures Wk 12
+
 Ukrainian; 72; 3/8/20-6/11/20
-German; 72; 6/11/20
+
+German; 66; 6/11/20
+German; 1; 10/8/20; 0:15; 150-200 word corona thing
+German; 5; 13/8/20; 0:15; Presentation about Marx
 
 Housework; 3.5; 3/8/20-10/8/20; 0.25
 Housework; 3.5; 10/8/20-17/8/20; 0.25
@@ -37,6 +76,27 @@ Housework; 3.5; 7/12/20-14/12/20; 0.25
 Housework; 3.5; 14/12/20-21/12/20; 0.25
 Housework; 3.5; 21/12/20-28/12/20; 0.25
 
-UAS; 348:48; 31/12/20
+UAS; 345:21; 31/12/20
 
-Car maintenance; 28.5; 31/12/20
+Car maintenance; 1; 10/8/20
+Car maintenance; 1; 17/8/20
+Car maintenance; 1; 24/8/20
+Car maintenance; 1; 31/8/20
+Car maintenance; 1; 7/9/20
+Car maintenance; 1; 14/9/20
+Car maintenance; 1; 21/9/20
+Car maintenance; 1; 28/9/20
+Car maintenance; 1; 5/10/20
+Car maintenance; 1; 12/10/20
+Car maintenance; 1; 19/10/20
+Car maintenance; 1; 26/10/20
+Car maintenance; 1; 2/11/20
+Car maintenance; 1; 9/11/20
+Car maintenance; 1; 16/11/20
+Car maintenance; 1; 23/11/20
+Car maintenance; 1; 30/11/20
+Car maintenance; 1; 7/12/20
+Car maintenance; 1; 14/12/20
+Car maintenance; 1; 21/12/20
+Car maintenance; 1; 28/12/20
+Car maintenance; 1; 4/1/21
