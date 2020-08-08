@@ -7,8 +7,7 @@ Tuesday; 2; UAS
 Monday; 8
 Tuesday; 8
 Wednesday; 8
-6/8/20; 8; PI
-7/8/20; 8; PI
+7/8/20; 5; PI
 
 # Ukrainian
 5/8/20; 2; Ukrainian
@@ -56,31 +55,10 @@ Wednesday; 8
 29/10/20; 2; German
 5/11/20; 2; German
 
-# CAD
-7/8/20; 2; CAD
-21/8/20; 2; CAD
-4/9/20; 2; CAD
-18/9/20; 2; CAD
-16/10/20; 2; CAD
-30/10/20; 2; CAD
-
 # Topscore Tutoring
 Wednesday; 2
 Thursday; 3
 
 # LearnMate Tutoring
 Friday; 1
-
-# Justin tutoring
-1/8/20; 8
-15/8/20; 1
-29/8/20; 1
-12/9/20; 1
-26/9/20; 1
-10/10/20; 1
-24/10/20; 1
-7/11/20; 1
-21/11/20; 1
-5/12/20; 1
-19/12/20; 1
-2/1/21; 1
+Saturday; 1
