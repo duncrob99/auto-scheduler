@@ -228,6 +228,7 @@ print("All input data imported")
 required_hour_sum = 0
 auto_work_per_day = {}
 work_on_days_to_due = {}
+fig, ax = plt.subplots(figsize=(100,100))
 for index, task in enumerate(tasks):
     print(clearer_text, end='')
     print("(" + str(index + 1) + "/" + str(2*len(tasks)) + ") - Accounting hours for " + task[0] + '\r', end='')
@@ -273,8 +274,8 @@ for index, task in enumerate(tasks):
     # Plot
     x = [datetime.datetime.now().date() + datetime.timedelta(days=x) for x in range((max([tasks[x][3] for x in range(len(tasks))]) - datetime.datetime.now().date()).days)]
     y = [work_on_days_to_due[date] if date in work_on_days_to_due else 0 for date in x]
-    plt.bar(x,y,align = 'center')
-    plt.show()
+    ax.bar(x,y,align = 'center', color=(0, 0, 1, 1))
+    plt.savefig('./saved_figs/' + str(index) + '_' + subtitle + '.png', dpi=5)
 
 # Assign subjects to each day
 daily_titles = {}
