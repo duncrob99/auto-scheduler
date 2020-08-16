@@ -1,13 +1,13 @@
 # UAS
 Monday; 1; UAS
 Tuesday; 2; UAS
-4/8/20; -1
 
 # PI
 Monday; 8
 Tuesday; 8
 Wednesday; 8
-7/8/20; 5; PI
+12/8/20; -8
+14/8/20; 8
 
 # Ukrainian
 5/8/20; 2; Ukrainian

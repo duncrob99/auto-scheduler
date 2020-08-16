@@ -12,8 +12,8 @@
 FVP; 27; 6/11/20
 
 # FVP Lectures
-FVP; 4; 11/8/20; 0:15; FVP Lecture Wk 1
-FVP; 2.5; 11/8/20; 0:15; FVP Lecture Wk 2
+FVP; 1; 18/8/20; 0:15; FVP Lecture Wk 1
+FVP; 2; 18/8/20; 0:15; FVP Lecture Wk 2
 FVP; 3.175; 19/8/20; 0:15; FVP Lecture Wk 3
 FVP; 3.5; 10/8/20-25/8/20; 0:15; FVP Lecture Wk 4
 FVP; 3.5; 10/8/20-2/9/20; 0:15; FVP Lecture Wk 5
@@ -35,9 +35,7 @@ FVP; 5; 21/10/20; 0:15; Assignment 5
 FVP; 5; 17/8/20-5/10/20; 0:15; Lab Report
 
 CAD; 64; 6/11/20
-CAD; 0:15; 9/8/20; 0.15; CAD Lectures Wk 1
-CAD; 1.5; 16/8/20; 0.15; CAD Lectures Wk 2
-CAD; 1.5; 16/8/20; 0.15; CAD Lab Work Wk 2
+CAD; 1.5; 19/8/20; 0.15; CAD Lectures Wk 2
 CAD; 1.5; 19/8/20-21/8/20; 0.15; CAD Lectures Wk 3
 CAD; 1.5; 19/8/20-21/8/20; 0.15; CAD Lab Work Wk 3
 CAD; 1.5; 26/8/20-28/8/20; 0.15; CAD Lectures Wk 4
@@ -59,14 +57,36 @@ CAD; 1.5; 28/10/20-30/10/20; 0.15; CAD Lab Work Wk 11
 CAD; 1.5; 4/11/20-6/11/20; 0.15; CAD Lectures Wk 12
 CAD; 1.5; 4/11/20-6/11/20; 0.15; CAD Lab Work Wk 12
 
-Ukrainian; 72; 3/8/20-6/11/20
+# CAD Assignments
+CAD; 5; 21/8/20; 0:15; CAD Assignment 1
+CAD; 5; 11/9/20; 0:15; CAD Assignment 2
+CAD; 5; 16/10/20; 0:15; CAD Assignment 3
+CAD; 5; 6/11/20; 0:15; CAD Assignment 4
 
-German; 66; 6/11/20
-German; 1; 10/8/20; 0:15; 150-200 word corona thing
-German; 5; 13/8/20; 0:15; Presentation about Marx
+Ukrainian; 39:40; 3/8/20-6/11/20
+Ukrainian; 1; 24/8/20; 0:15; Ukrainian Culture Wk 4
+Ukrainian; 1; 31/8/20; 0:15; Ukrainian Culture Wk 5
+Ukrainian; 1; 7/9/20; 0:15; Ukrainian Culture Wk 6
+Ukrainian; 1; 14/9/20; 0:15; Ukrainian Culture Wk 7
+Ukrainian; 1; 5/10/20; 0:15; Ukrainian Culture Wk 8
+Ukrainian; 1; 12/10/20; 0:15; Ukrainian Culture Wk 9
+Ukrainian; 1; 19/10/20; 0:15; Ukrainian Culture Wk 10
+Ukrainian; 1; 26/10/20; 0:15; Ukrainian Culture Wk 11
+Ukrainian; 1; 2/11/20; 0:15; Ukrainian Culture Wk 12
+Ukrainian; 1; 19/8/20; 0:15; Ukrainian Language Wk 3
+Ukrainian; 1; 26/8/20; 0:15; Ukrainian Language Wk 4
+Ukrainian; 1; 2/9/20; 0:15; Ukrainian Language Wk 5
+Ukrainian; 1; 9/9/20; 0:15; Ukrainian Language Wk 6
+Ukrainian; 1; 16/9/20; 0:15; Ukrainian Language Wk 7
+Ukrainian; 1; 7/10/20; 0:15; Ukrainian Language Wk 8
+Ukrainian; 1; 14/10/20; 0:15; Ukrainian Language Wk 9
+Ukrainian; 1; 21/10/20; 0:15; Ukrainian Language Wk 10
+Ukrainian; 1; 28/10/20; 0:15; Ukrainian Language Wk 11
+Ukrainian; 1; 4/11/20; 0:15; Ukrainian Language Wk 12
 
-Housework; 3.5; 3/8/20-10/8/20; 0.25
-Housework; 3.5; 10/8/20-17/8/20; 0.25
+German; 65:53; 6/11/20
+
+Housework; 2:50; 10/8/20-17/8/20; 0.25
 Housework; 3.5; 17/8/20-24/8/20; 0.25
 Housework; 3.5; 24/8/20-31/8/20; 0.25
 Housework; 3.5; 31/8/20-7/9/20; 0.25
@@ -110,7 +130,6 @@ UAS; 10; 22/12/20; 0.25
 UAS; 10; 29/12/20; 0.25
 UAS; 10; 5/1/21; 0.25
 
-Car maintenance; 1; 10/8/20; 1
 Car maintenance; 1; 17/8/20; 1
 Car maintenance; 1; 24/8/20; 1
 Car maintenance; 1; 31/8/20; 1
