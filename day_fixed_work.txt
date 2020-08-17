@@ -1,6 +1,6 @@
 # UAS
-Monday; 1; UAS General
-Tuesday; 2; UAS General
+Monday; 1
+Tuesday; 2
 
 # PI
 Monday; 8

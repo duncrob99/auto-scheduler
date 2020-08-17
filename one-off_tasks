@@ -25,11 +25,11 @@ FVP; 3.5; 10/8/20-21/10/20; 0:15; FVP Lecture Wk 11
 FVP; 3.5; 10/8/20-21/10/20; 0:15; FVP Lecture Wk 11
 
 # FVP Assignments
-FVP; 5; 19/8/20; 0:15; Assignment 1
-FVP; 5; 2/9/20; 0:15; Assignment 2
-FVP; 5; 16/9/20; 0:15; Assignment 3
-FVP; 5; 7/10/20; 0:15; Assignment 4
-FVP; 5; 21/10/20; 0:15; Assignment 5
+FVP; 5; 19/8/20; 0:15; FVP Assignment 1
+FVP; 5; 2/9/20; 0:15; FVP Assignment 2
+FVP; 5; 16/9/20; 0:15; FVP Assignment 3
+FVP; 5; 7/10/20; 0:15; FVP Assignment 4
+FVP; 5; 21/10/20; 0:15; FVP Assignment 5
 
 FVP; 5; 17/8/20-5/10/20; 0:15; Lab Report
 
@@ -63,15 +63,13 @@ CAD; 5; 16/10/20; 0:15; CAD Assignment 3
 CAD; 5; 6/11/20; 0:15; CAD Assignment 4
 
 Ukrainian; 39:40; 3/8/20-6/11/20
-Ukrainian; 1; 24/8/20; 0:15; Ukrainian Culture Wk 4
+Ukrainian; 1; 24/8/20; 0:15; Ukrainian Culture Wk 4 - Read Articles on Moodle homepage
 Ukrainian; 1; 31/8/20; 0:15; Ukrainian Culture Wk 5
 Ukrainian; 1; 7/9/20; 0:15; Ukrainian Culture Wk 6
 Ukrainian; 1; 14/9/20; 0:15; Ukrainian Culture Wk 7
 Ukrainian; 1; 5/10/20; 0:15; Ukrainian Culture Wk 8
 Ukrainian; 1; 12/10/20; 0:15; Ukrainian Culture Wk 9
-Ukrainian; 1; 19/10/20; 0:15; Ukrainian Culture Wk 10
-Ukrainian; 1; 26/10/20; 0:15; Ukrainian Culture Wk 11
-Ukrainian; 1; 2/11/20; 0:15; Ukrainian Culture Wk 12
+Ukrainian; 10; 19/10/20; 0:15; Ukrainian Culture Book Presentation
 Ukrainian; 1; 19/8/20; 0:15; Ukrainian Language Wk 3
 Ukrainian; 1; 26/8/20; 0:15; Ukrainian Language Wk 4
 Ukrainian; 1; 2/9/20; 0:15; Ukrainian Language Wk 5
@@ -105,27 +103,27 @@ Housework; 3.5; 7/12/20-14/12/20; 0.25
 Housework; 3.5; 14/12/20-21/12/20; 0.25
 Housework; 3.5; 21/12/20-28/12/20; 0.25
 
-UAS; 144:01; 31/12/20; 0:1; UAS General
-UAS; 10; 24/8/20; 0.25
-UAS; 10; 31/8/20; 0.25
-UAS; 10; 7/9/20; 0.25
-UAS; 10; 14/9/20; 0.25
-UAS; 10; 21/9/20; 0.25
-UAS; 10; 28/9/20; 0.25
-UAS; 10; 5/10/20; 0.25
-UAS; 10; 12/10/20; 0.25
-UAS; 10; 19/10/20; 0.25
-UAS; 10; 26/10/20; 0.25
-UAS; 10; 2/11/20; 0.25
-UAS; 10; 9/11/20; 0.25
-UAS; 10; 16/11/20; 0.25
-UAS; 10; 23/11/20; 0.25
-UAS; 10; 30/11/20; 0.25
-UAS; 10; 7/12/20; 0.25
-UAS; 10; 14/12/20; 0.25
-UAS; 10; 21/12/20; 0.25
-UAS; 10; 28/12/20; 0.25
-UAS; 10; 4/1/21; 0.25
+UAS; 144:01; 31/12/20
+UAS; 7; 24/8/20; 0.25
+UAS; 7; 31/8/20; 0.25
+UAS; 7; 7/9/20; 0.25
+UAS; 7; 14/9/20; 0.25
+UAS; 7; 21/9/20; 0.25
+UAS; 7; 28/9/20; 0.25
+UAS; 7; 5/10/20; 0.25
+UAS; 7; 12/10/20; 0.25
+UAS; 7; 19/10/20; 0.25
+UAS; 7; 26/10/20; 0.25
+UAS; 7; 2/11/20; 0.25
+UAS; 7; 9/11/20; 0.25
+UAS; 7; 16/11/20; 0.25
+UAS; 7; 23/11/20; 0.25
+UAS; 7; 30/11/20; 0.25
+UAS; 7; 7/12/20; 0.25
+UAS; 7; 14/12/20; 0.25
+UAS; 7; 21/12/20; 0.25
+UAS; 7; 28/12/20; 0.25
+UAS; 7; 4/1/21; 0.25
 
 Car maintenance; 1; 24/8/20; 1
 Car maintenance; 1; 31/8/20; 1
