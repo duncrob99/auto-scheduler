@@ -6,8 +6,8 @@ Tuesday; 2
 Monday; 8
 Tuesday; 8
 Wednesday; 8
-12/8/20; -8
-14/8/20; 8
+26/8/20; 2.5
+25/8/20; 1.5
 
 # Ukrainian
 5/8/20; 2; Ukrainian
@@ -35,11 +35,10 @@ Wednesday; 8
 4/11/20; 2; Ukrainian
 
 # FVP Pracs
-18/8/20; 2; FVP Pracs
 1/9/20; 2; FVP Pracs
 15/9/20; 2; FVP Pracs
 13/10/20; 2; FVP Pracs
-27/10/20; 2; FVP Pracs
+3/11/20; 2; FVP Pracs
 
 # German
 6/8/20; 2; German
