@@ -1,6 +1,7 @@
 # UAS
 Monday; 1
 Tuesday; 2
+25/8/20; -1:-15
 
 # PI
 Monday; 8
