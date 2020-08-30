@@ -9,11 +9,10 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
+Planet Innovation; 3:25; 1/9/20-3/9/20
 FVP; 27; 6/11/20
 
 # FVP Lectures
-FVP; 1; 1/9/20; 0:15; FVP Lecture Wk 2 Anki
-FVP; 1; 1/9/20; 0:15; FVP Lecture Wk 3 Anki
 FVP; 0; 10/8/20-25/8/20; 0:15; FVP Lecture Wk 4
 FVP; 3.5; 10/8/20-4/9/20; 0:15; FVP Lecture Wk 5
 FVP; 3.5; 10/8/20-15/9/20; 0:15; FVP Lecture Wk 6
@@ -23,6 +22,8 @@ FVP; 3.5; 10/8/20-13/10/20; 0:15; FVP Lecture Wk 9
 FVP; 3.5; 10/8/20-21/10/20; 0:15; FVP Lecture Wk 10
 FVP; 3.5; 10/8/20-30/10/20; 0:15; FVP Lecture Wk 11
 FVP; 3.5; 10/8/20-3/11/20; 0:15; FVP Lecture Wk 11
+FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 2 Anki
+FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 3 Anki
 
 # FVP Assignments
 FVP; 2; 4/9/20; 0:15; FVP Assignment 2
@@ -32,12 +33,9 @@ FVP; 2; 30/10/20; 0:15; FVP Assignment 5
 
 FVP; 5; 17/8/20-5/10/20; 0:15; Lab Report
 
-CAD; 64; 6/11/20
-CAD; 1.5; 29/8/20; 0.15; CAD Lectures Wk 3
-CAD; 1.5; 29/8/20; 0.15; CAD Lectures Wk 4
-CAD; 1.5; 29/8/20; 0.15; CAD Lab Work Wk 4
-CAD; 1.5; 2/9/20-4/9/20; 0.15; CAD Lectures Wk 5
-CAD; 1.5; 2/9/20-4/9/20; 0.15; CAD Lab Work Wk 5
+CAD; 46.12; 6/11/20
+CAD; 1.5; 4/9/20; 0.15; CAD Lectures Wk 5
+CAD; 1.5; 4/9/20; 0.15; CAD Lab Work Wk 5
 CAD; 1.5; 9/9/20-11/9/20; 0.15; CAD Lectures Wk 6
 CAD; 1.5; 9/9/20-11/9/20; 0.15; CAD Lab Work Wk 6
 CAD; 1.5; 16/9/20-18/9/20; 0.15; CAD Lectures Wk 7
@@ -52,6 +50,16 @@ CAD; 1.5; 28/10/20-30/10/20; 0.15; CAD Lectures Wk 11
 CAD; 1.5; 28/10/20-30/10/20; 0.15; CAD Lab Work Wk 11
 CAD; 1.5; 4/11/20-6/11/20; 0.15; CAD Lectures Wk 12
 CAD; 1.5; 4/11/20-6/11/20; 0.15; CAD Lab Work Wk 12
+CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 3 Anki
+CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 4 Anki
+CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 5 Anki
+CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 6 Anki
+CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 7 Anki
+CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 8 Anki
+CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 9 Anki
+CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 10 Anki
+CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 11 Anki
+CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 12 Anki
 
 # CAD Assignments
 CAD; 3; 11/9/20; 0:15; CAD Assignment 2
@@ -59,7 +67,6 @@ CAD; 3; 16/10/20; 0:15; CAD Assignment 3
 CAD; 3; 6/11/20; 0:15; CAD Assignment 4
 
 Ukrainian; 39:40; 3/8/20-6/11/20
-Ukrainian; 1; 31/8/20; 0:15; Ukrainian Culture Wk 5
 Ukrainian; 1; 7/9/20; 0:15; Ukrainian Culture Wk 6
 Ukrainian; 1; 14/9/20; 0:15; Ukrainian Culture Wk 7
 Ukrainian; 1; 5/10/20; 0:15; Ukrainian Culture Wk 8
@@ -76,7 +83,6 @@ Ukrainian; 1; 4/11/20; 0:15; Ukrainian Language Wk 12
 
 German; 65:53; 6/11/20
 
-Housework; 3.5; 24/8/20-31/8/20; 0.25
 Housework; 3.5; 31/8/20-7/9/20; 0.25
 Housework; 3.5; 7/9/20-14/9/20; 0.25
 Housework; 3.5; 14/9/20-21/9/20; 0.25
@@ -96,7 +102,6 @@ Housework; 3.5; 14/12/20-21/12/20; 0.25
 Housework; 3.5; 21/12/20-28/12/20; 0.25
 
 UAS; 206:18; 31/12/20
-UAS; 7; 31/8/20; 0.25
 UAS; 7; 7/9/20; 0.25
 UAS; 7; 14/9/20; 0.25
 UAS; 7; 21/9/20; 0.25

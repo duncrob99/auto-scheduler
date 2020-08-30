@@ -1,23 +1,14 @@
 # UAS
 Monday; 1
-Tuesday; 2
-25/8/20; -1:-15
+Tuesday; 1
+Friday; 1
 
 # PI
 Monday; 8
 Tuesday; 8
 Wednesday; 8
-26/8/20; 2.5
-25/8/20; 1.5
 
 # Ukrainian
-5/8/20; 2; Ukrainian
-10/8/20; 2; Ukrainian
-12/8/20; 2; Ukrainian
-17/8/20; 2; Ukrainian
-19/8/20; 2; Ukrainian
-24/8/20; 2; Ukrainian
-26/8/20; 2; Ukrainian
 31/8/20; 2; Ukrainian
 2/9/20; 2; Ukrainian
 7/9/20; 2; Ukrainian
@@ -42,9 +33,6 @@ Wednesday; 8
 3/11/20; 2; FVP Pracs
 
 # German
-6/8/20; 2; German
-13/8/20; 2; German
-20/8/20; 2; German
 27/8/20; 2; German
 3/9/20; 2; German
 10/9/20; 2; German
