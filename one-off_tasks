@@ -9,6 +9,7 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
+Ukrainian; 2; 31/8/20; 0:15; Culture qns
 Planet Innovation; 3:25; 1/9/20-3/9/20
 FVP; 27; 6/11/20
 
