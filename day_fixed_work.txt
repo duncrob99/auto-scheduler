@@ -45,7 +45,7 @@ Wednesday; 8
 # Topscore Tutoring
 Wednesday; 2
 Thursday; 3
-5/9/20; 1
+Friday; 1
 
 # LearnMate Tutoring
 Friday; 1
