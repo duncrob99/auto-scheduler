@@ -291,6 +291,8 @@ for index, task in enumerate(tasks):
                         auto_work_to_add = min_time
                     elif daily_tasks[date][title] < min_time:
                         auto_work_to_add = min_time - daily_tasks[date][title]
+                    elif failed_min_time:
+                        auto_work_to_add = time_inc
                     else:
                         auto_work_to_add = min(required_hours, auto_work_per_day[date], min_time)
 
