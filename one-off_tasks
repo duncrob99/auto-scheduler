@@ -9,12 +9,11 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-Roadworthy Work; 20; 23/10/20
+Roadworthy Work; 3; 23/10/20
 FVP; 27; 6/11/20
 
 # FVP Lectures
-FVP; 3.5; 10/8/20-21/10/20; 0:15; FVP Lecture Wk 9
-FVP; 3.5; 10/8/20-21/10/20; 0:15; FVP Lecture Wk 10
+FVP; 2:45; 10/8/20-24/10/20; 0:15; FVP Lecture Wk 10
 FVP; 3.5; 10/8/20-30/10/20; 0:15; FVP Lecture Wk 11
 FVP; 3.5; 10/8/20-3/11/20; 0:15; FVP Lecture Wk 11
 FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 2 Anki
@@ -30,12 +29,10 @@ FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 11 Anki
 FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 12 Anki
 
 # FVP Assignments
-FVP; 5; 21/10/20; 0:15; FVP Assignment 4
+FVP; 5; 24/10/20; 0:15; FVP Assignment 4
 FVP; 5; 30/10/20; 0:15; FVP Assignment 5
 
 CAD; 46.12; 6/11/20
-CAD; 1.5; 14/10/20-18/10/20; 0.15; CAD Lectures Wk 9
-CAD; 1.5; 14/10/20-18/10/20; 0.15; CAD Lab Work Wk 9
 CAD; 1.5; 21/10/20-25/10/20; 0.15; CAD Lectures Wk 10
 CAD; 1.5; 21/10/20-25/10/20; 0.15; CAD Lab Work Wk 10
 CAD; 1.5; 28/10/20-1/11/20; 0.15; CAD Lectures Wk 11
@@ -54,21 +51,17 @@ CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 11 Anki
 CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 12 Anki
 
 # CAD Assignments
-CAD; 5; 16/10/20; 0:15; CAD Assignment 3
 CAD; 5; 6/11/20; 0:15; CAD Assignment 4
 
 Ukrainian; 39:40; 3/8/20-6/11/20
-Ukrainian; 3; 12/10/20; 0:15; Ukrainian Culture Wk 9 - Read articles on Khvylovyi
-Ukrainian; 10; 19/10/20; 0:15; Ukrainian Culture Book Presentation
-Ukrainian; 1; 7/10/20; 0:15; Ukrainian Language Wk 8 (start stuff on education, add gen. pl. declensions to Anki, write up 10a)
-Ukrainian; 1; 14/10/20; 0:15; Ukrainian Language Wk 9
+Ukrainian; 2; 12/10/20; 0:15; Ukrainian Culture Wk 9 - Read articles on Khvylovyi
+Ukrainian; 10; 26/10/20; 0:15; Ukrainian Culture Book Presentation
 Ukrainian; 1; 21/10/20; 0:15; Ukrainian Language Wk 10
 Ukrainian; 1; 28/10/20; 0:15; Ukrainian Language Wk 11
 Ukrainian; 1; 4/11/20; 0:15; Ukrainian Language Wk 12
 
 German; 65:53; 6/11/20
 
-Housework; 3.5; 12/10/20-19/10/20; 0.25
 Housework; 3.5; 19/10/20-26/10/20; 0.25
 Housework; 3.5; 26/10/20-2/11/20; 0.25
 Housework; 3.5; 2/11/20-9/11/20; 0.25
@@ -81,8 +74,6 @@ Housework; 3.5; 14/12/20-21/12/20; 0.25
 Housework; 3.5; 21/12/20-28/12/20; 0.25
 
 UAS; 206:18; 31/12/20
-UAS; 7; 19/10/20; 0.25
-UAS; 7; 19/10/20; 0.25
 UAS; 7; 26/10/20; 0.25
 UAS; 7; 2/11/20; 0.25
 UAS; 7; 9/11/20; 0.25
@@ -95,8 +86,6 @@ UAS; 7; 21/12/20; 0.25
 UAS; 7; 28/12/20; 0.25
 UAS; 7; 4/1/21; 0.25
 
-Car maintenance; 1; 12/10/20; 1
-Car maintenance; 1; 19/10/20; 1
 Car maintenance; 1; 26/10/20; 1
 Car maintenance; 1; 2/11/20; 1
 Car maintenance; 1; 9/11/20; 1
