@@ -8,7 +8,7 @@ Friday; 1
 Monday; 8
 Tuesday; 8
 Wednesday; 8
-15/9/20; 0:15
+27/10/20; 2
 
 # Ukrainian
 7/9/20; 2; Ukrainian

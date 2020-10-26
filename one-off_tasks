@@ -9,7 +9,6 @@
 # 	       inclusive of start date but exclusive of due date
 # min time/time step: float, assigned tasks will always be a multiple of this value in hrs where possible
 # task subtitle: arbitrary string, used to give usable output
-Roadworthy Work; 3; 23/10/20
 FVP; 27; 6/11/20
 
 # FVP Lectures
@@ -33,8 +32,7 @@ FVP; 5; 24/10/20; 0:15; FVP Assignment 4
 FVP; 5; 30/10/20; 0:15; FVP Assignment 5
 
 CAD; 46.12; 6/11/20
-CAD; 1.5; 21/10/20-25/10/20; 0.15; CAD Lectures Wk 10
-CAD; 1.5; 21/10/20-25/10/20; 0.15; CAD Lab Work Wk 10
+CAD; 1.5; 21/10/20-1/11/20; 0.15; CAD Lectures Wk 10
 CAD; 1.5; 28/10/20-1/11/20; 0.15; CAD Lectures Wk 11
 CAD; 1.5; 28/10/20-1/11/20; 0.15; CAD Lab Work Wk 11
 CAD; 1.5; 4/11/20-8/11/20; 0.15; CAD Lectures Wk 12
@@ -55,14 +53,13 @@ CAD; 5; 6/11/20; 0:15; CAD Assignment 4
 
 Ukrainian; 39:40; 3/8/20-6/11/20
 Ukrainian; 2; 12/10/20; 0:15; Ukrainian Culture Wk 9 - Read articles on Khvylovyi
-Ukrainian; 9; 26/10/20; 0:15; Ukrainian Culture Book Presentation
 Ukrainian; 1; 21/10/20; 0:15; Ukrainian Language Wk 10
 Ukrainian; 1; 28/10/20; 0:15; Ukrainian Language Wk 11
 Ukrainian; 1; 4/11/20; 0:15; Ukrainian Language Wk 12
 
 German; 65:53; 6/11/20
+German; 0:15; 29/10/20; 0:15; [German] Write 1 sentence with at least 2 Hauptsaetze and 3 Nebensaetze - i.e. complex syntax
 
-Housework; 3.5; 19/10/20-26/10/20; 0.25
 Housework; 3.5; 26/10/20-2/11/20; 0.25
 Housework; 3.5; 2/11/20-9/11/20; 0.25
 Housework; 3.5; 9/11/20-16/11/20; 0.25
@@ -74,19 +71,12 @@ Housework; 3.5; 14/12/20-21/12/20; 0.25
 Housework; 3.5; 21/12/20-28/12/20; 0.25
 
 UAS; 206:18; 31/12/20
-UAS; 7; 26/10/20; 0.25
-UAS; 7; 2/11/20; 0.25
-UAS; 7; 9/11/20; 0.25
-UAS; 7; 16/11/20; 0.25
-UAS; 7; 23/11/20; 0.25
-UAS; 7; 30/11/20; 0.25
 UAS; 7; 7/12/20; 0.25
 UAS; 7; 14/12/20; 0.25
 UAS; 7; 21/12/20; 0.25
 UAS; 7; 28/12/20; 0.25
 UAS; 7; 4/1/21; 0.25
 
-Car maintenance; 1; 26/10/20; 1
 Car maintenance; 1; 2/11/20; 1
 Car maintenance; 1; 9/11/20; 1
 Car maintenance; 1; 16/11/20; 1
