@@ -2,7 +2,7 @@
 Monday; 1
 Tuesday; 1
 Friday; 1
-18/10/20; 6
+1/11/20;8
 
 # PI
 Monday; 8
