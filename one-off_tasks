@@ -11,51 +11,43 @@
 # task subtitle: arbitrary string, used to give usable output
 
 # FVP Lectures
-FVP; 0:30; 10/8/20-3/11/20; 0:15; FVP Lecture Wk 10
-FVP; 3.5; 10/8/20-3/11/20; 0:15; FVP Lecture Wk 11
-FVP; 3.5; 10/8/20-3/11/20; 0:15; FVP Lecture Wk 11
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 2 Anki
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 3 Anki
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 4 Anki
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 5 Anki
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 6 Anki
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 7 Anki
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 8 Anki
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 9 Anki
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 10 Anki
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 11 Anki
-FVP; 1; 9/11/20; 0:15; FVP Lecture Wk 12 Anki
+FVP; 3.5; 24/11/20; 0:15; FVP Lecture Wk 11
+FVP; 3.5; 24/11/20; 0:15; FVP Lecture Wk 12
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 2 Anki
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 3 Anki
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 4 Anki
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 5 Anki
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 6 Anki
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 7 Anki
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 8 Anki
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 9 Anki
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 10 Anki
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 11 Anki
+FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 12 Anki
 
-# FVP Assignments
-FVP; 5; 31/10/20; 0:15; FVP Assignment 5
-
-CAD; 1.5; 21/10/20-1/11/20; 0.15; CAD Lectures Wk 10
-CAD; 1.5; 28/10/20-1/11/20; 0.15; CAD Lectures Wk 11
-CAD; 1.5; 28/10/20-1/11/20; 0.15; CAD Lab Work Wk 11
-CAD; 1.5; 4/11/20-8/11/20; 0.15; CAD Lectures Wk 12
-CAD; 1.5; 4/11/20-8/11/20; 0.15; CAD Lab Work Wk 12
-CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 3 Anki
-CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 4 Anki
-CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 5 Anki
-CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 6 Anki
-CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 7 Anki
-CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 8 Anki
-CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 9 Anki
-CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 10 Anki
-CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 11 Anki
-CAD; 1; 9/11/20; 0.15; CAD Lecture Wk 12 Anki
+CAD; 1.5; 8/11/20; 0.15; CAD Lectures Wk 10
+CAD; 1.5; 8/11/20; 0.15; CAD Lectures Wk 12
+CAD; 1.5; 8/11/20; 0.15; CAD Lab Work Wk 12
+CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 3 Anki
+CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 4 Anki
+CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 5 Anki
+CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 6 Anki
+CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 7 Anki
+CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 8 Anki
+CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 9 Anki
+CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 10 Anki
+CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 11 Anki
+CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 12 Anki
 
 # CAD Assignments
 CAD; 5; 6/11/20; 0:15; CAD Assignment 4
 
 Ukrainian; 2; 12/10/20; 0:15; Ukrainian Culture Wk 9 - Read articles on Khvylovyi
-Ukrainian; 3; 6/11/20; 0:15; Ukrainian Essay
-Ukrainian; 5; 4/11/20; 0:15; Ukrainian Language Exam Prep - що ви думаєте про вплив розвитку технологі на майбутнія нашої сивілізація (what do you think about the influence of the development of technology on the future of humankind?), possibly as letter [<500 words], add vocab from chapters 9-11, touch up on instrumental & genitive (incl. plural), imperatives (all the words on pp. 152-153), antonyms, joining clauses (10a, 10b, 11a)
+Ukrainian; 5; 6/11/20; 0:15; Ukrainian Essay (between 1000 & 1500 words)
 
-German; 0:15; 29/10/20; 0:15; [German] Write 1 sentence with at least 2 Hauptsaetze and 3 Nebensaetze - i.e. complex syntax
-German; 3; 6/11/20; 0:15; German Manifesto
+German; 3; 13/11/20; 0:15; German Essay
+German; 3; 13/11/20; 0:15; German Manifesto
 
-Housework; 3.5; 26/10/20-2/11/20; 0.25
 Housework; 3.5; 2/11/20-9/11/20; 0.25
 Housework; 3.5; 9/11/20-16/11/20; 0.25
 Housework; 3.5; 16/11/20-23/11/20; 0.25
