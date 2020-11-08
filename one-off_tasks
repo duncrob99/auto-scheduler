@@ -25,9 +25,6 @@ FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 10 Anki
 FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 11 Anki
 FVP; 1; 24/11/20; 0:15; FVP Lecture Wk 12 Anki
 
-CAD; 1.5; 8/11/20; 0.15; CAD Lectures Wk 10
-CAD; 1.5; 8/11/20; 0.15; CAD Lectures Wk 12
-CAD; 1.5; 8/11/20; 0.15; CAD Lab Work Wk 12
 CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 3 Anki
 CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 4 Anki
 CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 5 Anki
@@ -40,15 +37,14 @@ CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 11 Anki
 CAD; 1; 16/11/20; 0.15; CAD Lecture Wk 12 Anki
 
 # CAD Assignments
-CAD; 5; 6/11/20; 0:15; CAD Assignment 4
+CAD; 5; 7/11/20; 0:15; CAD Assignment 4
 
 Ukrainian; 2; 12/10/20; 0:15; Ukrainian Culture Wk 9 - Read articles on Khvylovyi
-Ukrainian; 5; 6/11/20; 0:15; Ukrainian Essay (between 1000 & 1500 words)
+Ukrainian; 5; 9/11/20; 0:15; Ukrainian Essay (between 1000 & 1500 words)
 
 German; 3; 13/11/20; 0:15; German Essay
 German; 3; 13/11/20; 0:15; German Manifesto
 
-Housework; 3.5; 2/11/20-9/11/20; 0.25
 Housework; 3.5; 9/11/20-16/11/20; 0.25
 Housework; 3.5; 16/11/20-23/11/20; 0.25
 Housework; 3.5; 23/11/20-30/11/20; 0.25
@@ -64,7 +60,6 @@ UAS; 7; 21/12/20; 0.25
 UAS; 7; 28/12/20; 0.25
 UAS; 7; 4/1/21; 0.25
 
-Car maintenance; 1; 9/11/20; 1
 Car maintenance; 1; 16/11/20; 1
 Car maintenance; 1; 23/11/20; 1
 Car maintenance; 1; 30/11/20; 1
