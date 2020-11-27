@@ -2,67 +2,20 @@
 Monday; 1
 Tuesday; 1
 Friday; 1
-1/11/20;8
-6/11/20;-1
-9/11/20;-1
-10/11/20;-1
-13/11/20;-1
-16/11/20;-1
-17/11/20;-1
-20/11/20;-1
-23/11/20;-1
-24/11/20;-1
-27/11/20;-1
-30/11/20;-1
-1/11/20;-1
-4/11/20;-1
+1/12/20; -1
 
 # PI
 Monday; 8
 Tuesday; 8
 Wednesday; 8
-3/11/20; -8
-5/11/20; 8
-6/1/20; 8
-
-# Ukrainian
-7/9/20; 2; Ukrainian
-9/9/20; 2; Ukrainian
-14/9/20; 2; Ukrainian
-16/9/20; 2; Ukrainian
-5/10/20; 2; Ukrainian
-7/10/20; 2; Ukrainian
-12/10/20; 2; Ukrainian
-14/10/20; 2; Ukrainian
-19/10/20; 2; Ukrainian
-21/10/20; 2; Ukrainian
-26/10/20; 2; Ukrainian
-28/10/20; 2; Ukrainian
-2/11/20; 2; Ukrainian
-4/11/20; 2; Ukrainian
-
-# FVP Pracs
-15/9/20; 0:20; FVP Pracs
-13/10/20; 2; FVP Pracs
-3/11/20; 2; FVP Pracs
-
-# German
-27/8/20; 2; German
-3/9/20; 2; German
-10/9/20; 2; German
-17/9/20; 2; German
-8/10/20; 2; German
-15/10/20; 2; German
-22/10/20; 2; German
-29/10/20; 2; German
-5/11/20; 2; German
+27/11/20; 7
+2/12/20; -8
+3/12/20; 8
 
 # Topscore Tutoring
-Wednesday; 2
-Thursday; 3
-Friday; 1
-28/10/20; -1
+Wednesday; 4
+2/12/20; -3
+3/12/20; 1
 
 # LearnMate Tutoring
-Friday; 1
-Saturday; 1
+Saturday; 0.5
