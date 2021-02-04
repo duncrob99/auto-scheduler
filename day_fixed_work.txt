@@ -6,9 +6,10 @@ Tuesday; 2
 Monday; 8
 Tuesday; 8
 Wednesday; 8
-28/1/21; 8
-29/1/21; 8
 30/1/21; 8
+8/2/21; -8
+9/2/21; -8
+10/2/21; -8
 
 # Topscore Tutoring
 Wednesday; 4
