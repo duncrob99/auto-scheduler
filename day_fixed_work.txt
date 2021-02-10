@@ -1,3 +1,6 @@
+# Uni
+10/2/21; 3
+
 # UAS
 Monday; 1
 Tuesday; 2
@@ -14,8 +17,10 @@ Wednesday; 8
 # Topscore Tutoring
 Wednesday; 4
 Thursday; 4
+10/2/21; -1
 
 # LearnMate Tutoring
+Friday; 1
 
 # Church
 Sunday; 4
