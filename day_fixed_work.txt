@@ -1,22 +1,103 @@
 # Uni
-10/2/21; 3
+1/3/21; 1; Aerospace computational mechanics
+2/3/21; 3; Flight Vehicle Dynamics
+3/3/21; 2; Power, Place & People
+3/3/21; 1; Aerospace computational mechanics
+4/3/21; 2; Middle Eastern Politics
+5/3/21; 1; Aerospace computational mechanics
+8/3/21; 1; Aerospace computational mechanics
+9/3/21; 2; Aerospace computational mechanics
+9/3/21; 3; Flight Vehicle Dynamics
+10/3/21; 2; Power, Place & People
+10/3/21; 1; Aerospace computational mechanics
+11/3/21; 2; Middle Eastern Politics
+12/3/21; 1; Aerospace computational mechanics
+15/3/21; 1; Aerospace computational mechanics
+16/3/21; 2; Aerospace computational mechanics
+16/3/21; 3; Flight Vehicle Dynamics
+17/3/21; 2; Power, Place & People
+17/3/21; 1; Aerospace computational mechanics
+18/3/21; 2; Middle Eastern Politics
+19/3/21; 1; Aerospace computational mechanics
+22/3/21; 1; Aerospace computational mechanics
+23/3/21; 2; Aerospace computational mechanics
+23/3/21; 3; Flight Vehicle Dynamics
+24/3/21; 2; Power, Place & People
+24/3/21; 1; Aerospace computational mechanics
+25/3/21; 2; Middle Eastern Politics
+26/3/21; 1; Aerospace computational mechanics
+29/3/21; 1; Aerospace computational mechanics
+30/3/21; 2; Aerospace computational mechanics
+30/3/21; 3; Flight Vehicle Dynamics
+31/3/21; 2; Power, Place & People
+31/3/21; 1; Aerospace computational mechanics
+1/4/21; 2; Middle Eastern Politics
+2/4/21; 1; Aerospace computational mechanics
+12/4/21; 1; Aerospace computational mechanics
+13/4/21; 2; Aerospace computational mechanics
+13/4/21; 3; Flight Vehicle Dynamics
+14/4/21; 2; Power, Place & People
+14/4/21; 1; Aerospace computational mechanics
+15/4/21; 2; Middle Eastern Politics
+16/4/21; 1; Aerospace computational mechanics
+19/4/21; 1; Aerospace computational mechanics
+20/4/21; 2; Aerospace computational mechanics
+20/4/21; 3; Flight Vehicle Dynamics
+21/4/21; 2; Power, Place & People
+21/4/21; 1; Aerospace computational mechanics
+22/4/21; 2; Middle Eastern Politics
+23/4/21; 1; Aerospace computational mechanics
+26/4/21; 1; Aerospace computational mechanics
+27/4/21; 2; Aerospace computational mechanics
+27/4/21; 3; Flight Vehicle Dynamics
+28/4/21; 2; Power, Place & People
+28/4/21; 1; Aerospace computational mechanics
+29/4/21; 2; Middle Eastern Politics
+30/4/21; 1; Aerospace computational mechanics
+3/5/21; 1; Aerospace computational mechanics
+4/5/21; 2; Aerospace computational mechanics
+4/5/21; 3; Flight Vehicle Dynamics
+5/5/21; 2; Power, Place & People
+5/5/21; 1; Aerospace computational mechanics
+6/5/21; 2; Middle Eastern Politics
+7/5/21; 1; Aerospace computational mechanics
+10/5/21; 1; Aerospace computational mechanics
+11/5/21; 2; Aerospace computational mechanics
+11/5/21; 3; Flight Vehicle Dynamics
+12/5/21; 2; Power, Place & People
+12/5/21; 1; Aerospace computational mechanics
+13/5/21; 2; Middle Eastern Politics
+14/5/21; 1; Aerospace computational mechanics
+17/5/21; 1; Aerospace computational mechanics
+18/5/21; 2; Aerospace computational mechanics
+18/5/21; 3; Flight Vehicle Dynamics
+19/5/21; 2; Power, Place & People
+19/5/21; 1; Aerospace computational mechanics
+20/5/21; 2; Middle Eastern Politics
+21/5/21; 1; Aerospace computational mechanics
+24/5/21; 1; Aerospace computational mechanics
+25/5/21; 2; Aerospace computational mechanics
+25/5/21; 3; Flight Vehicle Dynamics
+26/5/21; 2; Power, Place & People
+26/5/21; 1; Aerospace computational mechanics
+27/5/21; 2; Middle Eastern Politics
+28/5/21; 1; Aerospace computational mechanics
 
 # UAS
-Monday; 1
 Tuesday; 2
 
 # PI
 Monday; 8
-Tuesday; 8
-Wednesday; 8
-30/1/21; 8
-8/2/21; -8
-9/2/21; -8
-10/2/21; -8
+Friday; 8
+17/2/21; 8
+23/2/21; 8
+24/2/21; 8
+26/2/21; -8
 
 # Topscore Tutoring
 Wednesday; 4
 Thursday; 4
+Monday; 1
 10/2/21; -1
 
 # LearnMate Tutoring
