@@ -89,10 +89,7 @@ Tuesday; 2
 # PI
 Monday; 8
 Friday; 8
-17/2/21; 8
-23/2/21; 8
-24/2/21; 8
-26/2/21; -8
+27/2/21; 6
 
 # Topscore Tutoring
 Wednesday; 4
