@@ -1,5 +1,5 @@
 # Uni
-13/4/21; 1; Flight Vehicle Dynamics
+13/4/21; 0.5; Flight Vehicle Dynamics
 14/4/21; 2; Power, Place & People
 13/4/21; 2; Middle Eastern Politics
 20/4/21; 1; Flight Vehicle Dynamics
@@ -34,7 +34,9 @@ Friday; 8
 Wednesday; 4
 Thursday; 4
 Saturday; 1
-8/4/21; -4
+14/4/21; -4
+15/4/21; -4
+17/4/21; -1
 
 # LearnMate Tutoring
 
