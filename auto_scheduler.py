@@ -369,6 +369,8 @@ for date in sorted(daily_subtitles, reverse=reverse_output):
     output = weekday_conversion[date.weekday()] + ' ' + str(date) + ' (' + decimal_to_timestring(total_auto) + ' auto/'\
         + decimal_to_timestring(work_on_days_to_due[date]) + ' total)'
     cur_side_left = True
+    if len(output) >= screen_width:
+        output = '-' * screen_width + '\n' + output + '\n' + '.' * screen_width
     while len(output) < screen_width:
         if cur_side_left:
             output = '-' + output
