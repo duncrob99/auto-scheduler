@@ -187,6 +187,7 @@ for index, task in enumerate(one_off_tasks_lines):
         start_date = datetime.datetime.now().date()
         due_date = date_string_to_datetime(due_date)
 
+    actual_due_date = due_date
     due_date = max(due_date, datetime.datetime.now().date() + datetime.timedelta(days=1 if include_today else 2))
 
     if len(split_info) >= 5:
@@ -200,7 +201,7 @@ for index, task in enumerate(one_off_tasks_lines):
     if subtitle[-1] == '\n':
         subtitle = subtitle[:-1]
 
-    tasks.append([title, required_hours, start_date, due_date, min_time, subtitle])
+    tasks.append([title, required_hours, start_date, due_date, min_time, subtitle, actual_due_date])
 
 # Remove set work from task requirements
 for date in daily_tasks:
@@ -219,7 +220,7 @@ for index in due_dateless_task_indices:
     tasks[index][3] = max_due_date
 
 # Sort tasks by due date
-tasks = sorted(tasks, key=itemgetter(3))
+tasks = sorted(sorted(tasks, key=itemgetter(6)), key=itemgetter(3))
 
 print("All input data imported")
 
@@ -230,7 +231,7 @@ work_on_days_to_due = {}
 for index, task in enumerate(tasks):
     print(clearer_text, end='')
     print("(" + str(index + 1) + "/" + str(2*len(tasks)) + ") - Accounting hours for " + task[0] + '\r', end='')
-    title, required_hours, start_date, due_date, min_time, subtitle = task
+    title, required_hours, start_date, due_date, min_time, subtitle, actual_due_date = task
 
     # Get list of days which could possibly be used
     if include_today or start_date != datetime.datetime.now().date():
@@ -275,7 +276,7 @@ for index, task in enumerate(tasks):
     print(clearer_text, end='')
     print("(" + str(index + 1 + len(tasks)) + "/" + str(2*len(tasks)) + ") - Allotting hours for " + task[0] + '\r',
           end='')
-    title, required_hours, start_date, due_date, min_time, subtitle = task
+    title, required_hours, start_date, due_date, min_time, subtitle, actual_due_date = task
 
     available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
 
@@ -335,7 +336,7 @@ for index, task in enumerate(tasks):
 # Assign specific tasks to dates
 daily_subtitles = {}
 for task in tasks:
-    title, required_hours, start_date, due_date, min_time, subtitle = task
+    title, required_hours, start_date, due_date, min_time, subtitle, actual_due_date = task
 
     for date in sorted(filter(lambda x: x >= start_date, daily_titles)):
         if title in daily_titles[date] and required_hours > 0 and daily_titles[date][title] > 0:
