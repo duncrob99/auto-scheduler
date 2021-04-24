@@ -344,9 +344,12 @@ for task in tasks:
             required_hours -= auto_work_to_add
             daily_titles[date][title] -= auto_work_to_add
             output_subtitle = subtitle
+            overdue = due_date - actual_due_date
             if required_hours <= 0:
                 output_subtitle = "(Complete) " + output_subtitle
-            if due_date == date + datetime.timedelta(days=1):
+            if overdue > datetime.timedelta(0):
+                output_subtitle = "(OVERDUE " + str(overdue.days) + " DAYS)" + output_subtitle
+            elif due_date == date + datetime.timedelta(days=1):
                 output_subtitle = "(DUE) " + output_subtitle
             if date in daily_subtitles:
                 if output_subtitle in daily_subtitles[date]:
