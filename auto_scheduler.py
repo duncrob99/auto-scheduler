@@ -4,10 +4,10 @@ import subprocess
 import os
 import datetime
 from operator import itemgetter
-import drive
+import sync
 
 print("Updating data from drive")
-drive.update()
+sync.update()
 
 day_fixed_work = io.open('day_fixed_work.txt')
 one_off_tasks = io.open('one-off_tasks')
