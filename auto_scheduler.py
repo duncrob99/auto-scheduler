@@ -14,7 +14,7 @@ regular_working = {'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Fr
 weekday_conversion = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday', 4: 'Friday', 5: 'Saturday', 6: 'Sunday'}
 one_off_working = {}
 
-time_inc = 1/60
+time_inc = 1/360
 
 valid_input = False
 include_today = True
@@ -189,6 +189,10 @@ for index, task in enumerate(one_off_tasks_lines):
 
     actual_due_date = due_date
     due_date = max(due_date, datetime.datetime.now().date() + datetime.timedelta(days=1 if include_today else 2))
+    if due_date.weekday() in [6, 5] and not include_weekends:
+        due_date = due_date - datetime.timedelta(days=due_date.weekday() - 4)
+        if start_date > due_date:
+            start_date = due_date - datetime.timedelta(days=1)
 
     if len(split_info) >= 5:
         subtitle = split_info[4]
@@ -253,6 +257,14 @@ for index, task in enumerate(tasks):
     # Can't delete while iterating over list, so actually remove weekends now
     for deletable_index in reversed(indices_to_delete):
         del available_days[deletable_index]
+
+    if len(available_days) <= 0:
+        date = due_date - datetime.timedelta(days=1)
+        available_days = [date]
+        if date in auto_work_per_day:
+            work_on_days_to_due[date] = get_work_on_day(date) + auto_work_per_day[date]
+        else:
+            work_on_days_to_due[date] = get_work_on_day(date)
 
     # Add hours to day with smallest amount of work so far
     while required_hours > 0 and len(work_on_days_to_due) > 0:
@@ -323,7 +335,8 @@ for index, task in enumerate(tasks):
 
         if previous_hours == required_hours:
             if failed_min_time:
-                print("Not enough time for " + title + " (" + subtitle + ") with " + str(required_hours) + " hours extra.")
+                print("Not enough time for " + title + " (" + subtitle + ") with " + str(required_hours) + "hours "
+                                                                                                           "extra.")
                 break
             min_time = 0
             failed_min_time = True
@@ -345,6 +358,15 @@ for task in tasks:
             daily_titles[date][title] -= auto_work_to_add
             output_subtitle = subtitle
             overdue = due_date - actual_due_date
+
+            # Ensure they close cleanly to zero
+            if 0 < required_hours < time_inc:
+                print('Minimising ' + subtitle + ': required hours = ' + str(required_hours))
+                required_hours = 0
+            if 0 < daily_titles[date][title] < time_inc:
+                print('Minimising ' + subtitle + ': daily titles = ' + str(daily_titles[date][title]))
+                daily_titles[date][title] = 0
+
             if required_hours <= 0:
                 output_subtitle = "(Complete) " + output_subtitle
             if overdue > datetime.timedelta(0):
