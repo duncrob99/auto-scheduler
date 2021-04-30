@@ -5,7 +5,7 @@ import datetime
 from datetime import timezone
 from googleapiclient.discovery import build
 from googleapiclient.http import MediaFileUpload
-from google_auth_oauthlib.flow import InstalledAppFlow
+from google_auth_oauthlib.flow import InstalledAppFlow, Flow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 
@@ -25,9 +25,19 @@ def update():
         if creds and creds.expired and creds.refresh_token:
             creds.refresh(Request())
         else:
-            flow = InstalledAppFlow.from_client_secrets_file(
-                'credentials.json', SCOPES)
-            creds = flow.run_local_server(port=0)
+            flow = Flow.from_client_secrets_file(
+                'credentials.json', SCOPES,
+                redirect_uri='urn:ietf:wg:oauth:2.0:oob'
+            )
+            auth_url, hi = flow.authorization_url(prompt='consent')
+            print('Please go to this URL: {}'.format(auth_url))
+
+            code = input('Enter the authorisation code: ')
+            flow.fetch_token(code=code)
+
+            session = flow.authorized_session()
+
+            creds = flow.credentials
         # Save the credentials for the next run
         with open('token.json', 'w') as token:
             token.write(creds.to_json())
