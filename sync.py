@@ -65,8 +65,6 @@ def update():
             fixed_id = file.get('id')
             fixed_drive_modified = datetime.datetime.strptime(file.get('modifiedTime'),
                                                               '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)
-        modified = datetime.datetime.strptime(file.get('modifiedTime'), '%Y-%m-%dT%H:%M:%S.%fZ')
-        print('Found file: %s (%s) [%s]' % (file.get('name'), file.get('id'), modified))
 
     if not tasks_exist:
         print('Creating flexible task list')
@@ -79,7 +77,6 @@ def update():
         file = service.files().create(body=file_metadata,
                                       media_body=media,
                                       fields='id').execute()
-        print('File ID: %s' % file.get('id'))
     elif task_local_modified > task_drive_modified:
         print('Uploading modified task list')
         media = MediaFileUpload('one-off_tasks',
@@ -104,7 +101,6 @@ def update():
         file = service.files().create(body=file_metadata,
                                       media_body=media,
                                       fields='id').execute()
-        print('File ID: %s' % file.get('id'))
     elif fixed_local_modified > fixed_drive_modified:
         print('Uploading modified fixed work list')
         media = MediaFileUpload('day_fixed_work.txt',
@@ -114,7 +110,7 @@ def update():
             media_body=media,
             fields='modifiedTime').execute()
     else:
-        print('Downloading task list')
+        print('Downloading fixed work list')
         downloaded_file = service.files().get_media(fileId=fixed_id).execute()
         with open("day_fixed_work.txt", "wb") as out_file:
             out_file.write(downloaded_file)
