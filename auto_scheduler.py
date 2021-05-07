@@ -5,6 +5,7 @@ import os
 import datetime
 from operator import itemgetter
 import sync
+from colorama import Fore, Back, Style
 
 print("Updating data from drive")
 try:
@@ -21,7 +22,7 @@ regular_working = {'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Fr
 weekday_conversion = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday', 4: 'Friday', 5: 'Saturday', 6: 'Sunday'}
 one_off_working = {}
 
-time_inc = 1/360
+time_inc = 1/60
 
 valid_input = False
 include_today = True
@@ -397,6 +398,7 @@ for date in sorted(daily_subtitles, reverse=reverse_output):
     for task in daily_subtitles[date]:
         total_auto += daily_subtitles[date][task]
 
+
     # Create correct number of title dashes
     output = weekday_conversion[date.weekday()] + ' ' + str(date) + ' (' + decimal_to_timestring(total_auto) + ' auto/'\
         + decimal_to_timestring(work_on_days_to_due[date]) + ' total)'
@@ -416,3 +418,10 @@ for date in sorted(daily_subtitles, reverse=reverse_output):
     for task in daily_subtitles[date]:
         print(task + ': ' + decimal_to_timestring(daily_subtitles[date][task]))
         actual_hours_sum += daily_subtitles[date][task]
+
+    # Show if there's a miss-match in work amounts
+    excess_work = total_auto + get_work_on_day(date) - work_on_days_to_due[date]
+    if excess_work > 0:
+        print(Fore.RED + decimal_to_timestring(excess_work) + ' hours of extra work' + Style.RESET_ALL)
+    elif excess_work < 0:
+        print(Fore.RED + 'Missing ' + decimal_to_timestring(-excess_work) + ' hours of work' + Style.RESET_ALL)
