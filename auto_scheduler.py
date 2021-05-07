@@ -67,10 +67,12 @@ if input("Clear terminal history? [Y/n]: ") in ['y', '']:
     subprocess.call('reset')
 elif input("Separate output? [Y/n]: ") in ['y', '']:
     output = ''
+    print(Back.GREEN)
     for j in range(screen_width):
         output += ':'
     for i in range(20):
         print(output)
+    print(Style.RESET_ALL)
 
 
 def datetime_to_date_string(input_date):
@@ -413,7 +415,9 @@ for date in sorted(daily_subtitles, reverse=reverse_output):
 
         cur_side_left = not cur_side_left
 
+    print(Fore.GREEN)
     print(output)
+    print(Style.RESET_ALL)
 
     for task in daily_subtitles[date]:
         print(task + ': ' + decimal_to_timestring(daily_subtitles[date][task]))
