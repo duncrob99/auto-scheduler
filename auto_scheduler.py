@@ -7,7 +7,10 @@ from operator import itemgetter
 import sync
 
 print("Updating data from drive")
-sync.update()
+try:
+    sync.update()
+except:
+    print("Unable to sync, using local data")
 
 day_fixed_work = io.open('day_fixed_work.txt')
 one_off_tasks = io.open('one-off_tasks')
