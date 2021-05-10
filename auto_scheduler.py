@@ -244,7 +244,8 @@ auto_work_per_day = {}
 work_on_days_to_due = {}
 for index, task in enumerate(tasks):
     print(clearer_text, end='')
-    print("(" + str(index + 1) + "/" + str(2*len(tasks)) + ") - Accounting hours for " + task[0] + '\r', end='')
+    output = "(" + str(index + 1) + "/" + str(2*len(tasks)) + ") - Accounting hours for " + task[0] + '\r'
+    print(output[:screen_width], end='\r')
     title, required_hours, start_date, due_date, min_time, subtitle, actual_due_date = task
 
     # Get list of days which could possibly be used
@@ -296,8 +297,8 @@ for index, task in enumerate(tasks):
 daily_titles = {}
 for index, task in enumerate(tasks):
     print(clearer_text, end='')
-    print("(" + str(index + 1 + len(tasks)) + "/" + str(2*len(tasks)) + ") - Allotting hours for " + task[0] + '\r',
-          end='')
+    output = "(" + str(index + 1 + len(tasks)) + "/" + str(2*len(tasks)) + ") - Allotting hours for " + task[0] + '\r'
+    print(output[0:screen_width], end='\r')
     title, required_hours, start_date, due_date, min_time, subtitle, actual_due_date = task
 
     available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
