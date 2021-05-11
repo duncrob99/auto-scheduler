@@ -1,6 +1,7 @@
 from __future__ import print_function
 
 import os.path
+import os
 import datetime
 from datetime import timezone
 from googleapiclient.discovery import build
@@ -50,6 +51,8 @@ def update():
 
     task_local_modified = datetime.datetime.fromtimestamp(os.path.getmtime('one-off_tasks'), tz=timezone.utc)
     fixed_local_modified = datetime.datetime.fromtimestamp(os.path.getmtime('day_fixed_work.txt'), tz=timezone.utc)
+    print('task local: ' + str(task_local_modified))
+    print('fixed local: ' + str(fixed_local_modified))
 
     tasks_exist = False
     fixed_exist = False
@@ -60,11 +63,13 @@ def update():
             task_id = file.get('id')
             task_drive_modified = datetime.datetime.strptime(file.get('modifiedTime'),
                                                              '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)
+            print('task drive: ' + str(task_drive_modified))
         elif file.get('name') == 'day_fixed_work.txt':
             fixed_exist = True
             fixed_id = file.get('id')
             fixed_drive_modified = datetime.datetime.strptime(file.get('modifiedTime'),
                                                               '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)
+            print('fixed drive: ' + str(fixed_drive_modified))
 
     if not tasks_exist:
         print('Creating flexible task list')
@@ -77,19 +82,24 @@ def update():
         file = service.files().create(body=file_metadata,
                                       media_body=media,
                                       fields='id').execute()
-    elif task_local_modified > task_drive_modified:
+    elif task_local_modified - task_drive_modified > datetime.timedelta(seconds=1):
         print('Uploading modified task list')
         media = MediaFileUpload('one-off_tasks',
                                 resumable=True)
+        metadata = {'modifiedTime': task_local_modified.strftime('%Y-%m-%dT%H:%M:%S.%fZ')}
         service.files().update(
             fileId=task_id,
+            body=metadata,
             media_body=media,
             fields='modifiedTime').execute()
-    else:
+    elif task_local_modified - task_drive_modified < datetime.timedelta(seconds=-1):
         print('Downloading task list')
         downloaded_file = service.files().get_media(fileId=task_id).execute()
         with open("one-off_tasks", "wb") as out_file:
             out_file.write(downloaded_file)
+            os.utime('one-off_tasks', (task_drive_modified.timestamp(), task_drive_modified.timestamp()))
+    else:
+        print('No update required for task list')
     if not fixed_exist:
         print('Creating fixed work list')
         file_metadata = {
@@ -101,19 +111,24 @@ def update():
         file = service.files().create(body=file_metadata,
                                       media_body=media,
                                       fields='id').execute()
-    elif fixed_local_modified > fixed_drive_modified:
+    elif fixed_local_modified - fixed_drive_modified > datetime.timedelta(seconds=1):
         print('Uploading modified fixed work list')
         media = MediaFileUpload('day_fixed_work.txt',
                                 resumable=True)
+        metadata = {'modifiedTime': fixed_local_modified.strftime('%Y-%m-%dT%H:%M:%S.%fZ')}
         service.files().update(
             fileId=fixed_id,
+            body=metadata,
             media_body=media,
             fields='modifiedTime').execute()
-    else:
+    elif fixed_local_modified - fixed_drive_modified < datetime.timedelta(seconds=-1):
         print('Downloading fixed work list')
         downloaded_file = service.files().get_media(fileId=fixed_id).execute()
         with open("day_fixed_work.txt", "wb") as out_file:
             out_file.write(downloaded_file)
+            os.utime('day_fixed_work.txt', (fixed_drive_modified.timestamp(), fixed_drive_modified.timestamp()))
+    else:
+        print('No update required for fixed list')
 
 
 if __name__ == '__main__':
