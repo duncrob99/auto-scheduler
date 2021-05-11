@@ -51,8 +51,6 @@ def update():
 
     task_local_modified = datetime.datetime.fromtimestamp(os.path.getmtime('one-off_tasks'), tz=timezone.utc)
     fixed_local_modified = datetime.datetime.fromtimestamp(os.path.getmtime('day_fixed_work.txt'), tz=timezone.utc)
-    print('task local: ' + str(task_local_modified))
-    print('fixed local: ' + str(fixed_local_modified))
 
     tasks_exist = False
     fixed_exist = False
@@ -63,13 +61,11 @@ def update():
             task_id = file.get('id')
             task_drive_modified = datetime.datetime.strptime(file.get('modifiedTime'),
                                                              '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)
-            print('task drive: ' + str(task_drive_modified))
         elif file.get('name') == 'day_fixed_work.txt':
             fixed_exist = True
             fixed_id = file.get('id')
             fixed_drive_modified = datetime.datetime.strptime(file.get('modifiedTime'),
                                                               '%Y-%m-%dT%H:%M:%S.%fZ').replace(tzinfo=timezone.utc)
-            print('fixed drive: ' + str(fixed_drive_modified))
 
     if not tasks_exist:
         print('Creating flexible task list')
