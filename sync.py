@@ -93,7 +93,7 @@ def update():
         downloaded_file = service.files().get_media(fileId=task_id).execute()
         with open("one-off_tasks", "wb") as out_file:
             out_file.write(downloaded_file)
-            os.utime('one-off_tasks', (task_drive_modified.timestamp(), task_drive_modified.timestamp()))
+        os.utime('one-off_tasks', (task_drive_modified.timestamp(), task_drive_modified.timestamp()))
     else:
         print('No update required for task list')
     if not fixed_exist:
@@ -122,7 +122,7 @@ def update():
         downloaded_file = service.files().get_media(fileId=fixed_id).execute()
         with open("day_fixed_work.txt", "wb") as out_file:
             out_file.write(downloaded_file)
-            os.utime('day_fixed_work.txt', (fixed_drive_modified.timestamp(), fixed_drive_modified.timestamp()))
+        os.utime('day_fixed_work.txt', (fixed_drive_modified.timestamp(), fixed_drive_modified.timestamp()))
     else:
         print('No update required for fixed list')
 
