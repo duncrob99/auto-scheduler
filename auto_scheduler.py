@@ -6,11 +6,19 @@ import datetime
 from operator import itemgetter
 import sync
 from colorama import Fore, Back, Style
+from google.auth.exceptions import RefreshError
+from httplib2.error import ServerNotFoundError
 
 print("Updating data from drive")
 try:
     sync.update()
-except:
+except RefreshError:
+    os.remove("token.json")
+    try:
+        sync.update()
+    except ServerNotFoundError:
+        print("Unable to sync, using local data")
+except ServerNotFoundError:
     print("Unable to sync, using local data")
 
 day_fixed_work = io.open('day_fixed_work.txt')
