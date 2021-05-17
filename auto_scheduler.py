@@ -31,17 +31,24 @@ weekday_conversion = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday', 
 one_off_working = {}
 
 time_inc = 1/60
+day_start_time = datetime.time(5, 0, 0)
 
-valid_input = False
-include_today = True
-while not valid_input:
-    include_today = input("Include Today? [Y/n]: ")
-    if include_today == "y" or include_today == "":
-        include_today = True
-        valid_input = True
-    elif include_today == "n":
-        include_today = False
-        valid_input = True
+def input_start_date():
+    # Get date to start on (i.e. current day, tomorrow)
+    cur_date = datetime.datetime.now().date()
+    if datetime.datetime.now().time() < day_start_time:
+        # Before day start time, so count as yesterday
+        cur_date -= datetime.timedelta(days=1)
+    while True:
+        include_today = input("Include Today? [Y/n]: ")
+        if include_today == "y" or include_today == "":
+            break
+        elif include_today == "n":
+            cur_date += datetime.timedelta(days=1)
+            break
+    return cur_date
+
+cur_date = input_start_date()
 
 valid_input = False
 include_weekends = True
@@ -195,18 +202,18 @@ for index, task in enumerate(one_off_tasks_lines):
 
     if due_date == 'none':
         due_dateless_task_indices.append(index)
-        start_date = max(date_string_to_datetime(due_date[0]), datetime.datetime.now().date())
+        start_date = max(date_string_to_datetime(due_date[0]), cur_date)
         due_date = date_string_to_datetime('1/1/01')
     elif len(due_date.split('-')) > 1:
         due_date = due_date.split('-')
-        start_date = max(date_string_to_datetime(due_date[0]), datetime.datetime.now().date())
+        start_date = max(date_string_to_datetime(due_date[0]), cur_date)
         due_date = date_string_to_datetime(due_date[1])
     else:
-        start_date = datetime.datetime.now().date()
+        start_date = cur_date
         due_date = date_string_to_datetime(due_date)
 
     actual_due_date = due_date
-    due_date = max(due_date, datetime.datetime.now().date() + datetime.timedelta(days=1 if include_today else 2))
+    due_date = max(due_date, cur_date + datetime.timedelta(days=1))
     if due_date.weekday() in [6, 5] and not include_weekends:
         due_date = due_date - datetime.timedelta(days=due_date.weekday() - 4)
         if start_date > due_date:
@@ -257,10 +264,7 @@ for index, task in enumerate(tasks):
     title, required_hours, start_date, due_date, min_time, subtitle, actual_due_date = task
 
     # Get list of days which could possibly be used
-    if include_today or start_date != datetime.datetime.now().date():
-        available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
-    else:
-        available_days = [start_date + datetime.timedelta(days=x) for x in range(1, (due_date - start_date).days)]
+    available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
 
     # Get total work on each day and slate weekends for removal if necessary
     indices_to_delete = []
