@@ -9,10 +9,23 @@ from googleapiclient.http import MediaFileUpload
 from google_auth_oauthlib.flow import InstalledAppFlow, Flow
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
+from google.auth.exceptions import RefreshError
+from httplib2.error import ServerNotFoundError
 
 # If modifying these scopes, delete the file token.json.
 SCOPES = ['https://www.googleapis.com/auth/drive.appdata']
 
+def safe_sync():
+    try:
+        update()
+    except RefreshError:
+        os.remove('token.json')
+        try:
+            update()
+        except ServerNotFoundError:
+            print('No connection to sync server') 
+    except ServerNotFoundError:
+        print('No connection to sync server') 
 
 def update():
     creds = None

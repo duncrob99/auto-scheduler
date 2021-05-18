@@ -1,32 +1,15 @@
 #!/usr/bin/env python
-import time
 import io
 import subprocess
 import os
 import datetime
 from operator import itemgetter
+
+from typing import Dict
+
 import sync
 from colorama import Fore, Back, Style
-from google.auth.exceptions import RefreshError
-from httplib2.error import ServerNotFoundError
 from tqdm import tqdm
-
-print("Updating data from drive")
-try:
-    sync.update()
-except RefreshError:
-    os.remove("token.json")
-    try:
-        sync.update()
-    except ServerNotFoundError:
-        print("Unable to sync, using local data")
-except ServerNotFoundError:
-    print("Unable to sync, using local data")
-
-day_fixed_work = io.open('day_fixed_work.txt')
-one_off_tasks = io.open('one-off_tasks')
-fixed_work_lines = day_fixed_work.readlines()
-one_off_tasks_lines = one_off_tasks.readlines()
 
 regular_working = {'Monday': 0, 'Tuesday': 0, 'Wednesday': 0, 'Thursday': 0, 'Friday': 0, 'Saturday': 0, 'Sunday': 0}
 weekday_conversion = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday', 4: 'Friday', 5: 'Saturday', 6: 'Sunday'}
@@ -35,68 +18,56 @@ one_off_working = {}
 time_inc = 1/60
 day_start_time = datetime.time(5, 0, 0)
 
-def input_start_date():
+
+def bool_input(query: str, default: bool = True) -> bool:
+    query = query[0].upper() + query[1:]
+    if default:
+        option_string = '[Y/n]'
+    else:
+        option_string = '[y/N]'
+    while True:
+        input_str = input(f'{query}? {option_string}: ')
+        if input_str in ['y', '']:
+            return True
+        elif input_str == "n":
+            return False
+        print('Invalid input, please try again')
+
+
+def input_start_date() -> datetime.date:
     # Get date to start on (i.e. current day, tomorrow)
-    cur_date = datetime.datetime.now().date()
+    initial_date = datetime.datetime.now().date()
     if datetime.datetime.now().time() < day_start_time:
         # Before day start time, so count as yesterday
-        cur_date -= datetime.timedelta(days=1)
-    while True:
-        include_today = input("Include Today? [Y/n]: ")
-        if include_today == "y" or include_today == "":
-            break
-        elif include_today == "n":
-            cur_date += datetime.timedelta(days=1)
-            break
-    return cur_date
+        initial_date -= datetime.timedelta(days=1)
+    include_today = bool_input('include today')
+    if not include_today:
+        initial_date += datetime.timedelta(days=1)
+    return initial_date
 
-cur_date = input_start_date()
 
-valid_input = False
-include_weekends = True
-while not valid_input:
-    include_weekends = input("Include weekends? [Y/n]: ") 
-    if include_weekends == 'y' or include_weekends == "":
-        include_weekends = True
-        valid_input = True
-    elif include_weekends == "n":
-        include_weekends = False
-        valid_input = True
+def get_screen_width(default: int = 30) -> int:
+    try:
+        return int(os.popen('stty size', 'r').read().split()[1])
+    except IndexError:
+        return default
 
-valid_input = False
-reverse_output = True
-while not valid_input:
-    reverse_output = input("Reverse output? [Y/n]: ")
-    if reverse_output == "y" or reverse_output == "":
-        reverse_output = True
-        valid_input = True
-    elif reverse_output == "n":
-        reverse_output = False
-        valid_input = True
 
-try:
-    screen_width = int(os.popen('stty size', 'r').read().split()[1])
-except IndexError:
-    screen_width = 30
-clearer_text = ''.join([' ' for x in range(screen_width)]) + '\r'
-
-if input("Clear terminal history? [Y/n]: ") in ['y', '']:
-    subprocess.call('reset')
-elif input("Separate output? [Y/n]: ") in ['y', '']:
+def separate_output() -> None:
     output = ''
     print(Back.GREEN)
-    for j in range(screen_width):
+    for j in range(get_screen_width()):
         output += ':'
     for i in range(20):
         print(output)
     print(Style.RESET_ALL)
 
 
-def datetime_to_date_string(input_date):
+def datetime_to_date_string(input_date: datetime.datetime.date) -> str:
     return str(input_date.day) + '/' + str(input_date.month) + '/' + str(input_date.year)[2:]
 
 
-def date_string_to_datetime(input_date_string):
+def date_string_to_datetime(input_date_string: str) -> datetime.date:
     split_string = input_date_string.split('/')
     try:
         local_day = int(split_string[0])
@@ -110,7 +81,7 @@ def date_string_to_datetime(input_date_string):
         print("Invalid date-string:", input_date_string)
 
 
-def decimal_to_timestring(value):
+def decimal_to_timestring(value: float) -> str:
     hours = round(value - value % 1)
     minutes = round((value - hours) * 60)
     if minutes == 60:
@@ -123,7 +94,7 @@ def decimal_to_timestring(value):
         return str(hours) + ":0" + str(minutes)
 
 
-def timestring_to_decimal(timestring):
+def timestring_to_decimal(timestring: str) -> float:
     split_time = timestring.split(':')
     hours = float(split_time[0])
     if len(split_time) > 1:
@@ -135,7 +106,7 @@ def timestring_to_decimal(timestring):
     return decimal_time
 
 
-def get_work_on_day(requested_day):
+def get_work_on_day(requested_day: datetime.date) -> float:
     weekday = weekday_conversion[requested_day.weekday()]
     regular_work = regular_working[weekday]
     if requested_day in one_off_working:
@@ -147,111 +118,140 @@ def get_work_on_day(requested_day):
     return total_work
 
 
-# Bring fixed work data into memory structures
-daily_tasks = {}
-for day_info in fixed_work_lines:
-    if day_info == '\n' or day_info[0] == '#':
-        continue
+def load_fixed_tasks(filename: str = 'day_fixed_work.txt') -> Dict[datetime.date, Dict[str, float]]:
+    day_fixed_work = io.open(filename)
+    fixed_work_lines = day_fixed_work.readlines()
+    # Bring fixed work data into memory structures
+    _daily_tasks = {}
+    for day_info in fixed_work_lines:
+        if day_info == '\n' or day_info[0] == '#':
+            continue
 
-    split_info = day_info.split(';')
-    day = split_info[0]
-    work_time = timestring_to_decimal(split_info[1].split('\n')[0])
-    if day in regular_working.keys():
-        regular_working[day] += work_time
-    elif date_string_to_datetime(day) in one_off_working.keys():
-        one_off_working[date_string_to_datetime(day)] += work_time
-    else:
-        one_off_working[date_string_to_datetime(day)] = work_time
-
-    # Deal with titled work data
-    if len(split_info) >= 3:
-        work_title = split_info[2].strip()
+        _split_info = day_info.split(';')
+        day = _split_info[0]
+        work_time = timestring_to_decimal(_split_info[1].split('\n')[0])
         if day in regular_working.keys():
-            # TODO: Deal with regulars
-            pass
+            regular_working[day] += work_time
+        elif date_string_to_datetime(day) in one_off_working.keys():
+            one_off_working[date_string_to_datetime(day)] += work_time
         else:
-            date = date_string_to_datetime(day)
-            if date in daily_tasks:
-                if work_title in daily_tasks[date]:
-                    daily_tasks[date][work_title] += work_time
-                else:
-                    daily_tasks[date][work_title] = work_time
+            one_off_working[date_string_to_datetime(day)] = work_time
+
+        # Deal with titled work data
+        if len(_split_info) >= 3:
+            work_title = _split_info[2].strip()
+            if day in regular_working.keys():
+                # TODO: Deal with regulars
+                pass
             else:
-                daily_tasks[date] = {}
-                daily_tasks[date][work_title] = work_time
+                _date = date_string_to_datetime(day)
+                if _date in _daily_tasks:
+                    if work_title in _daily_tasks[_date]:
+                        _daily_tasks[_date][work_title] += work_time
+                    else:
+                        _daily_tasks[_date][work_title] = work_time
+                else:
+                    _daily_tasks[_date] = {}
+                    _daily_tasks[_date][work_title] = work_time
 
-# Bring task list data into memory structures
-tasks = []
-due_dateless_task_indices = []
-for index, task in enumerate(one_off_tasks_lines):
-    split_info = task.split(';')
-    
-    if task[0] == '#' or split_info == '\n' or '\n' in split_info:
-        continue
+    return _daily_tasks
 
-    title = split_info[0]
-    try:
-        required_hours = timestring_to_decimal(split_info[1].split(' ')[1])
-    except IndexError:
-        print(split_info)
-        continue
 
-    due_date = split_info[2].split(' ')[1].split('\n')[0]
-    if len(split_info) >= 4:
-        min_time = timestring_to_decimal(split_info[3].split(' ')[1])
-    else:
-        min_time = 1/60
+def load_flexi_tasks(filename: str = 'one-off_tasks'):
+    one_off_tasks = io.open(filename)
+    one_off_tasks_lines = one_off_tasks.readlines()
+    # Bring task list data into memory structures
+    _tasks = []
+    due_dateless_task_indices = []
+    for _index, _task in enumerate(one_off_tasks_lines):
+        split_info = _task.split(';')
 
-    if due_date == 'none':
-        due_dateless_task_indices.append(index)
-        start_date = max(date_string_to_datetime(due_date[0]), cur_date)
-        due_date = date_string_to_datetime('1/1/01')
-    elif len(due_date.split('-')) > 1:
-        due_date = due_date.split('-')
-        start_date = max(date_string_to_datetime(due_date[0]), cur_date)
-        due_date = date_string_to_datetime(due_date[1])
-    else:
-        start_date = cur_date
-        due_date = date_string_to_datetime(due_date)
+        if _task[0] == '#' or split_info == '\n' or '\n' in split_info:
+            continue
 
-    actual_due_date = due_date
-    due_date = max(due_date, cur_date + datetime.timedelta(days=1))
-    if due_date.weekday() in [6, 5] and not include_weekends:
-        due_date = due_date - datetime.timedelta(days=due_date.weekday() - 4)
-        if start_date > due_date:
-            start_date = due_date - datetime.timedelta(days=1)
+        _title = split_info[0]
+        try:
+            _required_hours = timestring_to_decimal(split_info[1].split(' ')[1])
+        except IndexError:
+            print(split_info)
+            continue
 
-    if len(split_info) >= 5:
-        subtitle = split_info[4]
-    else:
-        subtitle = title
+        _due_date = split_info[2].split(' ')[1].split('\n')[0]
+        if len(split_info) >= 4:
+            _min_time = timestring_to_decimal(split_info[3].split(' ')[1])
+        else:
+            _min_time = 1/60
 
-    if subtitle[0] == ' ':
-        subtitle = subtitle[1:]
+        if _due_date == 'none':
+            due_dateless_task_indices.append(_index)
+            _start_date = max(date_string_to_datetime(_due_date[0]), cur_date)
+            _due_date = date_string_to_datetime('1/1/01')
+        elif len(_due_date.split('-')) > 1:
+            _due_date = _due_date.split('-')
+            _start_date = max(date_string_to_datetime(_due_date[0]), cur_date)
+            _due_date = date_string_to_datetime(_due_date[1])
+        else:
+            _start_date = cur_date
+            _due_date = date_string_to_datetime(_due_date)
 
-    if subtitle[-1] == '\n':
-        subtitle = subtitle[:-1]
+        _actual_due_date = _due_date
+        _due_date = max(_due_date, cur_date + datetime.timedelta(days=1))
+        if _due_date.weekday() in [6, 5] and not include_weekends:
+            _due_date = _due_date - datetime.timedelta(days=_due_date.weekday() - 4)
+            if _start_date > _due_date:
+                _start_date = _due_date - datetime.timedelta(days=1)
 
-    tasks.append([title, required_hours, start_date, due_date, min_time, subtitle, actual_due_date])
+        if len(split_info) >= 5:
+            _subtitle = split_info[4]
+        else:
+            _subtitle = _title
 
-# Remove set work from task requirements
-for date in daily_tasks:
-    for title in daily_tasks[date]:
-        time_to_remove = daily_tasks[date][title]
-        for task in tasks:
-            if time_to_remove <= time_inc:
-                break
-            elif title == task[5]:
-                task[1] -= min(time_to_remove, task[1])
-                time_to_remove -= min(time_to_remove, task[1])
+        if _subtitle[0] == ' ':
+            _subtitle = _subtitle[1:]
 
-# Set due date for any tasks without due date to maximum due date
-max_due_date = sorted(tasks, key=itemgetter(3))[-1][3]
-for index in due_dateless_task_indices:
-    tasks[index][3] = max_due_date
+        if _subtitle[-1] == '\n':
+            _subtitle = _subtitle[:-1]
 
-# Sort tasks by due date
-tasks = sorted(sorted(tasks, key=itemgetter(6)), key=itemgetter(3))
+        _tasks.append([_title, _required_hours, _start_date, _due_date, _min_time, _subtitle, _actual_due_date])
+
+    # Set due date for any tasks without due date to maximum due date
+    max_due_date = sorted(_tasks, key=itemgetter(3))[-1][3]
+    for _index in due_dateless_task_indices:
+        _tasks[_index][3] = max_due_date
+
+    # Sort tasks by due date
+    _tasks = sorted(sorted(_tasks, key=itemgetter(6)), key=itemgetter(3))
+    return _tasks
+
+
+def remove_fixed_from_flexi(fixed, flexi):
+    # Remove set work from task requirements
+    for _date in fixed:
+        for _title in fixed[_date]:
+            time_to_remove = fixed[_date][_title]
+            for _task in flexi:
+                if time_to_remove <= time_inc:
+                    break
+                elif _title == _task[5]:
+                    _task[1] -= min(time_to_remove, _task[1])
+                    time_to_remove -= min(time_to_remove, _task[1])
+
+
+# Input choices
+cur_date = input_start_date()
+include_weekends = bool_input('include weekends')
+reverse_output = bool_input('reverse output')
+if bool_input('clear terminal history'):
+    subprocess.call('reset')
+elif bool_input('separate output'):
+    separate_output()
+
+screen_width = get_screen_width()
+
+# Load data
+daily_tasks = load_fixed_tasks()
+tasks = load_flexi_tasks()
+remove_fixed_from_flexi(daily_tasks, tasks)
 
 print("All input data imported")
 
@@ -306,10 +306,8 @@ for index, task in enumerate(tqdm(tasks, desc='Calculating total hours')):
 
 # Assign subjects to each day
 daily_titles = {}
+warning_str = ''
 for index, task in enumerate(tqdm(tasks, desc='Assigning subjects')):
-    #print(clearer_text, end='')
-    #output = "(" + str(index + 1 + len(tasks)) + "/" + str(2*len(tasks)) + ") - Allotting hours for " + task[0] + '\r'
-    #print(output[0:screen_width], end='\r')
     title, required_hours, start_date, due_date, min_time, subtitle, actual_due_date = task
 
     available_days = [start_date + datetime.timedelta(days=x) for x in range(0, (due_date - start_date).days)]
@@ -357,16 +355,17 @@ for index, task in enumerate(tqdm(tasks, desc='Assigning subjects')):
 
         if previous_hours == required_hours:
             if failed_min_time:
-                print("Not enough time for " + title + " (" + subtitle + ") with " + str(required_hours) + "hours "
-                                                                                                           "extra.")
+                warning_str += "Not enough time for " + title + " (" + subtitle + ") with " + str(required_hours) + \
+                                                                                                   " hour(s) extra.\n"
                 break
             min_time = 0
             failed_min_time = True
     if len(available_days) <= 0:
         if required_hours > 1:
-            print('Do ' + str(required_hours) + ' hours of ' + subtitle + ' now!')
+            warning_str += 'Do ' + str(required_hours) + ' hours of ' + subtitle + ' now!\n'
         else:
-            print('Do ' + str(required_hours) + ' hour of ' + subtitle + ' now!')
+            warning_str += 'Do ' + str(required_hours) + ' hour of ' + subtitle + ' now!\n'
+print(warning_str)
 
 # Assign specific tasks to dates
 daily_subtitles = {}
@@ -405,39 +404,47 @@ for task in tqdm(tasks, desc="Assigning tasks"):
     if required_hours >= time_inc:
         print('%s: %s' % (subtitle, required_hours))
 
-# Display results
-actual_hours_sum = 0
-for date in sorted(daily_subtitles, reverse=reverse_output):
-    total_auto = 0
-    for task in daily_subtitles[date]:
-        total_auto += daily_subtitles[date][task]
+
+def print_results(_daily_subtitles, _work_on_days_to_due):
+    # Display results
+    actual_hours_sum = 0
+    for _date in sorted(_daily_subtitles, reverse=reverse_output):
+        total_auto = 0
+        for _task in _daily_subtitles[_date]:
+            total_auto += _daily_subtitles[_date][_task]
+
+        # Create correct number of title dashes
+        output = weekday_conversion[_date.weekday()] + ' ' + str(_date) + ' (' + decimal_to_timestring(total_auto) + \
+            ' auto/' + decimal_to_timestring(_work_on_days_to_due[_date]) + ' total)'
+        cur_side_left = True
+        if len(output) >= screen_width:
+            output = '-' * screen_width + '\n' + output + '\n' + '.' * screen_width
+        while len(output) < screen_width:
+            if cur_side_left:
+                output = '-' + output
+            else:
+                output = output + '-'
+
+            cur_side_left = not cur_side_left
+
+        print(Fore.GREEN)
+        print(output)
+        print(Style.RESET_ALL)
+
+        for _task in _daily_subtitles[_date]:
+            print(_task + ': ' + decimal_to_timestring(_daily_subtitles[_date][_task]))
+            actual_hours_sum += _daily_subtitles[_date][_task]
+
+        # Show if there's a miss-match in work amounts
+        excess_work = total_auto + get_work_on_day(_date) - _work_on_days_to_due[_date]
+        if excess_work > 0:
+            print(Fore.RED + decimal_to_timestring(excess_work) + ' hours of extra work' + Style.RESET_ALL)
+        elif excess_work < 0:
+            print(Fore.RED + 'Missing ' + decimal_to_timestring(-excess_work) + ' hours of work' + Style.RESET_ALL)
 
 
-    # Create correct number of title dashes
-    output = weekday_conversion[date.weekday()] + ' ' + str(date) + ' (' + decimal_to_timestring(total_auto) + ' auto/'\
-        + decimal_to_timestring(work_on_days_to_due[date]) + ' total)'
-    cur_side_left = True
-    if len(output) >= screen_width:
-        output = '-' * screen_width + '\n' + output + '\n' + '.' * screen_width
-    while len(output) < screen_width:
-        if cur_side_left:
-            output = '-' + output
-        else:
-            output = output + '-'
+if __name__ == '__main__':
+    print("Updating data from drive")
+    sync.safe_sync()
 
-        cur_side_left = not cur_side_left
-
-    print(Fore.GREEN)
-    print(output)
-    print(Style.RESET_ALL)
-
-    for task in daily_subtitles[date]:
-        print(task + ': ' + decimal_to_timestring(daily_subtitles[date][task]))
-        actual_hours_sum += daily_subtitles[date][task]
-
-    # Show if there's a miss-match in work amounts
-    excess_work = total_auto + get_work_on_day(date) - work_on_days_to_due[date]
-    if excess_work > 0:
-        print(Fore.RED + decimal_to_timestring(excess_work) + ' hours of extra work' + Style.RESET_ALL)
-    elif excess_work < 0:
-        print(Fore.RED + 'Missing ' + decimal_to_timestring(-excess_work) + ' hours of work' + Style.RESET_ALL)
+    print_results(daily_subtitles, work_on_days_to_due)
