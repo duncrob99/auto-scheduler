@@ -171,7 +171,7 @@ class Task:
     actual_due_date: datetime.date
 
 
-def load_flexi_tasks(cur_date: datetime.date, filename: str = 'one-off_tasks') -> List[Task]:
+def load_flexi_tasks(cur_date: datetime.date, filename: str = 'one-off_tasks', weekends: bool = True) -> List[Task]:
     one_off_tasks = io.open(filename)
     one_off_tasks_lines = one_off_tasks.readlines()
     # Bring task list data into memory structures
@@ -300,9 +300,9 @@ def calc_daily_work(_tasks: List[Task], regular_tasks: Dict[str, float], single_
                 else:
                     num_mins += 1
             if second_min_work_day is not None:
-                optimal_split = max(min((_work_on_days_to_due[second_min_work_day] - _work_on_days_to_due[min_work_day]), _required_hours/num_mins), _task.min_time)
+                optimal_split = min(max(min((_work_on_days_to_due[second_min_work_day] - _work_on_days_to_due[min_work_day]), _required_hours/num_mins), _task.min_time), _required_hours)
             else:
-                optimal_split = _required_hours/len(_available_days)
+                optimal_split = min(max(_required_hours/len(_available_days), _task.min_time), _required_hours)
             for day in time_sorted_work_amounts:
                 if _work_on_days_to_due[day] > _work_on_days_to_due[min_work_day] or _required_hours <= 0:
                     break
