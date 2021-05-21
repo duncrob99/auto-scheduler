@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+import math
+from copy import deepcopy
 import datetime
 import io
 import os
@@ -15,6 +17,18 @@ weekday_conversion = {0: 'Monday', 1: 'Tuesday', 2: 'Wednesday', 3: 'Thursday', 
 
 time_inc = 1 / 60
 day_start_time = datetime.time(5, 0, 0)
+
+
+def round_hours_to_minute(time: float) -> float:
+    return round(time*60)/60
+
+
+def floor_hours_to_minute(time: float) -> float:
+    return math.floor(time*60)/60
+
+
+def ceil_hours_to_minute(time: float) -> float:
+    return math.ceil(time*60)/60
 
 
 def bool_input(query: str, default: bool = True) -> bool:
@@ -194,7 +208,7 @@ def load_flexi_tasks(cur_date: datetime.date, filename: str = 'one-off_tasks', w
         if len(split_info) >= 4:
             _min_time = timestring_to_decimal(split_info[3].split(' ')[1])
         else:
-            _min_time = 1 / 60
+            _min_time = time_inc
 
         if _due_date == 'none':
             due_dateless_task_indices.append(_index)
@@ -254,9 +268,15 @@ def remove_fixed_from_flexi(fixed, flexi):
 def calc_daily_work(_tasks: List[Task], regular_tasks: Dict[str, float], single_fixed_work: Dict[datetime.date, float],
                     include_weekends: bool) -> Tuple[Dict[datetime.date, float], Dict[datetime.date, float]]:
     # Work out how many hours to work a day
+    _tasks = deepcopy(_tasks)
+    regular_tasks = deepcopy(regular_tasks)
+    single_fixed_work = deepcopy(single_fixed_work)
+
+    include_weekends = deepcopy(include_weekends)
     _auto_work_per_day: Dict[datetime.date, float] = {}
     _work_on_days_to_due = {}
-    for _index, _task in enumerate(tqdm(_tasks, desc='Calculating total hours')):
+    #for _index, _task in enumerate(tqdm(_tasks, desc='Calculating total hours')):
+    for _index, _task in enumerate(_tasks):
         _required_hours = _task.required_hours
         # Get list of days which could possibly be used
         _available_days = [_task.start_date + datetime.timedelta(days=x)
@@ -291,20 +311,21 @@ def calc_daily_work(_tasks: List[Task], regular_tasks: Dict[str, float], single_
         while _required_hours > 0 and len(_work_on_days_to_due) > 0:
             time_sorted_work_amounts = sorted(_available_days, key=lambda x: _work_on_days_to_due[x])
             min_work_day = time_sorted_work_amounts[0]
+            min_work_amount = _work_on_days_to_due[min_work_day]
             second_min_work_day: Optional[datetime.date] = None
             num_mins = 0
             for day in time_sorted_work_amounts:
-                if (_work_on_days_to_due[day] - _work_on_days_to_due[min_work_day]) > time_inc:
+                if round_hours_to_minute(_work_on_days_to_due[day] - _work_on_days_to_due[min_work_day]) >= time_inc:
                     second_min_work_day = day
                     break
                 else:
                     num_mins += 1
             if second_min_work_day is not None:
-                optimal_split = min(max(min((_work_on_days_to_due[second_min_work_day] - _work_on_days_to_due[min_work_day]), _required_hours/num_mins), _task.min_time), _required_hours)
+                optimal_split = min(max(min((_work_on_days_to_due[second_min_work_day] - _work_on_days_to_due[min_work_day]), ceil_hours_to_minute(_required_hours/num_mins)), _task.min_time), _required_hours)
             else:
-                optimal_split = min(max(_required_hours/len(_available_days), _task.min_time), _required_hours)
+                optimal_split = min(max(floor_hours_to_minute(_required_hours/len(_available_days)), _task.min_time), _required_hours)
             for day in time_sorted_work_amounts:
-                if _work_on_days_to_due[day] > _work_on_days_to_due[min_work_day] or _required_hours <= 0:
+                if _work_on_days_to_due[day] > min_work_amount or _required_hours <= 0:
                     break
                 else:
                     if day in _auto_work_per_day:
@@ -316,7 +337,7 @@ def calc_daily_work(_tasks: List[Task], regular_tasks: Dict[str, float], single_
                     else:
                         _auto_work_per_day[day] = optimal_split
                         _work_on_days_to_due[day] += optimal_split
-                    _required_hours -= optimal_split
+                    _required_hours = round_hours_to_minute(_required_hours - optimal_split)
 
     return _auto_work_per_day, _work_on_days_to_due
 
@@ -324,10 +345,17 @@ def calc_daily_work(_tasks: List[Task], regular_tasks: Dict[str, float], single_
 def calc_daily_subjects(tasks: List[Task], fixed_task_list: Dict[datetime.date, Dict[str, float]],
                         auto_work_per_day: Dict[datetime.date, float]) -> Tuple[Dict[datetime.date, Dict[str, float]], float]:
     # Assign subjects to each day
+
+    # Ensure mutable objects aren't mutated
+    tasks = deepcopy(tasks)
+    fixed_task_list = deepcopy(fixed_task_list)
+    auto_work_per_day = deepcopy(auto_work_per_day)
+
     _daily_titles = {}
     warning_str = ''
     missed_time = 0
-    for index, _task in enumerate(tqdm(tasks, desc='Assigning subjects')):
+    #for index, _task in enumerate(tqdm(tasks, desc='Assigning subjects')):
+    for index, _task in enumerate(tasks):
         available_days = [_task.start_date + datetime.timedelta(days=x)
                           for x in range(0, (_task.due_date - _task.start_date).days)]
 
@@ -338,8 +366,8 @@ def calc_daily_subjects(tasks: List[Task], fixed_task_list: Dict[datetime.date, 
             for _date in available_days:
                 if _date in auto_work_per_day:
                     if _required_hours > 0 and auto_work_per_day[_date] > 0:
-                        if auto_work_per_day[_date] < _task.min_time:
-                            continue
+                        #if auto_work_per_day[_date] < _task.min_time:
+                            #continue
                         if _date not in fixed_task_list or _task.title not in fixed_task_list[_date]:
                             _auto_work_to_add = _task.min_time
                         elif fixed_task_list[_date][_task.title] < _task.min_time:
@@ -357,7 +385,7 @@ def calc_daily_subjects(tasks: List[Task], fixed_task_list: Dict[datetime.date, 
                                 fixed_task_list[_date][_task.title] = _auto_work_to_add
 
                         else:
-                            fixed_task_list[_date] = {_task.title: _auto_work_to_add}
+                            fixed_task_list[_date] = {_task.title: _auto_work_to_add} # TODO: Don't think this does anything
 
                         # Update total amount of auto-work
                         auto_work_per_day[_date] -= _auto_work_to_add
@@ -371,7 +399,7 @@ def calc_daily_subjects(tasks: List[Task], fixed_task_list: Dict[datetime.date, 
                         else:
                             _daily_titles[_date] = {_task.title: _auto_work_to_add}
 
-                        _required_hours -= _auto_work_to_add
+                        _required_hours = round_hours_to_minute(_required_hours - _auto_work_to_add)
 
             if previous_hours == _required_hours:
                 if failed_min_time:
