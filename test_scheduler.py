@@ -1,12 +1,40 @@
 import datetime
+import math
 import sys
 from io import StringIO
+from math import ceil
 from typing import List, Dict
 
-from hypothesis import example, HealthCheck, settings, Verbosity, given, note, strategies as st, assume
+from hypothesis import example, settings, Verbosity, given, note, strategies as st
 
 import auto_scheduler
 from auto_scheduler import Task
+
+shared_due_date = st.shared(st.dates(min_value=datetime.date(2021, 1, 2), max_value=datetime.date(2025, 12, 31)))
+shared_min_time = st.shared(st.builds(lambda mins: mins / 60, st.integers(min_value=ceil(auto_scheduler.time_inc * 60),
+                                                                          max_value=24 * 60)))
+
+
+@st.composite
+def earlier_dates(draw):
+    return draw(
+        st.dates(min_value=datetime.date(2021, 1, 1), max_value=draw(shared_due_date) - datetime.timedelta(days=1)))
+
+
+@st.composite
+def earlier_dates_incl(draw):
+    return draw(st.dates(min_value=datetime.date(2021, 1, 1), max_value=draw(shared_due_date)))
+
+
+shared_start_date = st.shared(earlier_dates())
+
+
+@st.composite
+def required_time_strat(draw):
+    return draw(st.builds(lambda mins: mins / 60, st.integers(
+        min_value=ceil(draw(shared_min_time) * 60),
+        max_value=(draw(shared_due_date) - draw(shared_start_date)).days * 24 * 60)))
+
 
 safe_floats = st.floats(allow_nan=False, allow_infinity=False)
 safe_dates = st.dates(min_value=datetime.date(2000, 1, 1), max_value=datetime.date(2099, 12, 31))
@@ -16,8 +44,9 @@ sensible_floats = st.floats(allow_nan=False, allow_infinity=False, min_value=0, 
 sensible_times = st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=24 * 60))
 pos_float_times = st.builds(lambda mins: mins / 60, st.integers(min_value=1, max_value=24 * 60))
 sensible_strings = st.text(st.characters(whitelist_categories=['L', 'N']), max_size=3)
-task_strategy = st.builds(auto_scheduler.Task, sensible_strings, sensible_strings, sensible_times, sensible_times,
-                          safe_dates, safe_dates, safe_dates)
+task_strategy = st.builds(auto_scheduler.Task, sensible_strings, sensible_strings, required_time_strat(),
+                          shared_min_time,
+                          shared_start_date, shared_due_date, earlier_dates_incl())
 
 
 @given(safe_dates)
@@ -39,13 +68,13 @@ weekly_mapping = {'Monday': sensible_times,
                   'Friday': sensible_times,
                   'Saturday': sensible_times,
                   'Sunday': sensible_times}
-small_weekly_mapping = {'Monday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=1)),
-                        'Tuesday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=1)),
-                        'Wednesday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=1)),
-                        'Thursday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=1)),
-                        'Friday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=1)),
-                        'Saturday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=1)),
-                        'Sunday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=1))}
+small_weekly_mapping = {'Monday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=17)),
+                        'Tuesday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=17)),
+                        'Wednesday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=17)),
+                        'Thursday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=17)),
+                        'Friday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=17)),
+                        'Saturday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=17)),
+                        'Sunday': st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=17))}
 weekdays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
 
 
@@ -67,46 +96,36 @@ flexi_tasks = auto_scheduler.load_flexi_tasks(start_date)
 auto_scheduler.remove_fixed_from_flexi(fixed_tasks, flexi_tasks)
 
 
-# @given(st.lists(task_strategy, min_size=1), st.fixed_dictionaries(weekly_mapping),
-#       st.dictionaries(safe_dates, pos_floats),
-#       st.dictionaries(safe_dates, st.dictionaries(sensible_strings, pos_floats)))
-@given(st.lists(st.builds(auto_scheduler.Task, sensible_strings, sensible_strings,
-                          st.builds(lambda mins: mins / 60, st.integers(min_value=0, max_value=1 * 60)),
-                          st.builds(lambda mins: mins / 60, st.integers(min_value=1, max_value=2)),
-                          st.just(datetime.date(2021, 5, 20)),
-                          st.dates(min_value=datetime.date(2021, 5, 21), max_value=datetime.date(2021, 11, 3)),
-                          st.just(datetime.date(2000, 1, 1))), min_size=1, max_size=3),
-       st.fixed_dictionaries(small_weekly_mapping), st.just({}), st.just({}))
-# @example(tasks=flexi_tasks, regular_tasks=regular_fixed, single_fixed_work=one_off_fixed, fixed_tasks=fixed_tasks)
-@example(tasks=[
-    Task(title='Housework', subtitle='Housework', required_hours=1/60, min_time=1/60,
-         start_date=datetime.date(2021, 5, 21), due_date=datetime.date(2021, 5, 25),
-         actual_due_date=datetime.date(2000, 1, 1)),
-    Task(title='Housework', subtitle='Make a meal', required_hours=4/60, min_time=4/60,
-         start_date=datetime.date(2021, 5, 21), due_date=datetime.date(2021, 6, 1),
-         actual_due_date=datetime.date(2000, 1, 1)),
-    Task(title='Flight Vehicle Design', subtitle='Flight Vehicle Design', required_hours=22+1/60,
-         min_time=15/60, start_date=datetime.date(2021, 5, 21), due_date=datetime.date(2021, 10, 27),
-         actual_due_date=datetime.date(2000, 1, 1))],
-         regular_tasks={'Monday': 0, 'Tuesday': 0, 'Wednesday': 16/60, 'Thursday': 16/60,
-                        'Friday': 17/60, 'Saturday': 17/60, 'Sunday': 17/60},
-         single_fixed_work={datetime.date(2021, 5, 25): 16/60}, fixed_tasks={})
-@settings(max_examples=1, suppress_health_check=[HealthCheck.filter_too_much, HealthCheck.too_slow],
-          verbosity=Verbosity.verbose)
+@given(st.lists(task_strategy, min_size=1, max_size=50), st.fixed_dictionaries(weekly_mapping),
+       st.dictionaries(safe_dates, pos_floats, max_size=50),
+       st.dictionaries(safe_dates, st.dictionaries(sensible_strings, pos_float_times), max_size=50))
+@example(tasks=flexi_tasks, regular_tasks=regular_fixed, single_fixed_work=one_off_fixed, fixed_tasks=fixed_tasks)
+@settings(verbosity=Verbosity.verbose, deadline=None)
 def test_no_missing_time_at_subjects(tasks: List[auto_scheduler.Task], regular_tasks: Dict[str, float],
                                      single_fixed_work: Dict[datetime.date, float],
                                      fixed_tasks: Dict[datetime.date, Dict[str, float]]):
-    [assume(task.required_hours >= task.min_time >= auto_scheduler.time_inc and task.due_date > task.start_date) for
-     task
-     in tasks]
+    for task in tasks:
+        assert task.due_date > task.start_date and task.due_date >= task.actual_due_date
+        assert task.required_hours >= task.min_time >= auto_scheduler.time_inc
+        assert task.required_hours / (task.due_date - task.start_date).days <= 24
     tasks = sorted(sorted(tasks, key=lambda x: x.actual_due_date), key=lambda x: x.due_date)
+    note('Calculating auto work')
     auto_work_per_day, work_on_days_to_due = auto_scheduler.calc_daily_work(tasks, regular_tasks, single_fixed_work,
                                                                             True)
     note(f'Auto work: {auto_work_per_day}')
-    daily_subjects, missed_time = auto_scheduler.calc_daily_subjects(tasks, fixed_tasks, auto_work_per_day)
+    daily_subjects, missed_time = auto_scheduler.calc_daily_subjects(tasks, auto_work_per_day)
     note(f'Result: {daily_subjects}')
+    daily_tasks = auto_scheduler.calc_daily_tasks(tasks, daily_subjects)
     note(f'Missed time: {missed_time}')
     assert missed_time == 0
+    total_required_hours = sum([task.required_hours for task in tasks])
+    total_auto_work = sum(auto_work_per_day.values())
+    total_daily_subjects = sum([sum(daily_subjects[date].values()) for date in daily_subjects.keys()])
+    total_daily_tasks = sum([sum(daily_tasks[date].values()) for date in daily_tasks.keys()])
+    note(
+        f'Required hours: {total_required_hours}, Auto work: {total_auto_work}, '
+        f'daily subjects: {total_daily_subjects}, daily tasks: {total_daily_tasks}')
+    assert math.isclose(total_daily_subjects, total_auto_work) and math.isclose(total_auto_work, total_required_hours)
 
 
 def prettify_task_list(input_list: list):
@@ -156,7 +175,7 @@ def test_current_shrink_fails():
     def calc_missed_time(flexi_tasks, regular_fixed, one_off_fixed, fixed_tasks):
         sys.stdout = StringIO()
         flexi_per_day, _ = auto_scheduler.calc_daily_work(flexi_tasks, regular_fixed, one_off_fixed, True)
-        _, missed_time = auto_scheduler.calc_daily_subjects(flexi_tasks, fixed_tasks, flexi_per_day)
+        _, missed_time = auto_scheduler.calc_daily_subjects(flexi_tasks, flexi_per_day)
         sys.stdout = sys.__stdout__
         return missed_time
 
@@ -266,16 +285,16 @@ def test_current_no_missed(val):
     flexi_tasks = sorted(sorted(flexi_tasks, key=lambda task: task.actual_due_date), key=lambda task: task.due_date)
 
     flexi_per_day, work_on_days_to_due = auto_scheduler.calc_daily_work(flexi_tasks, regular_fixed, one_off_fixed, True)
-    daily_titles, missed_time = auto_scheduler.calc_daily_subjects(flexi_tasks, fixed_tasks, flexi_per_day)
+    daily_subjects, missed_time = auto_scheduler.calc_daily_subjects(flexi_tasks, flexi_per_day)
 
     assert missed_time == 0
 
 
 if __name__ == "__main__":
-    # test_invert_datetime_to_date()
-    # test_invert_decimal_to_timestring()
-    # test_getting_work()
+    test_invert_datetime_to_date()
+    test_invert_decimal_to_timestring()
+    test_getting_work()
     test_no_missing_time_at_subjects()
-    # test_current_no_missed()
-    # test_current_shrink_fails()
+    test_current_no_missed()
+    test_current_shrink_fails()
     print('tested')
