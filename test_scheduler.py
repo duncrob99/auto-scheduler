@@ -98,12 +98,12 @@ auto_scheduler.remove_fixed_from_flexi(fixed_tasks, flexi_tasks)
 
 @given(st.lists(task_strategy, min_size=1, max_size=50), st.fixed_dictionaries(weekly_mapping),
        st.dictionaries(safe_dates, pos_floats, max_size=50),
-       st.dictionaries(safe_dates, st.dictionaries(sensible_strings, pos_float_times), max_size=50))
-@example(tasks=flexi_tasks, regular_tasks=regular_fixed, single_fixed_work=one_off_fixed, fixed_tasks=fixed_tasks)
+       st.dictionaries(safe_dates, st.dictionaries(sensible_strings, pos_float_times), max_size=50), st.booleans())
+@example(tasks=flexi_tasks, regular_tasks=regular_fixed, single_fixed_work=one_off_fixed, fixed_tasks=fixed_tasks, weekends=True)
 @settings(verbosity=Verbosity.verbose, deadline=None)
 def test_no_missing_time_at_subjects(tasks: List[auto_scheduler.Task], regular_tasks: Dict[str, float],
                                      single_fixed_work: Dict[datetime.date, float],
-                                     fixed_tasks: Dict[datetime.date, Dict[str, float]]):
+                                     fixed_tasks: Dict[datetime.date, Dict[str, float]], weekends: bool):
     for task in tasks:
         assert task.due_date > task.start_date and task.due_date >= task.actual_due_date
         assert task.required_hours >= task.min_time >= auto_scheduler.time_inc
@@ -111,7 +111,7 @@ def test_no_missing_time_at_subjects(tasks: List[auto_scheduler.Task], regular_t
     tasks = sorted(sorted(tasks, key=lambda x: x.actual_due_date), key=lambda x: x.due_date)
     note('Calculating auto work')
     auto_work_per_day, work_on_days_to_due = auto_scheduler.calc_daily_work(tasks, regular_tasks, single_fixed_work,
-                                                                            True)
+                                                                            weekends)
     note(f'Auto work: {auto_work_per_day}')
     daily_subjects, missed_time = auto_scheduler.calc_daily_subjects(tasks, auto_work_per_day)
     note(f'Result: {daily_subjects}')
@@ -122,6 +122,9 @@ def test_no_missing_time_at_subjects(tasks: List[auto_scheduler.Task], regular_t
     total_auto_work = sum(auto_work_per_day.values())
     total_daily_subjects = sum([sum(daily_subjects[date].values()) for date in daily_subjects.keys()])
     total_daily_tasks = sum([sum(daily_tasks[date].values()) for date in daily_tasks.keys()])
+    if not weekends:
+        for date in daily_tasks.keys():
+            assert date.weekday() not in [5, 6]
     note(
         f'Required hours: {total_required_hours}, Auto work: {total_auto_work}, '
         f'daily subjects: {total_daily_subjects}, daily tasks: {total_daily_tasks}')
