@@ -328,7 +328,7 @@ def calc_daily_work(_tasks: List[Task], regular_tasks: Dict[str, float], single_
             else:
                 optimal_split = min(max(floor_hours_to_minute(_required_hours / len(_available_days)), _task.min_time),
                                     _required_hours)
-            optimal_split = ceil_hours_to_minute(_required_hours / math.floor(_required_hours / optimal_split) - 1e-10)
+            # optimal_split = ceil_hours_to_minute(_required_hours / math.floor(_required_hours / optimal_split) - 1e-10)
             for day in time_sorted_work_amounts:
                 if _work_on_days_to_due[day] > min_work_amount or _required_hours < optimal_split:
                     break
@@ -364,7 +364,7 @@ def calc_daily_subjects(tasks: List[Task], auto_work_per_day: Dict[datetime.date
                           _task.start_date + datetime.timedelta(days=x) in auto_work_per_day]
 
         _required_hours = _task.required_hours
-        failed_min_time = False
+        failed_min_time = 0
         while _required_hours >= time_inc and len(available_days) > 0:
             previous_hours = _required_hours
             work_to_add = max(round_hours_to_minute(_required_hours / len(available_days)), _task.min_time)
@@ -381,13 +381,14 @@ def calc_daily_subjects(tasks: List[Task], auto_work_per_day: Dict[datetime.date
                         _daily_titles[date] = {_task.title: work_to_add}
 
             if previous_hours == _required_hours:
-                if failed_min_time:
+                if failed_min_time > 50:
                     warning_str += "Not enough time for " + _task.title + " (" + _task.subtitle + ") with " + \
                                    str(_required_hours) + " hour(s) extra.\n"
                     missed_time += _required_hours
                     break
                 _task.min_time = time_inc
-                failed_min_time = True
+                assert len(available_days) > 0
+                failed_min_time += 1
         if len(available_days) <= 0:
             if _required_hours > 1:
                 warning_str += 'Do ' + str(_required_hours) + ' hours of ' + _task.subtitle + ' now!\n'
