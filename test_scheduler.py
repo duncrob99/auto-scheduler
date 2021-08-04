@@ -5,7 +5,7 @@ from io import StringIO
 from math import ceil
 from typing import List, Dict
 
-from hypothesis import example, settings, Verbosity, given, note, strategies as st
+from hypothesis import example, assume, settings, Verbosity, given, note, strategies as st
 
 import auto_scheduler
 from auto_scheduler import Task
@@ -108,6 +108,7 @@ def test_no_missing_time_at_subjects(tasks: List[auto_scheduler.Task], regular_t
         assert task.due_date > task.start_date and task.due_date >= task.actual_due_date
         assert task.required_hours >= task.min_time >= auto_scheduler.time_inc
         assert task.required_hours / (task.due_date - task.start_date).days <= 24
+        assume((weekends) or (task.due_date.weekday() not in [5, 6] and task.start_date.weekday() not in [5, 6]))
     tasks = sorted(sorted(tasks, key=lambda x: x.actual_due_date), key=lambda x: x.due_date)
     note('Calculating auto work')
     auto_work_per_day, work_on_days_to_due = auto_scheduler.calc_daily_work(tasks, regular_tasks, single_fixed_work,
