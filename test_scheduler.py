@@ -8,7 +8,7 @@ from typing import List, Dict
 from hypothesis import example, assume, settings, Verbosity, given, note, strategies as st
 
 import auto_scheduler
-from auto_scheduler import Task
+from auto_scheduler import Task, DateOrderError
 
 shared_due_date = st.shared(st.dates(min_value=datetime.date(2021, 1, 2), max_value=datetime.date(2025, 12, 31)))
 shared_min_time = st.shared(st.builds(lambda mins: mins / 60, st.integers(min_value=ceil(auto_scheduler.time_inc * 60),
@@ -92,7 +92,11 @@ def test_getting_work(requested_day, weekly_work, single_fixed_work):
 # Include actual values
 start_date = datetime.date.today()
 fixed_tasks, regular_fixed, one_off_fixed = auto_scheduler.load_fixed_tasks()
-flexi_tasks = auto_scheduler.load_flexi_tasks(start_date)
+try:
+    flexi_tasks = auto_scheduler.load_flexi_tasks(start_date)
+except DateOrderError as e:
+    print("Flexi tasks has incorrect date order, can't use current values.")
+    flexi_tasks = None
 auto_scheduler.remove_fixed_from_flexi(fixed_tasks, flexi_tasks)
 
 
@@ -104,6 +108,8 @@ auto_scheduler.remove_fixed_from_flexi(fixed_tasks, flexi_tasks)
 def test_no_missing_time_at_subjects(tasks: List[auto_scheduler.Task], regular_tasks: Dict[str, float],
                                      single_fixed_work: Dict[datetime.date, float],
                                      fixed_tasks: Dict[datetime.date, Dict[str, float]], weekends: bool):
+    if tasks is None:
+        return
     for task in tasks:
         assert task.due_date > task.start_date and task.due_date >= task.actual_due_date
         assert task.required_hours >= task.min_time >= auto_scheduler.time_inc
@@ -147,7 +153,11 @@ def prettify_task_list(input_list: list):
 def test_current_shrink_fails():
     start_date = datetime.date.today()
     fixed_tasks, regular_fixed, one_off_fixed = auto_scheduler.load_fixed_tasks()
-    flexi_tasks = auto_scheduler.load_flexi_tasks(start_date)
+    try:
+        flexi_tasks = auto_scheduler.load_flexi_tasks(start_date)
+    except DateOrderError:
+        print("Current has bad date ordering")
+        return
     auto_scheduler.remove_fixed_from_flexi(fixed_tasks, flexi_tasks)
 
     flexi_tasks = [
@@ -275,7 +285,11 @@ def test_current_shrink_fails():
 def test_current_no_missed(val):
     start_date = datetime.date.today()
     fixed_tasks, regular_fixed, one_off_fixed = auto_scheduler.load_fixed_tasks()
-    flexi_tasks = auto_scheduler.load_flexi_tasks(start_date)
+    try:
+        flexi_tasks = auto_scheduler.load_flexi_tasks(start_date)
+    except DateOrderError:
+        print("Current has bad date ordering")
+        return
     auto_scheduler.remove_fixed_from_flexi(fixed_tasks, flexi_tasks)
 
     for task in flexi_tasks:

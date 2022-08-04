@@ -185,6 +185,13 @@ class Task:
     actual_due_date: datetime.date
 
 
+class DateOrderError(Exception):
+    def __init__(self, task: Task, message="Incorrect Date Order"):
+        self.task = task
+        self.message = message
+        super().__init__(message)
+
+
 def load_flexi_tasks(cur_date: datetime.date, filename: str = 'one-off_tasks', weekends: bool = True) -> List[Task]:
     one_off_tasks = io.open(filename)
     one_off_tasks_lines = one_off_tasks.readlines()
@@ -240,6 +247,8 @@ def load_flexi_tasks(cur_date: datetime.date, filename: str = 'one-off_tasks', w
         if _subtitle[-1] == '\n':
             _subtitle = _subtitle[:-1]
 
+        if _start_date >= _due_date:
+            raise DateOrderError(Task(_title, _subtitle, _required_hours, _min_time, _start_date, _due_date, _actual_due_date))
         tasks.append(Task(_title, _subtitle, _required_hours, _min_time, _start_date, _due_date, _actual_due_date))
 
     # Set due date for any tasks without due date to maximum due date
@@ -508,7 +517,11 @@ if __name__ == '__main__':
 
     # Load data
     fixed_tasks, regular_fixed, one_off_fixed = load_fixed_tasks()
-    flexi_tasks = load_flexi_tasks(start_date)
+    try:
+        flexi_tasks = load_flexi_tasks(start_date)
+    except DateOrderError as e:
+        print(f"{e.task.title} - {e.task.subtitle} has a due date before the start date ({e.task.due_date} <= {e.task.start_date})")
+        exit()
     remove_fixed_from_flexi(fixed_tasks, flexi_tasks)
 
     print("All input data imported")
