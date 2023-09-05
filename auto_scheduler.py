@@ -229,6 +229,7 @@ def load_flexi_tasks(cur_date: datetime.date, filename: str = 'one-off_tasks', w
             _start_date = cur_date
             _due_date = date_string_to_datetime(_due_date)
 
+        print(cur_date)
         _actual_due_date = _due_date
         _due_date = max(_due_date, cur_date + datetime.timedelta(days=1))
         if _due_date.weekday() in [6, 5] and not weekends:
@@ -503,8 +504,8 @@ def all_calcs(flexi_tasks, regular_fixed, one_off_fixed, weekends):
 
 if __name__ == '__main__':
     # Sync with Google Drive
-    print("Updating data from drive")
-    sync.safe_sync()
+    #print("Updating data from drive")
+    #sync.safe_sync()
 
     # Input choices
     start_date = input_start_date()
