@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!./.venv/bin/python3
 import datetime
 import io
 import math
