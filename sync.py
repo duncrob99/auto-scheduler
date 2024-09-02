@@ -62,8 +62,14 @@ def update():
                                     fields='nextPageToken, files(id, name, modifiedTime)',
                                     pageSize=10).execute()
 
-    task_local_modified = datetime.datetime.fromtimestamp(os.path.getmtime('one-off_tasks'), tz=timezone.utc)
-    fixed_local_modified = datetime.datetime.fromtimestamp(os.path.getmtime('day_fixed_work.txt'), tz=timezone.utc)
+    try:
+        task_local_modified = datetime.datetime.fromtimestamp(os.path.getmtime('one-off_tasks'), tz=timezone.utc)
+    except FileNotFoundError:
+        task_local_modified = datetime.datetime.fromtimestamp(0, tz=timezone.utc)
+    try:
+        fixed_local_modified = datetime.datetime.fromtimestamp(os.path.getmtime('day_fixed_work.txt'), tz=timezone.utc)
+    except FileNotFoundError:
+        fixed_local_modified = datetime.datetime.fromtimestamp(0, tz=timezone.utc)
 
     tasks_exist = False
     fixed_exist = False
@@ -109,6 +115,7 @@ def update():
         os.utime('one-off_tasks', (task_drive_modified.timestamp(), task_drive_modified.timestamp()))
     else:
         print('No update required for task list')
+
     if not fixed_exist:
         print('Creating fixed work list')
         file_metadata = {
