@@ -504,8 +504,8 @@ def all_calcs(flexi_tasks, regular_fixed, one_off_fixed, weekends):
 
 if __name__ == '__main__':
     # Sync with Google Drive
-    #print("Updating data from drive")
-    #sync.safe_sync()
+    print("Updating data from drive")
+    sync.safe_sync()
 
     # Input choices
     start_date = input_start_date()
