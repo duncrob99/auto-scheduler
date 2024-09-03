@@ -436,10 +436,15 @@ def calc_daily_tasks(tasks: List[Task], subject_distribution: Dict[datetime.date
 
                 if required_hours <= 0:
                     output_subtitle = "(Complete) " + output_subtitle
-                if overdue > datetime.timedelta(0):
-                    output_subtitle = f'(OVERDUE {str(overdue.days)} DAY{"S" if overdue.days > 1 else ""}) {output_subtitle}'
+                if overdue.days > 1:
+                    output_subtitle = f'(OVERDUE {str(overdue.days - 1)} DAY{"S" if overdue.days > 2 else ""}) {output_subtitle}'
+                elif overdue.days == 1:
+                    output_subtitle = "(DUE TODAY) " + output_subtitle
                 elif task.due_date == date + datetime.timedelta(days=1):
-                    output_subtitle = "(DUE) " + output_subtitle
+                    if task.due_date == datetime.datetime.now().date() + datetime.timedelta(days=1):
+                        output_subtitle = "(DUE TOMORROW) " + output_subtitle
+                    else:
+                        output_subtitle = "(DUE NEXT DAY) " + output_subtitle
                 if date in _daily_subtitles:
                     if output_subtitle in _daily_subtitles[date]:
                         _daily_subtitles[date][output_subtitle] += auto_work_to_add
